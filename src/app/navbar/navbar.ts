@@ -22,7 +22,7 @@ import { map, shareReplay } from 'rxjs/operators';
     MatIconModule,
     RouterLink,
     AsyncPipe,
-],
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
 })
@@ -34,4 +34,7 @@ export class Navbar {
       map(result => result.matches),
       shareReplay()
     );
+
+  // TO-DO: Read login state from session and change options from "Login" and "Signup" to "Signout"
+  loggedIn = false;
 }
