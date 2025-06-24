@@ -1,23 +1,25 @@
 import { Routes } from '@angular/router';
 import { Gallery } from './gallery/gallery';
-import { AddVideos } from './add-videos/add-videos';
-import { LoginSignup } from './login-signup/login-signup';
 
 export const routes: Routes = [
     {
         path: '',
         component: Gallery,
     },
+    
+    // Lazy-loaded components. Shouldn't need ".then()", but gives an error otherwise?
+    // https://next.angular.dev/guide/routing/define-routes#loading-route-component-strategies
+    // https://angular.dev/reference/migrations/route-lazy-loading
     {
         path: 'add',
-        component: AddVideos,
+        loadComponent: () => import('./add-videos/add-videos').then(m => m.AddVideos),
     },
     {
         path: 'login',
-        component: LoginSignup,
+        loadComponent: () => import('./login-signup/login-signup').then(m => m.LoginSignup),
     },
     {
         path: 'signup',
-        component: LoginSignup,
+        loadComponent: () => import('./login-signup/login-signup').then(m => m.LoginSignup),
     }
 ];
