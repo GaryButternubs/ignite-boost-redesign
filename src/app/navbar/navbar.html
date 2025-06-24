@@ -4,7 +4,7 @@
         <mat-toolbar>
             <h1>Ignite-Boost.net</h1>
         </mat-toolbar>
-        <mat-nav-list>
+        <mat-nav-list aria-label="Select an option">
             <!--TO-DO: Add submenu for Resources option-->
             <a mat-list-item href="#">Resources</a>
             <a mat-list-item href="#">Add Replay</a>
@@ -23,8 +23,7 @@
         } @else {
         <mat-toolbar class="justify-between">
             <h1>DFCI Replay Database</h1>
-            <mat-nav-list class="!inline-flex">
-                <!--TO-DO: Add submenu for Resources option-->
+            <mat-nav-list aria-label="Select an option" class="!inline-flex">
                 <a mat-list-item [matMenuTriggerFor]="resources">
                     <span class="inline-flex">
                         Resources
