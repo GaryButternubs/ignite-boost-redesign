@@ -1,17 +1,47 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
-@import "tailwindcss";
-// @import "/src/theme.css";
+@import "tailwindcss" important;
 
-html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+@theme {
+  // DFCI color variables
+  // TO-DO: Include palette for vanilla DFC as well, not just Ignition
+  --dfc-color-primary: #0a6873;
+  --dfc-color-secondary: #088c8c;
+  --dfc-color-tertiary: #05a696;
+
+  --dfc-hover-glow: #00ffff;
+  --dfc-gradient-start: #01b6af;
+  --dfc-gradient-middle: #0d4d68;
+  --dfc-gradient-end: #141d2a;
+  
+  --dfc-button-gradient-start: #0090a1;
+  --dfc-button-gradient-end: #00f3de;
+
+  // Clip path for button
+  --dfc-button-shape: polygon(92% 0%, 100% 50%, 100% 100%, 8% 100%, 0% 50%, 0% 0%);
+
+  // lg-shadow base, functions more like an outer glow than a shadow
+  --text-shadow-glow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 0px 2px varrgba(0, 0, 0, 0.1), 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+@layer components {
+  .dfc-button, .dfc-button * {
+    clip-path: var(--dfc-button-shape) !important;
+  }
+
+  .nav-text {
+    color: var(--color-white);
+
+    &:hover {
+      text-shadow: var(--text-shadow-glow);
+      --tw-shadow-color: var(--dfc-hover-glow);
+    }
+
+     :is(.\*\:overflow-visible > *) {
+      overflow: visible;
+     }
+  }
+}
+
+/* Need to apply this globally unfortunately. */
+.mat-expansion-panel-body {
+  padding: 0 !important;
 }
