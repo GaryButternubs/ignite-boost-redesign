@@ -15,17 +15,17 @@ export interface FragmentComponent {
 
 export const Fragments: Fragment[] = [
     {
-        src: '',
+        src: '../../../../assets/code_fragment_1.png',
         width: 464,
         height: 336
     },
     {
-        src: '',
+        src: '../../../../assets/code_fragment_2.png',
         width: 304,
         height: 336
     },
     {
-        src: '',
+        src: '../../../../assets/code_fragment_3.png',
         width: 464,
         height: 128
     }

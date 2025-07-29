@@ -1,10 +1,10 @@
 import { Component, input, output, signal } from '@angular/core';
-import { NgOptimizedImage, NgClass } from '@angular/common';
+import { NgOptimizedImage, NgStyle } from '@angular/common';
 import { Fragment, Fragments } from './FragmentData';
 
 @Component({
   selector: 'app-code-fragment',
-  imports: [ NgOptimizedImage, NgClass ],
+  imports: [ NgOptimizedImage, NgStyle ],
   templateUrl: './code-fragment.html',
   styleUrl: './code-fragment.scss'
 })
@@ -12,7 +12,7 @@ export class CodeFragment {
   private moveDistance = 75;
   private moveDuration = 1500;
   private movePerFrame = this.moveDistance / (60 * (this.moveDuration / 1000)); // 60FPS
-  opacity = 25;
+  opacity = 15;
 
   xPos = input<number>(0);
   yPos = input<number>(0);
@@ -31,6 +31,10 @@ export class CodeFragment {
   visible = signal<boolean>(false);
 
   updatePosition = setInterval(() => {
+    if (this.totalMoveAmt() === 0) {
+      console.log(this.fragmentId());
+    }
+
     const newAmt = Math.abs(this.totalMoveAmt()) + this.movePerFrame;
 
     if (this.visible() && newAmt >= this.moveDistance) {

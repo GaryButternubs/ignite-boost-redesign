@@ -1,6 +1,9 @@
 <!--TO-DO: Once components have been completed, change "h-screen" to "h-full"-->
 <main class="h-screen">
-    <!--Display all existing code fragments-->
+    <!--TO-DO: Don't display code until content in <router-outlet /> has fully loaded-->
+    @defer {
+        <app-code class="h-full w-full absolute" />
+    }
 
     <!--Render actual page-->
     <router-outlet />
