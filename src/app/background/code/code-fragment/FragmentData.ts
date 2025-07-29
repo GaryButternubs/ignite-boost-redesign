@@ -4,6 +4,15 @@ export interface Fragment {
     height: number
 };
 
+export interface FragmentComponent {
+    xPos: number,
+    yPos: number,
+    scale: number,
+    fragmentId: number,
+    fragmentIndex: number,
+    travelX: boolean
+};
+
 export const Fragments: Fragment[] = [
     {
         src: '',

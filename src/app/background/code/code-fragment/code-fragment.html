@@ -1,0 +1,11 @@
+<img 
+    [ngSrc]="fragment.src" 
+    [width]="fragment.width" 
+    [height]="fragment.height"
+    [class]="`absolute scale-${this.scale()} transition-opacity duration-100`" 
+    [ngClass]="`
+        left-${this.travelX() ? (this.xPos() + this.totalMoveAmt()) : this.xPos()} 
+        bottom-${this.travelX() ? this.yPos() : (this.yPos() + this.totalMoveAmt())}
+        opacity-${this.visible() ? this.opacity : 0}
+    `"
+/>

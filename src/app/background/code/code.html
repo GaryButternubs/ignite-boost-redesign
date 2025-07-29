@@ -1,1 +1,16 @@
-<p>code works!</p>
+<!-- @for (fragment of this.fragments; track fragment.fragmentIndex()) {
+    <ng-container *ngComponentOutlet="fragment" />
+} -->
+<div class="h-screen absolute">
+    @for (fragment of this.fragments; track fragment.fragmentIndex) {
+        <app-code-fragment 
+            [xPos]="fragment.xPos"
+            [yPos]="fragment.yPos"
+            [scale]="fragment.scale"
+            [fragmentId]="fragment.fragmentId"
+            [fragmentIndex]="fragment.fragmentIndex"
+            [travelX]="fragment.travelX"
+            (finishedMovement)="respawnFragment(fragment.fragmentIndex)"
+        />
+    }
+</div>
