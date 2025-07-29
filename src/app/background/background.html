@@ -2,7 +2,9 @@
 <main class="h-screen">
     <!--TO-DO: Don't display code until content in <router-outlet /> has fully loaded-->
     @defer {
-        <app-code class="h-full w-full absolute" />
+        @if (toggleCode) {
+            <app-code class="h-full w-full absolute" />
+        }
     }
 
     <!--Render actual page-->

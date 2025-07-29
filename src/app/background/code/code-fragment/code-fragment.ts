@@ -1,10 +1,10 @@
-import { Component, input, output, signal } from '@angular/core';
-import { NgOptimizedImage, NgStyle } from '@angular/common';
+import { Component, input, output, signal, computed } from '@angular/core';
+import { NgStyle } from '@angular/common';
 import { Fragment, Fragments } from './FragmentData';
 
 @Component({
   selector: 'app-code-fragment',
-  imports: [ NgOptimizedImage, NgStyle ],
+  imports: [ NgStyle ],
   templateUrl: './code-fragment.html',
   styleUrl: './code-fragment.scss'
 })
@@ -20,21 +20,17 @@ export class CodeFragment {
   fragmentId = input<number>(0);
   fragmentIndex = input<number>(0);
   travelX = input<boolean>(true);
+  moveDir = input<boolean>(true);
 
-  finishedMovement = output<number>(); // Fragment
+  finishedMovement = output<number>();
 
   // Always moves towards center
   // True is right/up, false is left/down
-  moveDir = (this.travelX()) ? (window.innerWidth / 2 > this.xPos()) : (window.innerHeight / 2 > this.yPos());
-  fragment: Fragment = Fragments[this.fragmentId()];
+  fragment = computed<Fragment>(() => Fragments[this.fragmentId()]);
   totalMoveAmt = signal<number>(0);
   visible = signal<boolean>(false);
 
   updatePosition = setInterval(() => {
-    if (this.totalMoveAmt() === 0) {
-      console.log(this.fragmentId());
-    }
-
     const newAmt = Math.abs(this.totalMoveAmt()) + this.movePerFrame;
 
     if (this.visible() && newAmt >= this.moveDistance) {
@@ -48,6 +44,6 @@ export class CodeFragment {
       this.visible.set(true);
     }
 
-    this.totalMoveAmt.set(newAmt * (this.moveDir ? 1 : -1));
+    this.totalMoveAmt.set(newAmt * (this.moveDir() ? 1 : -1));
   }, 1000 / 60);
 }

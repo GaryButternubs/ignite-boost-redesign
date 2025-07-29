@@ -1,4 +1,4 @@
-<mat-toolbar class="bg-[var(--dfc-color-primary)] shadow-xl/50 bg-[url(/assets/horizontal_bars.png)] h-auto relative" [ngClass]="checkBreakpoints.getIsHandset() ? 'block' : 'flex'">
+<mat-toolbar class="bg-[var(--dfc-color-primary)] shadow-xl/50 bg-[url(/assets/horizontal_bars.png)] h-auto relative z-1" [ngClass]="checkBreakpoints.getIsHandset() ? 'block' : 'flex'">
     <div class="flex h-14 flex-1 items-center transition-all duration-300" [ngClass]="mobileMenuOpen() ? 'border-b-gray-800 border-b-0' : 'border-transparent border-b-0'">
         <!--Mobile menu button-->
         <div class="flex items-center" [ngClass]="checkBreakpoints.getIsHandset() ? '' : 'hidden'">

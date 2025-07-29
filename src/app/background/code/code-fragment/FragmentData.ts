@@ -10,7 +10,8 @@ export interface FragmentComponent {
     scale: number,
     fragmentId: number,
     fragmentIndex: number,
-    travelX: boolean
+    travelX: boolean,
+    moveDir: boolean,
 };
 
 export const Fragments: Fragment[] = [

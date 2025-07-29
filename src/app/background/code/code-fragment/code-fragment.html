@@ -1,23 +1,14 @@
-<!-- <img 
-    [ngSrc]="fragment.src" 
-    [width]="fragment.width" 
-    [height]="fragment.height"
-    [class]="`absolute scale-${this.scale()} transition-opacity duration-100`" 
-    [ngClass]="`
-        left-${this.travelX() ? (this.xPos() + this.totalMoveAmt()) : this.xPos()} 
-        bottom-${this.travelX() ? this.yPos() : (this.yPos() + this.totalMoveAmt())}
-        opacity-${this.visible() ? this.opacity : 0}
-    `"
-/> -->
-<img 
-    [ngSrc]="fragment.src" 
-    [width]="fragment.width" 
-    [height]="fragment.height"
-    [class]="`absolute transition-opacity duration-100`"
-    [ngStyle]="{
-        'scale': `${this.scale()}%`,
-        'opacity': `${this.visible() ? this.opacity : 0}%`,
-        'left': `${this.travelX() ? (this.xPos() + this.totalMoveAmt()) : this.xPos()}px`,
-        'bottom': `${this.travelX() ? this.yPos() : (this.yPos() + this.totalMoveAmt())}px`
-    }"
-/>
+@if (fragment()) {
+    <img 
+        [src]="fragment().src" 
+        [width]="fragment().width" 
+        [height]="fragment().height"
+        [class]="`absolute origin-top-left transition-opacity duration-100`"
+        [ngStyle]="{
+            'scale': `${this.scale()}%`,
+            'opacity': `${this.visible() ? this.opacity : 0}%`,
+            'left': `${this.travelX() ? (this.xPos() + this.totalMoveAmt()) : this.xPos()}px`,
+            'top': `${this.travelX() ? this.yPos() : (this.yPos() + this.totalMoveAmt())}px`
+        }"
+    />
+}

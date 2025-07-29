@@ -9,5 +9,5 @@ import { Code } from './code/code';
   styleUrl: './background.scss'
 })
 export class Background {
-
+  toggleCode = window.matchMedia('(prefers-reduced-motion: no-preference').matches;
 }
