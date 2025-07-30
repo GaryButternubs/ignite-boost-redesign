@@ -10,6 +10,7 @@
         [fragmentIndex]="fragment.fragmentIndex"
         [travelX]="fragment.travelX"
         [moveDir]="fragment.moveDir"
+        [moveDistance]="this.moveDistance"
         (finishedMovement)="respawnFragment(fragment.fragmentIndex)"
     />
 }

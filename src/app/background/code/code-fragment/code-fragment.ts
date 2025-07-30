@@ -9,11 +9,6 @@ import { Fragment, Fragments } from './FragmentData';
   styleUrl: './code-fragment.scss'
 })
 export class CodeFragment {
-  private moveDistance = 75;
-  private moveDuration = 1500;
-  private movePerFrame = this.moveDistance / (60 * (this.moveDuration / 1000)); // 60FPS
-  opacity = 15;
-
   xPos = input<number>(0);
   yPos = input<number>(0);
   scale = input<number>(0);
@@ -21,6 +16,12 @@ export class CodeFragment {
   fragmentIndex = input<number>(0);
   travelX = input<boolean>(true);
   moveDir = input<boolean>(true);
+  moveDistance = input<number>(0);
+  
+  private moveDuration = 1000;
+  private movePerFrame = computed(() => this.moveDistance() / (60 * (this.moveDuration / 1000))); // 60FPS
+  //private movePerFrame = this.moveDistance() / (60 * (this.moveDuration / 1000)); // 60FPS
+  opacity = 15;
 
   finishedMovement = output<number>();
 
@@ -31,16 +32,16 @@ export class CodeFragment {
   visible = signal<boolean>(false);
 
   updatePosition = setInterval(() => {
-    const newAmt = Math.abs(this.totalMoveAmt()) + this.movePerFrame;
+    const newAmt = Math.abs(this.totalMoveAmt()) + this.movePerFrame();
 
-    if (this.visible() && newAmt >= this.moveDistance) {
+    if (this.visible() && newAmt >= this.moveDistance()) {
       this.visible.set(false);
       setTimeout(() => {
         //clearInterval(this.updatePosition);
         this.finishedMovement.emit(this.fragmentIndex());
         this.totalMoveAmt.set(0);
       }, 100);
-    } else if (!this.visible() && newAmt < this.moveDistance) {
+    } else if (!this.visible() && newAmt < this.moveDistance()) {
       this.visible.set(true);
     }
 
