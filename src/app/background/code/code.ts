@@ -11,7 +11,7 @@ import { Fragments, FragmentComponent } from './code-fragment/FragmentData';
 export class Code {
   private elementRef = inject(ElementRef);
 
-  private maxFragments = 1;
+  private maxFragments = 5;
   private spawnDelay = 750;
   private currentIndex = 0;
   private minScale = 0.35;
@@ -51,10 +51,10 @@ export class Code {
     const elWidth = this.elementRef.nativeElement.clientWidth;
     const elHeight = this.elementRef.nativeElement.clientHeight;
 
-    fragment.xPos = Math.random() * elWidth;
-    fragment.yPos = Math.random() * elHeight;
-    fragment.scale = (Math.random() + this.minScale) * 100;
     fragment.fragmentId = Math.floor(Math.random() * Fragments.length);
+    fragment.scale = (Math.random() + this.minScale);
+    fragment.xPos = Math.random() * (elWidth - (Fragments[fragment.fragmentId].width * fragment.scale));
+    fragment.yPos = Math.random() * (elHeight - (Fragments[fragment.fragmentId].height * fragment.scale));
     fragment.travelX = (Math.random() < 0.5) ? false : true;
     
     if (fragment.travelX) {
