@@ -31,7 +31,6 @@ export class Code {
 
     this.initializeFragment(fragment); 
     fragment.fragmentIndex = this.currentIndex;
-    console.log(fragment);
     this.fragments.update((fragments) => {
       return [...fragments, fragment];
     })

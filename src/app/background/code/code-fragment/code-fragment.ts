@@ -20,7 +20,6 @@ export class CodeFragment {
   
   private moveDuration = 1000;
   private movePerFrame = computed(() => this.moveDistance() / (60 * (this.moveDuration / 1000))); // 60FPS
-  //private movePerFrame = this.moveDistance() / (60 * (this.moveDuration / 1000)); // 60FPS
   opacity = 15;
 
   finishedMovement = output<number>();
