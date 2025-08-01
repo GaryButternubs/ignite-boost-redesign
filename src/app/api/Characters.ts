@@ -1,4 +1,4 @@
-interface Characters {
+export interface Characters {
     name: string;
     short?: string;
     abbr: string;
@@ -6,7 +6,7 @@ interface Characters {
     wiki: string;
 }
 
-const PlayableCharacters: Characters[] = [
+export const PlayableCharacters: Characters[] = [
     {
         name: 'Akira Yuki',
         short: 'Akira',
@@ -144,7 +144,7 @@ const PlayableCharacters: Characters[] = [
     }
 ];
 
-const AssistCharacters: Characters[] = [
+export const AssistCharacters: Characters[] = [
     {
         name: 'Wilhelmina Carmel',
         short: 'Wilhelmina',
@@ -232,7 +232,7 @@ const AssistCharacters: Characters[] = [
     },
     {
         name: 'Sadao Maou',
-        short: 'Maou',
+        short: 'Sadao',
         abbr: 'mou',
         ignition: false,
         wiki: 'https://wiki.gbl.gg/w/Dengeki_Bunko:_Fighting_Climax/Sadao_Maou',
