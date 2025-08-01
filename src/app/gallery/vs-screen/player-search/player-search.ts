@@ -8,7 +8,8 @@ import { Character, PlayableCharacters } from '../../../api/Characters';
   styleUrl: './player-search.scss'
 })
 export class PlayerSearch {
-  ignition = input<boolean>(true);
+  isIgnition = input<boolean>(true);
+  isP1 = input<boolean>(true); // Affects skew direction 
   updatePlayerQuery = output<string>();
 
   selectedChar = signal<Character>(PlayableCharacters[10]); // All characters
