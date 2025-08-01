@@ -1,12 +1,13 @@
-export interface Characters {
+export interface Character {
     name: string;
     short?: string;
+    internal?: string; // So that front-end names can be different from backend
     abbr: string;
     ignition: boolean;
     wiki: string;
 }
 
-export const PlayableCharacters: Characters[] = [
+export const PlayableCharacters: Character[] = [
     {
         name: 'Akira Yuki',
         short: 'Akira',
@@ -76,6 +77,12 @@ export const PlayableCharacters: Characters[] = [
         wiki: 'https://wiki.gbl.gg/w/Dengeki_Bunko:_Fighting_Climax/DFCI/Shana',
     },
     {
+        name: '',
+        abbr: 'all',
+        ignition: false,
+        wiki: ''
+    },
+    {
         name: 'Asuna',
         abbr: 'asu',
         ignition: false,
@@ -118,6 +125,7 @@ export const PlayableCharacters: Characters[] = [
     {
         name: 'Qwenthur Barbotage',
         short: 'Qwenthur',
+        internal: 'Quenser',
         abbr: 'qen',
         ignition: true,
         wiki: 'https://wiki.gbl.gg/w/Dengeki_Bunko:_Fighting_Climax/DFCI/Quenser',
@@ -144,7 +152,13 @@ export const PlayableCharacters: Characters[] = [
     }
 ];
 
-export const AssistCharacters: Characters[] = [
+export const AssistCharacters: Character[] = [
+    {
+        name: '',
+        abbr: 'all',
+        ignition: false,
+        wiki: '',
+    },
     {
         name: 'Wilhelmina Carmel',
         short: 'Wilhelmina',
@@ -232,7 +246,8 @@ export const AssistCharacters: Characters[] = [
     },
     {
         name: 'Sadao Maou',
-        short: 'Sadao',
+        short: 'Maou',
+        internal: 'Sadao',
         abbr: 'mou',
         ignition: false,
         wiki: 'https://wiki.gbl.gg/w/Dengeki_Bunko:_Fighting_Climax/Sadao_Maou',
