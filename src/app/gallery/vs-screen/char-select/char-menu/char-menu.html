@@ -4,6 +4,7 @@
         @if (!char.ignition || isIgnition()) {
             <img
                 [ngSrc]="`../../../../../assets/char-sel/${char.abbr}`"
+                class="hover:border-2 hover:border-white"
                 width="56"
                 height="144"
                 (mouseenter)="hoveredChar.set(char)"
