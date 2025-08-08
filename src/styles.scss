@@ -1,5 +1,9 @@
 @import "tailwindcss" important;
 
+* {
+  font-family: "Orbitron", sans-serif;
+}
+
 @theme {
   // DFCI color variables
   // TO-DO: Include palette for vanilla DFC as well, not just Ignition
