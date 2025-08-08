@@ -1,15 +1,22 @@
-<div class="p-4 bg-black opacity-50 skew-0! flex flex-row">
-    @for (char of this.playableCharacters; track char.abbr) {
-        <!--Don't display DFCI exclusive characters if only DFC-->
-        @if (!char.ignition || isIgnition()) {
-            <img
-                [ngSrc]="`../../../../../assets/char-sel/${char.abbr}`"
-                class="hover:border-2 hover:border-white"
-                width="56"
-                height="144"
-                (mouseenter)="hoveredChar.set(char)"
-                (click)="updateSelectedChar.emit(char)"  
-            />
+<div class="p-4 bg-black opacity-50 skew-0!">
+    <div class="flex flex-row">
+        @for (char of this.playableCharacters; track char.abbr) {
+            <!--Don't display DFCI exclusive characters if only DFC-->
+            @if (!char.ignition || isIgnition()) {
+                <img
+                    [ngSrc]="`../../../../../assets/char-menu/lg/${char.abbr}`"
+                    class="hover:border-2 hover:border-white"
+                    width="56"
+                    height="144"
+                    (mouseenter)="hoveredChar.set(char)"
+                    (click)="updateSelectedChar.emit(char)"  
+                />
+            }
         }
+    </div>
+    @if (hoveredChar().name) {
+        <span [classList]="`text-${isP1() ? 'left' : 'right'}`">
+            {{hoveredChar().name}}
+        </span>
     }
 </div>

@@ -1,1 +1,29 @@
-<p>char-select works!</p>
+@if (!checkBreakpoints.getIsFull()) {
+    <mat-form-field>
+        <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} character</mat-label>
+        <mat-select [(value)]="selectedChar">
+            <mat-option>All</mat-option>
+            @for (char of this.playableCharacters; track char.abbr) {
+                <!--Don't display DFCI exclusive characters if only DFC-->
+                @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
+                    <mat-option [value]="char.abbr">
+                        <!--TO-DO: Add character render to inside of <mat-option>-->
+                        {{char.name}}
+                    </mat-option>
+                }
+            }
+        </mat-select>
+    </mat-form-field>
+} @else {
+    <!--Add char select photo img in place of div-->
+    <div #trigger></div>
+    <app-char-menu 
+        [isIgnition]="isIgnition()"
+        [isP1]="isP1()"
+        (updateSelectedChar)="updateSelectedChar($event)"
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="isOpen()"
+        (detach)="isOpen.set(false)"
+    />
+}
