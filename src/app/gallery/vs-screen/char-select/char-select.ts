@@ -1,4 +1,5 @@
 import { Component, inject, input, output, signal } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { CheckBreakpoints } from '../../../breakpoints/check-breakpoints';
 import { Character, PlayableCharacters } from '../../../api/Characters';
 import { CharMenu } from './char-menu/char-menu';
@@ -7,7 +8,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-char-select',
-  imports: [CharMenu, MatSelectModule, OverlayModule],
+  imports: [NgOptimizedImage, CharMenu, MatSelectModule, OverlayModule],
   templateUrl: './char-select.html',
   styleUrl: './char-select.scss'
 })
@@ -29,7 +30,7 @@ export class CharSelect {
     }
 
     this.selectedChar.set(char);
-    // Null-ish coalescing multiple times because I suck
+    // Null-ish coalescing multiple times because I smell
     this.updateCharQuery.emit(char.internal ?? char.short ?? char.name);
   }
 }
