@@ -2,12 +2,23 @@
     <mat-form-field>
         <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} character</mat-label>
         <mat-select [(value)]="selectedChar">
-            <mat-option>All</mat-option>
+            <mat-option>
+                <img 
+                    [ngSrc]="`../../../../assets/char-menu/sm/all.png`"
+                    width="90"
+                    height="90"
+                />
+                All
+            </mat-option>
             @for (char of this.playableCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
                     <mat-option [value]="char">
-                        <!--TO-DO: Add character render to inside of <mat-option>-->
+                        <img 
+                            [ngSrc]="`../../../../assets/char-menu/sm/${char.abbr}.png`"
+                            width="90"
+                            height="90"
+                        />
                         {{char.name}}
                     </mat-option>
                 }
