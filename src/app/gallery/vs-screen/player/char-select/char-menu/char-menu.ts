@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../api/Characters';
 

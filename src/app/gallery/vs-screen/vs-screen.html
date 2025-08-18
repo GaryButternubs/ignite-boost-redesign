@@ -1,1 +1,38 @@
-<p>vs-screen works!</p>
+<div [class]="`flex justify-center items-center py-4 gap-4 text-white ${checkBreakpoints.getIsHandset() ? 'flex-col' : ''}`">
+    <!--Player 1-->
+    <div class="flex gap-2 justify-center">
+        <app-assist-select 
+            [isIgnition]="true"
+            [isP1]="true"
+            class="absolute"
+        />
+        <app-char-select 
+            [isIgnition]="true"
+            [isP1]="true"
+            class="absolute"
+        />
+    </div>
+
+    @if (!checkBreakpoints.getIsHandset()) {
+        <img 
+            ngSrc="../../../assets/vs_text.png"
+            width="192"
+            height="64"
+            class="h-fit"
+        />
+    }
+
+    <!--Player 2-->
+    <div class="flex gap-2 justify-center">
+        <app-char-select 
+            [isIgnition]="true"
+            [isP1]="false"
+            class="absolute"
+        />
+        <app-assist-select 
+            [isIgnition]="true"
+            [isP1]="false"
+            class="absolute"
+        />
+    </div>
+</div>

@@ -1,10 +1,10 @@
-<div class="p-4 bg-black opacity-50 skew-0!">
-    <div class="flex flex-row">
+<div class="p-4 bg-black opacity-75 skew-0!">
+    <div class="flex flex-row gap-2">
         @for (char of this.playableCharacters; track char.abbr) {
             <!--Don't display DFCI exclusive characters if only DFC-->
             @if (!char.ignition || isIgnition()) {
                 <img
-                    [ngSrc]="`../../../../../assets/char-menu/lg/${char.abbr}`"
+                    [ngSrc]="`../../../../../assets/char-menu/lg/${char.abbr}.png`"
                     class="hover:border-2 hover:border-white"
                     width="56"
                     height="144"

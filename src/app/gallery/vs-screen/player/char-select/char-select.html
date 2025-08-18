@@ -33,13 +33,16 @@
             height="395"
         />
     </button>
-    <app-char-menu 
-        [isIgnition]="isIgnition()"
-        [isP1]="isP1()"
-        (updateSelectedChar)="updateSelectedChar($event)"
+    <ng-template
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="trigger"
         [cdkConnectedOverlayOpen]="isOpen()"
         (detach)="isOpen.set(false)"
-    />
+    >
+        <app-char-menu 
+            [isIgnition]="isIgnition()"
+            [isP1]="isP1()"
+            (updateSelectedChar)="updateSelectedChar($event)"
+        />
+    </ng-template>
 }

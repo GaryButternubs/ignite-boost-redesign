@@ -16,7 +16,7 @@ export class CharSelect {
   checkBreakpoints = inject(CheckBreakpoints);
 
   isIgnition = input<boolean>(true);
-  isP1 = input<boolean>(true); // Affects skew direction 
+  isP1 = input<boolean>(true); // For char-menu text-alignment
   updateCharQuery = output<string>();
 
   selectedChar = signal<Character>(PlayableCharacters[10]); // All characters
