@@ -1,12 +1,12 @@
-<div [ngClass]="`${(hoveredChar().name) ? 'pt-4 pb-2' : 'py-4'} px-4 bg-black opacity-75 skew-0!`">
-    <div class="opacity-100!">
+<div [ngClass]="`${(hoveredChar().name) ? 'pt-4 pb-2' : 'py-4'} px-4 bg-black/75 skew-0!`">
+    <div>
         <div class="flex flex-row gap-2 pb-2">
             @for (char of this.playableCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (!char.ignition || isIgnition()) {
                     <img
                         [ngSrc]="`../../../../../../assets/char-menu/lg/${char.abbr}.png`"
-                        class="hover:border-2 hover:border-white"
+                        [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'}`"
                         width="56"
                         height="144"
                         (mouseenter)="hoveredChar.set(char)"
