@@ -1,6 +1,6 @@
 import { Component, input, output, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { Character, PlayableCharacters } from '../../../../api/Characters';
+import { Character, PlayableCharacters } from '../../../../../api/Characters';
 
 @Component({
   selector: 'app-char-menu',

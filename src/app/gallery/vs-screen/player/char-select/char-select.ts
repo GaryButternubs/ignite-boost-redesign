@@ -1,7 +1,6 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { CheckBreakpoints } from '../../../breakpoints/check-breakpoints';
-import { Character, PlayableCharacters } from '../../../api/Characters';
+import { Character, PlayableCharacters } from '../../../../api/Characters';
 import { CharMenu } from './char-menu/char-menu';
 import { MatSelectModule } from '@angular/material/select';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -13,10 +12,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
   styleUrl: './char-select.scss'
 })
 export class CharSelect {
-  checkBreakpoints = inject(CheckBreakpoints);
-
   isIgnition = input<boolean>(true);
   isP1 = input<boolean>(true); // For char-menu text-alignment
+  isFull = input<boolean>(true);
   updateCharQuery = output<string>();
 
   selectedChar = signal<Character>(PlayableCharacters[10]); // All characters
@@ -32,5 +30,10 @@ export class CharSelect {
     this.selectedChar.set(char);
     // Null-ish coalescing multiple times because I smell
     this.updateCharQuery.emit(char.internal ?? char.short ?? char.name);
+  }
+
+  debuggingFunction() {
+    console.log('Opening overlay');
+    this.isOpen.set(!this.isOpen());
   }
 }

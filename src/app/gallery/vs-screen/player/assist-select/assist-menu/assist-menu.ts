@@ -1,6 +1,6 @@
 import { Component, input, output, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { Character, AssistCharacters } from '../../../../api/Characters';
+import { Character, AssistCharacters } from '../../../../../api/Characters';
 
 @Component({
   selector: 'app-assist-menu',

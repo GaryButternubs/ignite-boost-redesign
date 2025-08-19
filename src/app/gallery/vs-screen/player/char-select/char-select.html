@@ -1,10 +1,10 @@
-@if (!checkBreakpoints.getIsFull()) {
+@if (!isFull()) {
     <mat-form-field>
         <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} character</mat-label>
         <mat-select [(value)]="selectedChar">
             <mat-option>
                 <img 
-                    [ngSrc]="`../../../../assets/char-menu/sm/all.png`"
+                    [ngSrc]="`../../../../../assets/char-menu/sm/all.png`"
                     width="90"
                     height="90"
                 />
@@ -15,7 +15,7 @@
                 @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
                     <mat-option [value]="char">
                         <img 
-                            [ngSrc]="`../../../../assets/char-menu/sm/${char.abbr}.png`"
+                            [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
                             width="90"
                             height="90"
                         />
@@ -26,9 +26,9 @@
         </mat-select>
     </mat-form-field>
 } @else {
-    <button (click)="isOpen.set(!isOpen)" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+    <button (click)="debuggingFunction()" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
         <img
-            [ngSrc]="`../../../../assets/char-portraits/${this.selectedChar().abbr}_${this.isP1() ? 'p1' : 'p2'}.png`"
+            [ngSrc]="`../../../../../assets/char-portraits/${this.selectedChar().abbr}_${this.isP1() ? 'p1' : 'p2'}.png`"
             width="596"
             height="395"
         />

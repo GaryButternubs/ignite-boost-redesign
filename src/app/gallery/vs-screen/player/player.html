@@ -1,1 +1,14 @@
-<p>player works!</p>
+<div [ngClass]="`flex gap-2 justify-center relative ${isFull() ? 'w-[596px] h-[459px]' : ''} ${(!isHandset() && isP1()) ? 'flex-row-reverse' : 'flex-row'}`">
+    <app-char-select 
+        [isIgnition]="isIgnition()"
+        [isP1]="isP1()"
+        [isFull]="isFull()"
+        [ngClass]="`${isFull() ? 'absolute' : ''}`"
+    />
+    <app-assist-select 
+        [isIgnition]="isIgnition()"
+        [isP1]="isP1()"
+        [isFull]="isFull()"
+        [ngClass]="`${isFull() ? `absolute bottom-0 ${isP1() ? 'left-0' : 'right-0'}` : ''}`"
+    />
+</div>

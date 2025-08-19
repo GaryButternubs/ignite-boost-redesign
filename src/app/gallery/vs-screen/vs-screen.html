@@ -1,19 +1,13 @@
-<div [class]="`flex justify-center items-center py-4 gap-4 text-white ${checkBreakpoints.getIsHandset() ? 'flex-col' : ''}`">
+<div [class]="`flex justify-center items-center py-4 ${isFull() ? 'gap-22' : 'gap-4'} text-white ${isHandset() ? 'flex-col' : ''}`">
     <!--Player 1-->
-    <div class="flex gap-2 justify-center">
-        <app-assist-select 
-            [isIgnition]="true"
-            [isP1]="true"
-            class="absolute"
-        />
-        <app-char-select 
-            [isIgnition]="true"
-            [isP1]="true"
-            class="absolute"
-        />
-    </div>
+    <app-player 
+        [isIgnition]="isIgnition()"
+        [isP1]="true"
+        [isHandset]="isHandset()"
+        [isFull]="isFull()"
+    />
 
-    @if (!checkBreakpoints.getIsHandset()) {
+    @if (!isHandset() && !isFull()) {
         <img 
             ngSrc="../../../assets/vs_text.png"
             width="192"
@@ -21,18 +15,22 @@
             class="h-fit"
         />
     }
-
+    
     <!--Player 2-->
-    <div class="flex gap-2 justify-center">
-        <app-char-select 
-            [isIgnition]="true"
-            [isP1]="false"
-            class="absolute"
+    <app-player 
+        [isIgnition]="isIgnition()"
+        [isP1]="false"
+        [isHandset]="isHandset()"
+        [isFull]="isFull()"
+    />
+
+    <!--VS Text-->
+    @if (!isHandset() && isFull()) {
+        <img 
+            ngSrc="../../../assets/vs_text.png"
+            width="192"
+            height="64"
+            class="h-fit absolute top-60"
         />
-        <app-assist-select 
-            [isIgnition]="true"
-            [isP1]="false"
-            class="absolute"
-        />
-    </div>
+    }
 </div>
