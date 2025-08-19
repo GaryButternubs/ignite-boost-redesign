@@ -1,22 +1,24 @@
-<div class="p-4 bg-black opacity-75 skew-0!">
-    <div class="flex flex-row flex-wrap gap-2">
-        @for (char of this.assistCharacters; track char.abbr) {
-            <!--Don't display DFCI exclusive assists if only DFC-->
-            @if (!char.ignition || isIgnition()) {
-                <img 
-                    [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
-                    class="hover:border-2 hover:border-white"
-                    width="60"
-                    height="60"
-                    (mouseenter)="hoveredAsst.set(char)"
-                    (click)="updateSelectedAsst.emit(char)"
-                />
+<div [ngClass]="`${(hoveredAsst().name) ? 'pt-4 pb-2' : 'py-4'} px-4 bg-black opacity-75 skew-0!`">
+    <div class="opacity-100!">
+        <div class="grid grid-cols-8 gap-2 pb-2">
+            @for (char of this.assistCharacters; track char.abbr) {
+                <!--Don't display DFCI exclusive assists if only DFC-->
+                @if (!char.ignition || isIgnition()) {
+                    <img 
+                        [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
+                        class="hover:border-2 hover:border-white"
+                        width="60"
+                        height="60"
+                        (mouseenter)="hoveredAsst.set(char)"
+                        (click)="updateSelectedAsst.emit(char)"
+                    />
+                }
             }
+        </div>
+        @if (hoveredAsst().name) {
+            <span [ngClass]="`text-white text-${isP1() ? 'left' : 'right'}`">
+                {{hoveredAsst().name}}
+            </span>
         }
     </div>
-    @if (hoveredAsst().name) {
-        <span [classList]="`text-${isP1() ? 'left' : 'right'}`">
-            {{hoveredAsst().name}}
-        </span>
-    }
 </div>

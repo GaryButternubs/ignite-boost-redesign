@@ -33,7 +33,6 @@ export class CharSelect {
   }
 
   debuggingFunction() {
-    console.log('Opening overlay');
-    this.isOpen.set(!this.isOpen());
+    console.log('Runs when clicking outside the overlay');
   }
 }
