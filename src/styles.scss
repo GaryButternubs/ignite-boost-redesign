@@ -24,12 +24,18 @@
 
   // Clip path for button
   --dfc-button-shape: polygon(92% 0%, 100% 50%, 100% 100%, 8% 100%, 0% 50%, 0% 0%);
+  --dfc-player-sel-shape-p1: polygon(0 0, 87% 9%, 100% 90%, 0% 100%);
+  --dfc-player-sel-shape-p2: polygon(13% 9%, 100% 0, 100% 100%, 0 90%);
+  --dfc-asst-sel-shape-p1: polygon(0 8%, 96% 0, 100% 80%, 0% 100%);
+  --dfc-asst-sel-shape-p2: polygon(5% 0, 100% 8%, 100% 100%, 0 80%);
 
   // lg-shadow base, functions more like an outer glow than a shadow
   --text-shadow-glow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 0px 2px varrgba(0, 0, 0, 0.1), 0px 0px 8px rgba(0, 0, 0, 0.1);
 
   --animate-p1-select: hover-p1 2s infinite;
   --animate-p2-select: hover-p2 2s infinite;
+  --animate-open-h: appear-h ease-out 416ms 1;
+  --animate-open-h-flash: appear-h-flash ease-out 166ms 416ms 1 forwards; 
 
   @keyframes hover-p1 {
     0% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-red-50), 0 0 #0000 }
@@ -42,11 +48,37 @@
     50% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-blue-600), 0 0 #0000 }
     100% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-blue-50), 0 0 #0000 }
   }
+
+  @keyframes appear-h {
+    0% { transform: scale(1, 0.2); }
+    100% { transform: scale(1, 1); }
+  }
+
+  @keyframes appear-h-flash {
+    0% { opacity: 100%; }
+    100% { opacity: 0%; }
+  }
 }
 
 @layer components {
   .dfc-button, .dfc-button * {
     clip-path: var(--dfc-button-shape) !important;
+  }
+
+  .player-sel-flash-p1 {
+    clip-path: var(--dfc-player-sel-shape-p1);
+  }
+
+  .player-sel-flash-p2 {
+    clip-path: var(--dfc-player-sel-shape-p2);
+  }
+
+  .asst-sel-flash-p1 {
+    clip-path: var(--dfc-asst-sel-shape-p1);
+  }
+
+  .asst-sel-flash-p2 {
+    clip-path: var(--dfc-asst-sel-shape-p2)
   }
 
   .nav-text {

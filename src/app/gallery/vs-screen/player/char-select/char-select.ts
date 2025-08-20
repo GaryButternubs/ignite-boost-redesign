@@ -1,5 +1,5 @@
-import { Component, inject, input, output, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { Component, input, output, signal } from '@angular/core';
+import { NgOptimizedImage, NgClass } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../api/Characters';
 import { CharMenu } from './char-menu/char-menu';
 import { MatSelectModule } from '@angular/material/select';
@@ -7,7 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-char-select',
-  imports: [NgOptimizedImage, CharMenu, MatSelectModule, OverlayModule],
+  imports: [NgOptimizedImage, CharMenu, MatSelectModule, OverlayModule, NgClass],
   templateUrl: './char-select.html',
   styleUrl: './char-select.scss'
 })

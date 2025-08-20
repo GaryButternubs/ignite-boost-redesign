@@ -1,5 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, NgClass } from '@angular/common';
 import { Character, AssistCharacters } from '../../../../api/Characters';
 import { AssistMenu } from './assist-menu/assist-menu';
 import { MatSelectModule } from '@angular/material/select';
@@ -8,7 +8,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: 'app-assist-select',
-  imports: [NgOptimizedImage, AssistMenu, MatSelectModule, OverlayModule, MatExpansionModule],
+  imports: [NgOptimizedImage, NgClass, AssistMenu, MatSelectModule, OverlayModule, MatExpansionModule],
   templateUrl: './assist-select.html',
   styleUrl: './assist-select.scss'
 })

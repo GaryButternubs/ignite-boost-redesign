@@ -27,7 +27,7 @@
     </mat-form-field>
 } @else {
     <button
-        class="cursor-pointer" 
+        class="cursor-pointer animate-open-h" 
         (click)="isOpen.set(!isOpen())" 
         type="button" 
         cdkOverlayOrigin 
@@ -38,6 +38,7 @@
             width="365"
             height="152"
         />
+        <div [ngClass]="`${isP1() ? 'asst-sel-flash-p1' : 'asst-sel-flash-p2'} absolute top-0 animate-open-h-flash w-full h-full bg-white`"></div>
     </button>
     <ng-template
         cdkConnectedOverlay
@@ -50,6 +51,12 @@
                 originY: 'center',
                 overlayX: (isP1()) ? 'start' : 'end',
                 overlayY: 'center'
+            },
+            {
+                originX: (isP1()) ? 'start' : 'end',
+                originY: 'bottom',
+                overlayX: (isP1()) ? 'start' : 'end',
+                overlayY: 'bottom'
             }
         ]"
         (detach)="isOpen.set(false)"
