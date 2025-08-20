@@ -43,6 +43,7 @@
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="trigger"
         [cdkConnectedOverlayOpen]="isOpen()"
+        [cdkConnectedOverlayFlexibleDimensions]="true"
         (detach)="isOpen.set(false)"
         (overlayOutsideClick)="isOpen.set(false)"
     >

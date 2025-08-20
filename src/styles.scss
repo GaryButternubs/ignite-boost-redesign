@@ -28,6 +28,8 @@
   --animate-p1-select: hover-p1 2s infinite;
   --animate-p2-select: hover-p2 2s infinite;
 
+  --mat-progress-spinner-active-indicator-color: var(--dfc-color-primary);
+
   @keyframes hover-p1 {
     0% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-red-50), 0 0 #0000 }
     50% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-red-600), 0 0 #0000 }

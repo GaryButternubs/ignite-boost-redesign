@@ -1,6 +1,6 @@
-<div [ngClass]="`${(hoveredChar().name) ? 'pt-4 pb-2' : 'py-4'} px-4 bg-black/75 skew-0!`">
+<div [ngClass]="`pt-4 pb-2 px-2 bg-black/75 skew-0! mx-1`">
     <div>
-        <div class="flex flex-row gap-2 pb-2">
+        <div class="flex flex-row flex-wrap gap-1 pb-2 justify-center">
             @for (char of this.playableCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (!char.ignition || isIgnition()) {
@@ -15,10 +15,8 @@
                 }
             }
         </div>
-        @if (hoveredChar().name) {
-            <span [ngClass]="`text-white text-${isP1() ? 'left' : 'right'}`">
-                {{hoveredChar().name}}
-            </span>
-        }
+        <span [ngClass]="`text-white text-${isP1() ? 'left' : 'right'}`">
+            {{hoveredChar().name ? hoveredChar().name : 'Any/All'}}
+        </span>
     </div>
 </div>
