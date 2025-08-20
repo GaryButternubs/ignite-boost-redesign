@@ -1,6 +1,7 @@
-<div [ngClass]="`transition-transform duration-700 ${isOpen() ? 'scale-y-100' : 'scale-y-0'} pt-4 pb-2 px-4 bg-black/50 skew-0!`">
+<div [ngClass]="`transition-transform duration-700 ${isOpen() ? 'scale-y-100' : 'scale-y-0'} py-2 px-4 bg-black/50 skew-0!`">
     <div>
-        <div class="grid grid-cols-8 gap-2 pb-2">
+        <span class="block w-full text-center text-white italic text-xl text-shadow-glow text-shadow-(color:--dfc-asst-sel-glow)">Support Character Select</span>
+        <div class="grid grid-cols-8 gap-2 py-2">
             @for (char of this.assistCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive assists if only DFC-->
                 <!-- @defer (on viewport) {
@@ -30,7 +31,7 @@
                 }
             }
         </div>
-        <span [ngClass]="`text-white text-${isP1() ? 'left' : 'right'}`">
+        <span [ngClass]="`block w-full text-white text-shadow-glow text-shadow-(color:--dfc-asst-sel-glow) ${isP1() ? 'text-left' : 'text-right'}`">
             {{hoveredAsst().name ? hoveredAsst().name : 'Any/All'}}
         </span>
     </div>

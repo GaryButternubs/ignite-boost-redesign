@@ -15,6 +15,9 @@
   --dfc-gradient-start: #01b6af;
   --dfc-gradient-middle: #0d4d68;
   --dfc-gradient-end: #141d2a;
+
+  --dfc-char-sel-glow: #08bd9c;
+  --dfc-asst-sel-glow: #004eff;
   
   --dfc-button-gradient-start: #0090a1;
   --dfc-button-gradient-end: #00f3de;
@@ -27,8 +30,6 @@
 
   --animate-p1-select: hover-p1 2s infinite;
   --animate-p2-select: hover-p2 2s infinite;
-
-  --mat-progress-spinner-active-indicator-color: var(--dfc-color-primary);
 
   @keyframes hover-p1 {
     0% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-red-50), 0 0 #0000 }

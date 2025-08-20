@@ -13,6 +13,8 @@ export class CharMenu {
   isIgnition = input<boolean>(true);
   isP1 = input<boolean>(true); // Affects text alignment
   updateSelectedChar = output<Character>();
+  elementHeight = output<number>();
+  
   playableCharacters = PlayableCharacters;
 
   hoveredChar = signal<Character>(PlayableCharacters[0]);

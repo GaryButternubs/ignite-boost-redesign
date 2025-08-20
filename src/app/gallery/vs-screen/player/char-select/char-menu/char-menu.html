@@ -1,6 +1,7 @@
-<div [ngClass]="`pt-4 pb-2 px-2 bg-black/75 skew-0! mx-1`">
+<div [ngClass]="`py-2 px-2 bg-black/75 skew-0! mx-1`">
     <div>
-        <div class="flex flex-row flex-wrap gap-1 pb-2 justify-center">
+        <span class="block w-full text-center text-white italic text-xl text-shadow-glow text-shadow-(color:--dfc-char-sel-glow)">Character Select</span>
+        <div class="flex flex-row flex-wrap gap-1 py-2 justify-center">
             @for (char of this.playableCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (!char.ignition || isIgnition()) {
@@ -15,7 +16,7 @@
                 }
             }
         </div>
-        <span [ngClass]="`text-white text-${isP1() ? 'left' : 'right'}`">
+        <span [ngClass]="`block w-full text-white text-shadow-glow text-shadow-(color:--dfc-char-sel-glow) ${isP1() ? 'text-left' : 'text-right'}`">
             {{hoveredChar().name ? hoveredChar().name : 'Any/All'}}
         </span>
     </div>

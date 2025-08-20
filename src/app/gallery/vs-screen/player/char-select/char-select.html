@@ -44,6 +44,14 @@
         [cdkConnectedOverlayOrigin]="trigger"
         [cdkConnectedOverlayOpen]="isOpen()"
         [cdkConnectedOverlayFlexibleDimensions]="true"
+        [cdkConnectedOverlayPositions]="[
+            {
+                originX: (isP1()) ? 'start' : 'end',
+                originY: 'center',
+                overlayX: (isP1()) ? 'start' : 'end',
+                overlayY: 'center'
+            }
+        ]"
         (detach)="isOpen.set(false)"
         (overlayOutsideClick)="isOpen.set(false)"
     >
