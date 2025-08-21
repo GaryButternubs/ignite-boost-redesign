@@ -38,6 +38,13 @@
             width="596"
             height="395"
         />
+        <div [ngClass]="`absolute bottom-3/17 flex flex-col w-full text-white italic font-semibold text-shadow-glow text-shadow-(color:--dfc-portrait-glow) ${isP1() ? 'text-right' : 'text-left'}`">
+            <span class="mx-10 text-5xl">{{((this.selectedChar().name) ? this.selectedChar().short ?? this.selectedChar().name : 'Any/All') | uppercase}}</span>
+            <!--TO-DO: Change second line to be assist's name-->
+            <span [ngClass]="`mx-8 ${(this.charName() && this.charName().length > 10) ? 'text-lg' : 'text-2xl'}`">
+                {{(`&${this.charName() ? this.charName() : 'Any/All'}`) | uppercase}}
+            </span>
+        </div>
         <div [ngClass]="`${isP1() ? 'player-sel-flash-p1' : 'player-sel-flash-p2'} absolute top-0 animate-open-h-flash w-full h-full bg-white`"></div>
     </button>
     <ng-template

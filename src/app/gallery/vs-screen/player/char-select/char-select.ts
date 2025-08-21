@@ -1,5 +1,5 @@
-import { Component, input, output, signal } from '@angular/core';
-import { NgOptimizedImage, NgClass } from '@angular/common';
+import { Component, input, output, signal, computed } from '@angular/core';
+import { NgOptimizedImage, NgClass, UpperCasePipe } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../api/Characters';
 import { CharMenu } from './char-menu/char-menu';
 import { MatSelectModule } from '@angular/material/select';
@@ -7,7 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-char-select',
-  imports: [NgOptimizedImage, CharMenu, MatSelectModule, OverlayModule, NgClass],
+  imports: [NgOptimizedImage, NgClass, UpperCasePipe, CharMenu, MatSelectModule, OverlayModule],
   templateUrl: './char-select.html',
   styleUrl: './char-select.scss'
 })
@@ -18,6 +18,7 @@ export class CharSelect {
   updateCharQuery = output<string>();
 
   selectedChar = signal<Character>(PlayableCharacters[10]); // All characters
+  charName = computed<string>(() => this.selectedChar().short ?? this.selectedChar().name);
   isOpen = signal<boolean>(false);
 
   playableCharacters = PlayableCharacters;
