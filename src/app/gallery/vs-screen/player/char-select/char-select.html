@@ -68,8 +68,12 @@
     (overlayOutsideClick)="isOpen.set(false)"
 >
     @if (!isFull()) {
-        <!--Simple Select-->
-        <div class="select-overlay mat-select-panel-animations-enabled mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open mat-primary">
+        <!--Standard Select-->
+        <div 
+            class="select-overlay"
+            animate.enter="select-overlay-enter"
+            animate.leave="select-overlay-leave"
+        >
             <div (click)="updateSelectedChar(playableCharacters[10])" [ngClass]="`select-option ${selectedChar().name ? '' : 'bg-(--dfc-color-primary)/50'} hover:bg-white/25 *:text-white`">
                 <img 
                     ngSrc="../../../../../assets/char-menu/sm/all.png"
@@ -98,7 +102,9 @@
         <app-char-menu 
             [isIgnition]="isIgnition()"
             [isP1]="isP1()"
-            (updateSelectedChar)="updateSelectedChar($event)"    
+            (updateSelectedChar)="updateSelectedChar($event)"
+            animate.enter="animate-overlay-open-h"
+            animate.leave="select-overlay-leave"    
         />
     }
 </ng-template>

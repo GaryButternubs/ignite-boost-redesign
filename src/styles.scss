@@ -66,6 +66,16 @@
     73% { opacity: 0%; }
     100% { opacity: 100%; }
   }
+
+  @keyframes _mat-select-enter {
+    from { opacity:0; transform:scaleY(0.8); }
+    to { opacity:1; transform:none; }
+  }
+
+  @keyframes _mat-select-exit {
+    from { opacity:1 }
+    to { opacity:0 }
+  }
 }
 
 @layer components {
@@ -114,6 +124,18 @@
     overflow-y: scroll;
   }
 
+  .animate-overlay-open-h {
+    animation: var(--animate-open-h);
+  }
+
+  .select-overlay-enter {
+    animation: _mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .select-overlay-leave {
+    animation:_mat-select-exit 100ms linear;
+  }
+
   .select-option {
     padding-block: calc(var(--spacing) * 1);
     padding-inline: calc(var(--spacing) * 4);
@@ -121,6 +143,7 @@
     flex-direction: row;
     gap: calc(var(--spacing) * 2);
     align-items: center;
+    cursor: pointer;
   }
 }
 

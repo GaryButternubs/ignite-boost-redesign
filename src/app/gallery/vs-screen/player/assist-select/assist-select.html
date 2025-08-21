@@ -1,40 +1,19 @@
-@if (!isFull()) {
-    <mat-form-field>
-        <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} assist</mat-label>
-        <mat-select [(value)]="selectedAsst">
-            <mat-option (click)="updateSelectedAssist(this.assistCharacters[0])" class="py-1 *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
-                <img 
-                    ngSrc="../../../../../assets/asst-menu/sm/all.png"
-                    width="90"
-                    height="48"
-                    class="w-12 h-auto"
-                />
-                <span class="text-white text-lg">Any/All</span>
-            </mat-option>
-            @for (char of this.sortedAssists; track char.abbr) {
-                <!--Don't display DFCI exclusive characters if only DFC-->
-                @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
-                    <mat-option [value]="char" (click)="updateSelectedAssist(char)" class="py-1 *:text-white *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
-                        <img 
-                            [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
-                            width="90"
-                            height="48"
-                            class="w-12 h-auto"
-                        />
-                        <span class="text-md">{{char.name}}</span>
-                    </mat-option>
-                }
-            }
-        </mat-select>
-    </mat-form-field>
-} @else {
-    <button
-        class="cursor-pointer animate-open-h" 
-        (click)="isOpen.set(!isOpen())" 
-        type="button" 
-        cdkOverlayOrigin 
-        #trigger="cdkOverlayOrigin"
-    >
+<button
+    class="cursor-pointer animate-open-h"
+    (click)="isOpen.set(!isOpen())"
+    type="button"
+    cdkOverlayOrigin
+    #trigger
+>
+    @if (!isFull()) {
+        <!--Replay Theater-->
+        <img 
+            [ngSrc]="`../../../../../assets/asst-menu/sm/${this.selectedAsst().abbr}.png`"
+            width="90"
+            height="48"
+        />
+    } @else {
+        <!--VS Screen Replica-->
         <img 
             [ngSrc]="`../../../../../assets/asst-portraits/${this.selectedAsst().abbr}_${this.isP1() ? 'p1' : 'p2'}.png`"
             width="365"
@@ -55,34 +34,69 @@
                 <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-portrait-glow) hover:(color:--dfc-hover-glow)" inline="true">info</mat-icon>
             </a>
         }
-    </button>
-    <ng-template
-        cdkConnectedOverlay
-        [cdkConnectedOverlayOrigin]="trigger"
-        [cdkConnectedOverlayOpen]="isOpen()"
-        [cdkConnectedOverlayFlexibleDimensions]="true"
-        [cdkConnectedOverlayPositions]="[
+    }
+</button>
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen()"
+    [cdkConnectedOverlayFlexibleDimensions]="true"
+    [cdkConnectedOverlayPositions]="!isFull() ? [
+            {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'top',
+            }
+        ] : [
             {
                 originX: (isP1()) ? 'start' : 'end',
                 originY: 'center',
                 overlayX: (isP1()) ? 'start' : 'end',
                 overlayY: 'center'
-            },
-            {
-                originX: (isP1()) ? 'start' : 'end',
-                originY: 'bottom',
-                overlayX: (isP1()) ? 'start' : 'end',
-                overlayY: 'bottom'
             }
         ]"
-        (detach)="isOpen.set(false)"
-        (overlayOutsideClick)="isOpen.set(false)"
-    >
+    (detach)="isOpen.set(false)"
+    (overlayOutsideClick)="isOpen.set(false)"
+>
+    @if (!isFull()) {
+        <!--Standard Select-->
+        <div 
+            class="select-overlay"
+            animate.enter="select-overlay-enter"
+            animate.leave="select-overlay-leave"
+        >
+            <div (click)="updateSelectedAssist(assistCharacters[0])" [ngClass]="`select-option ${selectedAsst().name ? '' : 'bg-(--dfc-color-primary)/50'} hover:bg-white/25 *:text-white`">
+                <img 
+                    ngSrc="../../../../../assets/asst-menu/sm/all.png"
+                    width="90"
+                    height="48"
+                    class="w-12 h-auto"
+                />
+                <span class="text-white text-lg">Any/All</span>
+            </div>
+            @for (char of this.sortedAssists; track char.abbr) {
+                @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
+                    <div (click)="updateSelectedAssist(char)" [ngClass]="`select-option *:text-white ${(selectedAsst() === char) ? 'bg-(--dfc-color-primary)/50' : ''} hover:bg-white/25`">
+                        <img 
+                            [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
+                            width="90"
+                            height="48"
+                            class="w-12 h-auto"
+                        />
+                        <span class="text-md">{{char.name}}</span>
+                    </div>
+                }
+            }
+        </div>
+    } @else {
         <app-assist-menu 
             [isIgnition]="isIgnition()"
             [isP1]="isP1()"
             [isOpen]="isOpen()"
             (updateSelectedAsst)="updateSelectedAssist($event)"
+            animate.enter="animate-overlay-open-h"
+            animate.leave="select-overlay-leave"  
         />
-    </ng-template>
-}
+    }
+</ng-template>
