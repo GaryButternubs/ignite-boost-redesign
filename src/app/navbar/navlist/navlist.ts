@@ -31,7 +31,7 @@ export class Navlist {
   // Navbar options
   options: NavbarOption[] = [
     {
-      text: 'Search Replays',
+      text: 'Replays',
       id: 1,
       url: { path: '/' },
     },

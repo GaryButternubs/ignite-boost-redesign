@@ -119,7 +119,7 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     max-height: 275px;
-    width: 212px !important;
+    width: 250px !important;
     padding-block: calc(var(--spacing) * 2);
     overflow-y: scroll;
   }
@@ -142,6 +142,7 @@
     display: flex;
     flex-direction: row;
     gap: calc(var(--spacing) * 2);
+    justify-content: space-between;
     align-items: center;
     cursor: pointer;
   }

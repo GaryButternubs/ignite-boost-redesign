@@ -40,12 +40,17 @@
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOpen()"
-    [cdkConnectedOverlayFlexibleDimensions]="true"
     [cdkConnectedOverlayPositions]="!isFull() ? [
             {
-                originX: 'start',
+                originX: isP1() ? 'start' : 'end',
                 originY: 'bottom',
-                overlayX: 'start',
+                overlayX: isP1() ? 'start' : 'end',
+                overlayY: 'top',
+            },
+            {
+                originX: isP1() ? 'end' : 'start',
+                originY: 'bottom',
+                overlayX: isP1() ? 'end' : 'start',
                 overlayY: 'top',
             }
         ] : [
@@ -67,24 +72,39 @@
             animate.leave="select-overlay-leave"
         >
             <div (click)="updateSelectedAssist(assistCharacters[0])" [ngClass]="`select-option ${selectedAsst().name ? '' : 'bg-(--dfc-color-primary)/50'} hover:bg-white/25 *:text-white`">
-                <img 
-                    ngSrc="../../../../../assets/asst-menu/sm/all.png"
-                    width="90"
-                    height="48"
-                    class="w-12 h-auto"
-                />
-                <span class="text-white text-lg">Any/All</span>
+                <div class="flex flex-row gap-2 items-center">
+                    <img 
+                        ngSrc="../../../../../assets/asst-menu/sm/all.png"
+                        width="90"
+                        height="48"
+                        class="w-12 h-auto"
+                    />
+                    <span class="text-white text-lg">Any/All</span>
+                </div>
             </div>
             @for (char of this.sortedAssists; track char.abbr) {
                 @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
                     <div (click)="updateSelectedAssist(char)" [ngClass]="`select-option *:text-white ${(selectedAsst() === char) ? 'bg-(--dfc-color-primary)/50' : ''} hover:bg-white/25`">
-                        <img 
-                            [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
-                            width="90"
-                            height="48"
-                            class="w-12 h-auto"
-                        />
-                        <span class="text-md">{{char.name}}</span>
+                        <div class="flex flex-row gap-2 items-center">
+                            <img 
+                                [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
+                                width="90"
+                                height="48"
+                                class="w-12 h-auto"
+                            />
+                            <span class="text-md">{{char.name}}</span>
+                        </div>
+
+                        <!--Mizuumi link-->
+                        <a 
+                            matIconButton 
+                            [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
+                            class="flex justify-end text-4xl *:overflow-visible"
+                            [href]="char.wiki"
+                            target="_blank"
+                        >
+                            <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-char-sel-glow) hover:text-shadow-(color:--dfc-portrait-glow)" inline="true">info</mat-icon>
+                        </a>
                     </div>
                 }
             }
@@ -96,7 +116,7 @@
             [isOpen]="isOpen()"
             (updateSelectedAsst)="updateSelectedAssist($event)"
             animate.enter="animate-overlay-open-h"
-            animate.leave="select-overlay-leave"  
+            animate.leave="select-overlay-leave" 
         />
     }
 </ng-template>
