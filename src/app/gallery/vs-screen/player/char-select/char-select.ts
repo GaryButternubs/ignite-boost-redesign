@@ -2,12 +2,13 @@ import { Component, input, output, signal, computed } from '@angular/core';
 import { NgOptimizedImage, NgClass, UpperCasePipe } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../api/Characters';
 import { CharMenu } from './char-menu/char-menu';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-char-select',
-  imports: [NgOptimizedImage, NgClass, UpperCasePipe, CharMenu, MatSelectModule, OverlayModule],
+  imports: [NgOptimizedImage, NgClass, UpperCasePipe, CharMenu, MatIconModule, MatSelectModule, OverlayModule],
   templateUrl: './char-select.html',
   styleUrl: './char-select.scss'
 })
@@ -18,8 +19,9 @@ export class CharSelect {
   updateCharQuery = output<string>();
 
   selectedChar = signal<Character>(PlayableCharacters[10]); // All characters
-  charName = computed<string>(() => this.selectedChar().short ?? this.selectedChar().name);
   isOpen = signal<boolean>(false);
+
+  charName = computed<string>(() => this.selectedChar().short ?? this.selectedChar().name);
 
   playableCharacters = PlayableCharacters;
 
@@ -29,11 +31,8 @@ export class CharSelect {
     }
 
     this.selectedChar.set(char);
-    // Null-ish coalescing multiple times because I smell
+    // Null-ish coalescing multiple times because I smell.
+    // This way 'Short' can be different, ie. short='Qwenthur' & internal='Quenser'
     this.updateCharQuery.emit(char.internal ?? char.short ?? char.name);
-  }
-
-  debuggingFunction() {
-    console.log('Runs when clicking outside the overlay');
   }
 }
