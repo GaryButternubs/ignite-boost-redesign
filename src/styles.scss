@@ -101,6 +101,11 @@
       overflow: visible;
      }
   }
+
+  div.mat-mdc-select-panel {
+    background-color: var(--dfc-color-secondary) !important;
+    background-image: url('./assets/horizontal_bars.png') !important;
+  }
 }
 
 /* Need to apply this globally unfortunately. */

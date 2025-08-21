@@ -2,24 +2,26 @@
     <mat-form-field>
         <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} assist</mat-label>
         <mat-select [(value)]="selectedAsst">
-            <mat-option>
+            <mat-option (click)="updateSelectedAssist(this.assistCharacters[0])" class="py-1 *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
                 <img 
                     ngSrc="../../../../../assets/asst-menu/sm/all.png"
                     width="90"
                     height="48"
+                    class="w-12 h-auto"
                 />
-                All
+                <span class="text-white text-lg">Any/All</span>
             </mat-option>
-            @for (char of this.assistCharacters; track char.abbr) {
+            @for (char of this.sortedAssists; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
-                    <mat-option [value]="char" (click)="updateSelectedAssist(char)">
+                    <mat-option [value]="char" (click)="updateSelectedAssist(char)" class="py-1 *:text-white *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
                         <img 
                             [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
                             width="90"
                             height="48"
+                            class="w-12 h-auto"
                         />
-                        {{char.name}}
+                        <span class="text-md">{{char.name}}</span>
                     </mat-option>
                 }
             }

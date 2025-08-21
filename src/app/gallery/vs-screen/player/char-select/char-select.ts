@@ -26,6 +26,7 @@ export class CharSelect {
   asstName = computed<string>(() => (this.selectedAsst()) ? this.selectedAsst()!.short ?? this.selectedAsst()!.name : '');
 
   playableCharacters = PlayableCharacters;
+  sortedChars = [...this.playableCharacters].sort((a: Character, b: Character) => a.name.localeCompare(b.name));
 
   updateSelectedChar(char: Character) {
     if (this.isOpen()) {

@@ -24,6 +24,7 @@ export class AssistSelect {
   isOpen = signal<boolean>(false);
 
   assistCharacters = AssistCharacters;
+  sortedAssists = [...this.assistCharacters].sort((a: Character, b: Character) => a.name.localeCompare(b.name));
 
   updateSelectedAssist(asst: Character) {
     if (this.isOpen()) {

@@ -2,24 +2,26 @@
     <mat-form-field>
         <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} character</mat-label>
         <mat-select [(value)]="selectedChar">
-            <mat-option>
+            <mat-option (click)="updateSelectedChar(this.playableCharacters[10])" class="py-1 *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
                 <img 
                     [ngSrc]="`../../../../../assets/char-menu/sm/all.png`"
                     width="90"
                     height="90"
+                    class="w-auto h-12"
                 />
-                All
+                <span class="text-white text-lg">Any/All</span>
             </mat-option>
-            @for (char of this.playableCharacters; track char.abbr) {
+            @for (char of this.sortedChars; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
-                    <mat-option [value]="char" (click)="updateSelectedChar(char)">
+                    <mat-option [value]="char" (click)="updateSelectedChar(char)" class="py-1 *:text-white *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
                         <img 
                             [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
                             width="90"
                             height="90"
+                            class="w-auto h-12"
                         />
-                        {{char.name}}
+                        <span class="text-md">{{char.name}}</span>
                     </mat-option>
                 }
             }
