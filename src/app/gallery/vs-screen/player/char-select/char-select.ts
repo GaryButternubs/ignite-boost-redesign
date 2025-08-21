@@ -16,12 +16,14 @@ export class CharSelect {
   isIgnition = input<boolean>(true);
   isP1 = input<boolean>(true); // For char-menu text-alignment
   isFull = input<boolean>(true);
+  selectedAsst = input<Character>();
   updateCharQuery = output<string>();
 
   selectedChar = signal<Character>(PlayableCharacters[10]); // All characters
   isOpen = signal<boolean>(false);
 
   charName = computed<string>(() => this.selectedChar().short ?? this.selectedChar().name);
+  asstName = computed<string>(() => (this.selectedAsst()) ? this.selectedAsst()!.short ?? this.selectedAsst()!.name : '');
 
   playableCharacters = PlayableCharacters;
 

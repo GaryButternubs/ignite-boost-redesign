@@ -13,7 +13,7 @@
             @for (char of this.playableCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
-                    <mat-option [value]="char">
+                    <mat-option [value]="char" (click)="updateSelectedChar(char)">
                         <img 
                             [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
                             width="90"
@@ -42,8 +42,8 @@
         <div [ngClass]="`absolute bottom-3/17 flex flex-col w-full text-white italic font-semibold text-shadow-glow text-shadow-(color:--dfc-portrait-glow) ${isP1() ? 'text-right' : 'text-left'}`">
             <span class="mx-10 text-5xl">{{((this.selectedChar().name) ? this.selectedChar().short ?? this.selectedChar().name : 'Any/All') | uppercase}}</span>
             <!--TO-DO: Change second line to be assist's name-->
-            <span [ngClass]="`mx-8 ${(this.charName() && this.charName().length > 10) ? 'text-lg' : 'text-2xl'}`">
-                {{(`&${this.charName() ? this.charName() : 'Any/All'}`) | uppercase}}
+            <span [ngClass]="`mx-8 ${(this.asstName() && this.asstName().length > 10) ? 'text-lg' : 'text-2xl'}`">
+                {{(`&${this.asstName() ? this.asstName() : 'Any/All'}`) | uppercase}}
             </span>
         </div>
 

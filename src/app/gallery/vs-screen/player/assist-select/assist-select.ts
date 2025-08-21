@@ -18,20 +18,24 @@ export class AssistSelect {
   isP1 = input<boolean>(true); // For assist-menu text-alignment
   isFull = input<boolean>(true);
   updateAsstQuery = output<string>();
+  updateAsstDisplay = output<Character>();
 
   selectedAsst = signal<Character>(AssistCharacters[0]); // All assists
   isOpen = signal<boolean>(false);
 
   assistCharacters = AssistCharacters;
 
-  updateSelectedAssist(char: Character) {
+  updateSelectedAssist(asst: Character) {
     if (this.isOpen()) {
       this.isOpen.set(false);
     }
 
-    this.selectedAsst.set(char);
+    this.selectedAsst.set(asst);
     // Null-ish coalescing multiple times because I smell.
     // This way 'Short' can be different, ie. short='Qwenthur' & internal='Quenser'
-    this.updateAsstQuery.emit(char.internal ?? char.short ?? char.name);
+    this.updateAsstQuery.emit(asst.internal ?? asst.short ?? asst.name);
+
+    // Handle displaying on player select options
+    this.updateAsstDisplay.emit(asst);
   }
 }

@@ -3,12 +3,16 @@
         [isIgnition]="isIgnition()"
         [isP1]="isP1()"
         [isFull]="isFull()"
+        [selectedAsst]="assist()"
         [ngClass]="`${isFull() ? 'absolute' : ''}`"
+        (updateCharQuery)="updateQueryParam('char', $event)"
     />
     <app-assist-select 
         [isIgnition]="isIgnition()"
         [isP1]="isP1()"
         [isFull]="isFull()"
         [ngClass]="`${isFull() ? `absolute bottom-0 ${isP1() ? 'left-0' : 'right-0'}` : ''}`"
+        (updateAsstDisplay)="updateAssistDisplay($event)"
+        (updateAsstQuery)="updateQueryParam('assist', $event)"
     />
 </div>

@@ -13,7 +13,7 @@
             @for (char of this.assistCharacters; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
-                    <mat-option [value]="char">
+                    <mat-option [value]="char" (click)="updateSelectedAssist(char)">
                         <img 
                             [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
                             width="90"

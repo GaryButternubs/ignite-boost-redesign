@@ -5,6 +5,7 @@
         [isP1]="true"
         [isHandset]="isHandset()"
         [isFull]="isFull()"
+        (updateQuery)="updateQueryParams($event)"
     />
 
     @if (!isHandset() && !isFull()) {
@@ -22,6 +23,7 @@
         [isP1]="false"
         [isHandset]="isHandset()"
         [isFull]="isFull()"
+        (updateQuery)="updateQueryParams($event)"
     />
 
     <!--VS Text-->
