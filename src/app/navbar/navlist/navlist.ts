@@ -31,8 +31,13 @@ export class Navlist {
   // Navbar options
   options: NavbarOption[] = [
     {
-      text: 'Resources',
+      text: 'Search Replays',
       id: 1,
+      url: { path: '/' },
+    },
+    {
+      text: 'Resources',
+      id: 2,
       children: [
         {
           text: 'DFC Resource Site',
@@ -54,17 +59,17 @@ export class Navlist {
     },
     {
       text: 'Add a Replay',
-      id: 2,
+      id: 3,
       url: { path: '/add' },
     },
     {
       text: 'Login',
-      id: 3,
+      id: 4,
       url: { path: '/login' },
     },
     {
       text: 'Signup',
-      id: 4,
+      id: 5,
       url: { path: '/signup' },
       elementType: 'dfc-button',
     }
