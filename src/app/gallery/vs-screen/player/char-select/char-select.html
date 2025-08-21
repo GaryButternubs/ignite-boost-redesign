@@ -1,40 +1,19 @@
-@if (!isFull()) {
-    <mat-form-field>
-        <mat-label>Select {{this.isP1() ? 'P1' : 'P2'}} character</mat-label>
-        <mat-select [(value)]="selectedChar">
-            <mat-option (click)="updateSelectedChar(this.playableCharacters[10])" class="py-1 *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
-                <img 
-                    [ngSrc]="`../../../../../assets/char-menu/sm/all.png`"
-                    width="90"
-                    height="90"
-                    class="w-auto h-12"
-                />
-                <span class="text-white text-lg">Any/All</span>
-            </mat-option>
-            @for (char of this.sortedChars; track char.abbr) {
-                <!--Don't display DFCI exclusive characters if only DFC-->
-                @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
-                    <mat-option [value]="char" (click)="updateSelectedChar(char)" class="py-1 *:text-white *:flex *:flex-row *:gap-2 *:items-center hover:bg-white/25">
-                        <img 
-                            [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
-                            width="90"
-                            height="90"
-                            class="w-auto h-12"
-                        />
-                        <span class="text-md">{{char.name}}</span>
-                    </mat-option>
-                }
-            }
-        </mat-select>
-    </mat-form-field>
-} @else {
-    <button
-        class="cursor-pointer animate-open-h" 
-        (click)="isOpen.set(!isOpen())" 
-        type="button" 
-        cdkOverlayOrigin 
-        #trigger="cdkOverlayOrigin"
-    >
+<button
+    class="cursor-pointer animate-open-h"
+    (click)="isOpen.set(!isOpen())"
+    type="button"
+    cdkOverlayOrigin
+    #trigger
+>
+    @if (!isFull()) {
+        <!--Replay Theater-->
+        <img 
+            [ngSrc]="`../../../../../assets/char-menu/sm/${this.selectedChar().abbr}.png`"
+            width="90"
+            height="90"
+        />
+    } @else {
+        <!--VS Screen Replica-->
         <img
             [ngSrc]="`../../../../../assets/char-portraits/${this.selectedChar().abbr}_${this.isP1() ? 'p1' : 'p2'}.png`"
             width="596"
@@ -63,13 +42,21 @@
                 <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-portrait-glow) hover:(color:--dfc-hover-glow)" inline="true">info</mat-icon>
             </a>
         }
-    </button>
-    <ng-template
-        cdkConnectedOverlay
-        [cdkConnectedOverlayOrigin]="trigger"
-        [cdkConnectedOverlayOpen]="isOpen()"
-        [cdkConnectedOverlayFlexibleDimensions]="true"
-        [cdkConnectedOverlayPositions]="[
+    }
+</button>
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen()"
+    [cdkConnectedOverlayFlexibleDimensions]="true"
+    [cdkConnectedOverlayPositions]="!isFull() ? [
+            {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'top',
+            }
+        ] : [
             {
                 originX: (isP1()) ? 'start' : 'end',
                 originY: 'center',
@@ -77,13 +64,41 @@
                 overlayY: 'center'
             }
         ]"
-        (detach)="isOpen.set(false)"
-        (overlayOutsideClick)="isOpen.set(false)"
-    >
+    (detach)="isOpen.set(false)"
+    (overlayOutsideClick)="isOpen.set(false)"
+>
+    @if (!isFull()) {
+        <!--Simple Select-->
+        <div class="select-overlay mat-select-panel-animations-enabled mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open mat-primary">
+            <div (click)="updateSelectedChar(playableCharacters[10])" [ngClass]="`select-option ${selectedChar().name ? '' : 'bg-(--dfc-color-primary)/50'} hover:bg-white/25 *:text-white`">
+                <img 
+                    ngSrc="../../../../../assets/char-menu/sm/all.png"
+                    width="90"
+                    height="90"
+                    class="w-auto h-12"
+                />
+                <span class="text-md">Any/All</span>
+            </div>
+            @for (char of this.sortedChars; track char.abbr) {
+                <!--Don't display DFCI exclusive characters if only DFC-->
+                @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
+                    <div (click)="updateSelectedChar(char)" [ngClass]="`select-option *:text-white ${(selectedChar() === char) ? 'bg-(--dfc-color-primary)/50' : ''} hover:bg-white/25`">
+                        <img 
+                            [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
+                            width="90"
+                            height="90"
+                            class="w-auto h-12"
+                        />
+                        <span class="text-md">{{char.name}}</span>
+                    </div>
+                }
+            }
+        </div>
+    } @else {
         <app-char-menu 
             [isIgnition]="isIgnition()"
             [isP1]="isP1()"
-            (updateSelectedChar)="updateSelectedChar($event)"
+            (updateSelectedChar)="updateSelectedChar($event)"    
         />
-    </ng-template>
-}
+    }
+</ng-template>

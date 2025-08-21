@@ -102,9 +102,25 @@
      }
   }
 
-  div.mat-mdc-select-panel {
+  .select-overlay {
     background-color: var(--dfc-color-secondary) !important;
     background-image: url('./assets/horizontal_bars.png') !important;
+    border-radius: calc(var(--spacing) * 1);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    max-height: 275px;
+    width: 212px !important;
+    padding-block: calc(var(--spacing) * 2);
+    overflow-y: scroll;
+  }
+
+  .select-option {
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: row;
+    gap: calc(var(--spacing) * 2);
+    align-items: center;
   }
 }
 
