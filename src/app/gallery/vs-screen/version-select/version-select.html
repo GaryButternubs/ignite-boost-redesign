@@ -1,1 +1,24 @@
-<p>version-select works!</p>
+<div [ngClass]="`flex justify-center text-white animate-fadein`">
+    <div class="dfc-button h-fit w-fit bg-black p-1">
+        <div class="bg-linear-to-r from-(--dfc-button-gradient-start) via-(--dfc-button-gradient-end) to-(--dfc-button-gradient-start) p-1">
+            <mat-button-toggle-group name="versionSelect" aria-label="Version Select" class="dfc-button h-fit w-fit bg-black p-1">
+                <mat-button-toggle 
+                    value="2" 
+                    class="*:text-shadow-glow *:text-shadow-(color:--dfc-char-sel-glow)"
+                    [checked]="isIgnition()"
+                    (click)="updateSelectedVersion(2)"
+                >
+                    DFCI
+                </mat-button-toggle>
+                <mat-button-toggle 
+                    value="1" 
+                    class="*:text-shadow-glow *:text-shadow-(color:--dfc-asst-sel-glow)"
+                    [checked]="!isIgnition()"
+                    (click)="updateSelectedVersion(1)"
+                >
+                    DFC
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+</div>
