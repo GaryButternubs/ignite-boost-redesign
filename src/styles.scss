@@ -40,7 +40,8 @@
   --animate-p2-select: hover-p2 2s infinite;
   --animate-open-h: appear-h ease-out 416ms 1;
   --animate-open-h-flash: appear-h-flash ease-out 166ms 416ms 1 forwards;
-  --animate-hide-info-icon: hide-info linear 582ms 1 forwards; 
+  --animate-hide-info-icon: hide-info linear 582ms 1 forwards;
+  --animate-fadein: appear-opacity ease-out 416ms 1; 
 
   @keyframes hover-p1 {
     0% { box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 4px var(--color-red-50), 0 0 #0000 }
@@ -78,6 +79,11 @@
   @keyframes _mat-select-exit {
     from { opacity:1 }
     to { opacity:0 }
+  }
+
+  @keyframes appear-opacity {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
 
