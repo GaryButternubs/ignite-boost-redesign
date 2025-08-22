@@ -2,12 +2,14 @@ import { Component, input, output, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CharSelect } from './char-select/char-select';
 import { AssistSelect } from "./assist-select/assist-select";
+import { PlayerSearch } from "./player-search/player-search";
 import { AssistCharacters, Character } from '../../../api/Characters';
 import { VideoSearch } from '../../../api/Videos';
 
+
 @Component({
   selector: 'app-player',
-  imports: [CharSelect, NgClass, AssistSelect],
+  imports: [CharSelect, NgClass, AssistSelect, PlayerSearch],
   templateUrl: './player.html',
   styleUrl: './player.scss'
 })
