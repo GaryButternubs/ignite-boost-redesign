@@ -14,10 +14,13 @@
         />
     } @else {
         <!--VS Screen Replica-->
+        <div [ngClass]="`${isP1() ? 'player-sel-flash-p1' : 'player-sel-flash-p2'} absolute -bottom-1/30 w-full h-full bg-black/50`"></div>
+
         <img
             [ngSrc]="`../../../../../assets/char-portraits/${this.selectedChar().abbr}_${this.isP1() ? 'p1' : 'p2'}.png`"
             width="596"
             height="395"
+            class="relative"
         />
 
         <div [ngClass]="`absolute bottom-3/17 flex flex-col w-full text-white italic font-semibold text-shadow-glow text-shadow-(color:--dfc-portrait-glow) ${isP1() ? 'text-right' : 'text-left'}`">
