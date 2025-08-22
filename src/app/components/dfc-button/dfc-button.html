@@ -2,16 +2,16 @@
 <div>
     @if (callback()) {
         <button matButton (click)="callback()" class="dfc-button h-fit w-fit bg-black p-1 text-white hover:text-shadow-glow hover:text-shadow-(color:--dfc-hover-glow) *:overflow-visible">
-            <div class="bg-linear-to-r from-(--dfc-button-gradient-start) via-(--dfc-button-gradient-end) to-(--dfc-button-gradient-start) p-1">
-                <div class="bg-black px-2 py-1">
+            <div class="dfc-button bg-linear-to-r from-(--dfc-button-gradient-start) via-(--dfc-button-gradient-end) to-(--dfc-button-gradient-start) p-1">
+                <div class="dfc-button bg-black px-2 py-1">
                     <ng-content />
                 </div>
             </div>
         </button>
     } @else {
         <a matButton [routerLink]="routerURL()" class="dfc-button h-fit w-fit bg-black p-1 text-white hover:text-shadow-glow hover:text-shadow-(color:--dfc-hover-glow) *:overflow-visible">
-            <div class="bg-linear-to-r from-(--dfc-button-gradient-start) via-(--dfc-button-gradient-end) to-(--dfc-button-gradient-start) p-1">
-                <div class="bg-black px-2 py-1">
+            <div class="dfc-button bg-linear-to-r from-(--dfc-button-gradient-start) via-(--dfc-button-gradient-end) to-(--dfc-button-gradient-start) p-1">
+                <div class="dfc-button bg-black px-2 py-1">
                     <ng-content />
                 </div>
             </div>
