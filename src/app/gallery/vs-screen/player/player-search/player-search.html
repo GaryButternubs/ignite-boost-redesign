@@ -1,6 +1,7 @@
-<div [ngClass]="`scale-100 p-[2px] shadow-xl bg-black ${isFull() ? `absolute bottom-1/50 ${isP1() ? '-right-1/50 -skew-y-4 skew-x-13' : '-left-1/50 skew-y-4 -skew-x-13'}` : ''}`">
+<!-- To line up with char-sel portrait, add '-right-1/50 skew-x-13' and '-left-1/50 -skew-x-13' -->
+<div [ngClass]="`scale-100 p-[2px] shadow-xl bg-black ${isFull() ? `absolute bottom-1/50 ${isP1() ? '-right-0 -skew-y-4' : '-left-0 skew-y-4'}` : ''}`">
     <div class="p-[2px] bg-gradient-to-r from-(--dfc-player-gradient-ends) via-(--dfc-player-gradient-center) to-(--dfc-player-gradient-ends)">
-        <mat-form-field [ngClass]="`bg-black p-1 player-search flex ${isP1() ? 'justify-start' : 'justify-end'}`">
+        <mat-form-field [ngClass]="`skew-x-0 bg-black p-1 player-search flex ${isP1() ? 'justify-start' : 'justify-end'}`">
             <mat-label>{{`Player ${isP1() ? '1' : '2'}`}}</mat-label>
             <input matInput (change)="updatePlayerInput($event.target.value)" />
         </mat-form-field>
