@@ -13,8 +13,7 @@ import { VersionSelect } from "./version-select/version-select";
 })
 export class VsScreen {
   checkBreakpoints = inject(CheckBreakpoints);
-  query = input<VideoSearch>();
-  isIgnition = computed<boolean>(() => !(this.query()?.version === 2)); // 2 is DFCI, 1 is DFC
+  isIgnition = input<boolean>(true);
   isHandset = computed<boolean>(() => this.checkBreakpoints.getIsHandset());
   isFull = computed<boolean>(() => this.checkBreakpoints.getIsFull());
 

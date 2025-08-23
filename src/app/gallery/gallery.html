@@ -1,4 +1,5 @@
 <app-vs-screen 
+    [isIgnition]="(query().version === 2)"
     (updateQuery)="updateQueryParam($event)"
 />
 <app-replay-list />
