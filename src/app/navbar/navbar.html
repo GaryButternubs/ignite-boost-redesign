@@ -1,4 +1,4 @@
-<mat-toolbar class="bg-[var(--dfc-color-primary)] shadow-xl/50 bg-[url(/assets/horizontal_bars.png)] h-auto relative z-1" [ngClass]="checkBreakpoints.getIsHandset() ? 'block' : 'flex'">
+<mat-toolbar class="bg-[var(--color-primary)] shadow-xl/50 bg-[url(/assets/horizontal_bars.png)] h-auto relative z-1" [ngClass]="checkBreakpoints.getIsHandset() ? 'block' : 'flex'">
     <div class="flex h-14 flex-1 items-center transition-all duration-300" [ngClass]="mobileMenuOpen() ? 'border-b-gray-800 border-b-0' : 'border-transparent border-b-0'">
         <!--Mobile menu button-->
         <div class="flex items-center" [ngClass]="checkBreakpoints.getIsHandset() ? '' : 'hidden'">
@@ -6,7 +6,7 @@
                 matIconButton 
                 aria-label="Mobile menu button"
                 (click)="mobileMenuOpen.set(!mobileMenuOpen())" 
-                class="text-white *:text-3xl p-0 flex items-center justify-center *:w-auto *:h-auto *:overflow-visible *:hover:text-shadow-glow *:hover:text-shadow-(color:--dfc-hover-glow) *:focus:inset-ring-2 *:focus:inset-ring-(color: --dfc-hover-glow)"
+                class="text-white *:text-3xl p-0 flex items-center justify-center *:w-auto *:h-auto *:overflow-visible *:hover:text-shadow-glow *:hover:text-shadow-(color:--hover-glow) *:focus:inset-ring-2 *:focus:inset-ring-(color: --hover-glow)"
             >
                 <mat-icon>{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
             </button>
@@ -17,7 +17,7 @@
             <div class="flex shrink-0 items-center">
                 <img class="h-8 w-auto" ngSrc="assets/logo.PNG" width="240" height="240" />
             </div>
-            <h1 class="text-white text-xl font-medium px-3 py-2 hover:text-shadow-glow hover:text-shadow-(color:--dfc-hover-glow) hover:cursor-pointer"
+            <h1 class="text-white text-xl font-medium px-3 py-2 hover:text-shadow-glow hover:text-shadow-(color:--hover-glow) hover:cursor-pointer"
                 routerLink="/">DFC Replay Database</h1>
         </div>
     </div>

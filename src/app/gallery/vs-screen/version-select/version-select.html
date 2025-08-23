@@ -1,6 +1,6 @@
 <div [ngClass]="`flex justify-center text-white animate-fadein`">
     <div class="dfc-button h-fit w-fit bg-black p-1">
-        <div class="dfc-button bg-linear-to-r from-(--dfc-button-gradient-start) via-(--dfc-button-gradient-end) to-(--dfc-button-gradient-start) p-1">
+        <div class="dfc-button bg-linear-to-r from-(--button-gradient-start) via-(--button-gradient-end) to-(--button-gradient-start) p-1">
             <div class="dfc-button h-fit w-fit bg-black">
                 <mat-button-toggle-group 
                     name="versionSelect" 
@@ -9,7 +9,7 @@
                 >
                     <mat-button-toggle 
                         value="2" 
-                        [ngClass]="`*:text-shadow-glow *:text-shadow-(color:--dfc-char-sel-glow) transition ${isIgnition() ? 'bg-(color:--dfc-char-sel-glow)/50' : ''} hover:bg-(color:--dfc-char-sel-glow)/50`"
+                        [ngClass]="`*:text-shadow-glow *:text-shadow-(color:--char-sel-glow) transition ${isIgnition() ? 'bg-(color:--char-sel-glow)/50' : ''} hover:bg-(color:--char-sel-glow)/50`"
                         [checked]="isIgnition()"
                         (click)="updateSelectedVersion(2)"
                     >
@@ -17,7 +17,7 @@
                     </mat-button-toggle>
                     <mat-button-toggle 
                         value="1" 
-                        [ngClass]="`*:text-shadow-glow *:text-shadow-(color:--dfc-asst-sel-glow) transition ${!isIgnition() ? 'bg-(color:--dfc-asst-sel-glow)/50' : ''} hover:bg-(color:--dfc-asst-sel-glow)/50`"
+                        [ngClass]="`*:text-shadow-glow *:text-shadow-(color:--asst-sel-glow) transition ${!isIgnition() ? 'bg-(color:--asst-sel-glow)/50' : ''} hover:bg-(color:--asst-sel-glow)/50`"
                         [checked]="!isIgnition()"
                         (click)="updateSelectedVersion(1)"
                     >

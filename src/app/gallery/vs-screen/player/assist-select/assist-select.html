@@ -31,7 +31,7 @@
                 [href]="this.selectedAsst().wiki"
                 target="_blank"
             >
-                <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-portrait-glow) hover:text-shadow-(color:--dfc-char-sel-glow)" inline="true">info</mat-icon>
+                <mat-icon class="text-shadow-glow text-shadow-(color:--portrait-glow) hover:text-shadow-(color:--char-sel-glow)" inline="true">info</mat-icon>
             </a>
         }
     }
@@ -71,7 +71,7 @@
             animate.enter="select-overlay-enter"
             animate.leave="select-overlay-leave"
         >
-            <div (click)="updateSelectedAssist(assistCharacters[0])" [ngClass]="`select-option ${selectedAsst().name ? '' : 'bg-(--dfc-color-primary)/50'} hover:bg-white/25 *:text-white`">
+            <div (click)="updateSelectedAssist(assistCharacters[0])" [ngClass]="`select-option ${selectedAsst().name ? '' : 'bg-(--color-primary)/50'} hover:bg-white/25 *:text-white`">
                 <div class="flex flex-row gap-2 items-center">
                     <img 
                         ngSrc="../../../../../assets/asst-menu/sm/all.png"
@@ -84,7 +84,7 @@
             </div>
             @for (char of this.sortedAssists; track char.abbr) {
                 @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
-                    <div (click)="updateSelectedAssist(char)" [ngClass]="`select-option *:text-white ${(selectedAsst() === char) ? 'bg-(--dfc-color-primary)/50' : ''} hover:bg-white/25`">
+                    <div (click)="updateSelectedAssist(char)" [ngClass]="`select-option *:text-white ${(selectedAsst() === char) ? 'bg-(--color-primary)/50' : ''} hover:bg-white/25`">
                         <div class="flex flex-row gap-2 items-center">
                             <img 
                                 [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
@@ -103,7 +103,7 @@
                             [href]="char.wiki"
                             target="_blank"
                         >
-                            <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-char-sel-glow) hover:text-shadow-(color:--dfc-portrait-glow)" inline="true">info</mat-icon>
+                            <mat-icon class="text-shadow-glow text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)" inline="true">info</mat-icon>
                         </a>
                     </div>
                 }

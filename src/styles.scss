@@ -2,36 +2,65 @@
 
 * {
   font-family: "Orbitron", sans-serif;
+  transition: color 0.5s ease, background-color 0.5s ease, background-image 0.5s ease, border-color 0.5s ease !important;
 }
 
 @theme inline {
-  // DFCI color variables
-  // TO-DO: Include palette for vanilla DFC as well, not just Ignition
-  --dfc-color-primary: #0a6873;
-  --dfc-color-secondary: #088c8c;
-  --dfc-color-tertiary: #05a696;
+  // Base theme variables (identical to DFCI)
+  --color-primary: #0a6873;
+  --color-secondary: #088c8c;
+  --color-tertiary: #05a696;
 
-  --dfc-hover-glow: #00ffff;
-  --dfc-gradient-start: #01b6af;
-  --dfc-gradient-middle: #0d4d68;
-  --dfc-gradient-end: #141d2a;
-
-  --dfc-char-sel-glow: #08bd9c;
-  --dfc-asst-sel-glow: #004eff;
-  --dfc-portrait-glow: #006bff;
+  --hover-glow: #00ffff;
   
-  --dfc-button-gradient-start: #0090a1;
-  --dfc-button-gradient-end: #00f3de;
+  --bg-gradient-start: #01b6af;
+  --bg-gradient-middle: #0d4d68;
+  --bg-gradient-end: #141d2a;
 
-  --dfc-player-gradient-ends: #0079ff;
-  --dfc-player-gradient-center: #1082ff;
+  --char-sel-glow: #08bd9c;
+  --asst-sel-glow: #004eff;
+  --portrait-glow: #006bff;
+  
+  --button-gradient-start: #0090a1;
+  --button-gradient-end: #00f3de;
 
-  // Clip path for button
-  --dfc-button-shape: polygon(92% 0%, 100% 50%, 100% 100%, 8% 100%, 0% 50%, 0% 0%);
-  --dfc-player-sel-shape-p1: polygon(0 0, 87% 9%, 100% 90%, 0% 100%);
-  --dfc-player-sel-shape-p2: polygon(13% 9%, 100% 0, 100% 100%, 0 90%);
-  --dfc-asst-sel-shape-p1: polygon(0 8%, 96% 0, 100% 80%, 0% 100%);
-  --dfc-asst-sel-shape-p2: polygon(5% 0, 100% 8%, 100% 100%, 0 80%);
+  --player-gradient-ends: #0079ff;
+  --player-gradient-center: #1082ff;
+
+  // DFCI theme variables
+  --dfci-color-primary: #0a6873;
+  --dfci-color-secondary: #088c8c;
+  --dfci-color-tertiary: #05a696;
+
+  --dfci-hover-glow: #00ffff;
+  
+  --dfci-bg-gradient-start: #01b6af;
+  --dfci-bg-gradient-middle: #0d4d68;
+  --dfci-bg-gradient-end: #141d2a;
+  
+  --dfci-button-gradient-start: #0090a1;
+  --dfci-button-gradient-end: #00f3de;
+
+  // DFC theme variables
+  --dfc-color-primary: #2a6587;
+  --dfc-color-secondary: #3486a8;
+  --dfc-color-tertiary: #34a1bb;
+
+  --dfc-hover-glow: #0054ff;
+  
+  --dfc-bg-gradient-start: #01b8e7;
+  --dfc-bg-gradient-middle: #004A5B;
+  --dfc-bg-gradient-end: #001F25;
+  
+  --dfc-button-gradient-start: #0066a1;
+  --dfc-button-gradient-end: #009af3;
+
+  // Clip paths for button, character select, and assist select
+  --button-shape: polygon(92% 0%, 100% 50%, 100% 100%, 8% 100%, 0% 50%, 0% 0%);
+  --player-sel-shape-p1: polygon(0 0, 87% 9%, 100% 90%, 0% 100%);
+  --player-sel-shape-p2: polygon(13% 9%, 100% 0, 100% 100%, 0 90%);
+  --asst-sel-shape-p1: polygon(0 8%, 96% 0, 100% 80%, 0% 100%);
+  --asst-sel-shape-p2: polygon(5% 0, 100% 8%, 100% 100%, 0 80%);
 
   // lg-shadow base, functions more like an outer glow than a shadow
   --text-shadow-glow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 0px 2px varrgba(0, 0, 0, 0.1), 0px 0px 8px rgba(0, 0, 0, 0.1);
@@ -88,24 +117,64 @@
 }
 
 @layer components {
+  .dfci-theme {
+    --color-primary: var(--dfci-color-primary);
+    --color-secondary: var(--dfci-color-secondary);
+    --color-tertiary: var(--dfci-color-tertiary);
+
+    --hover-glow: var(--dfci-hover-glow);
+    
+    --bg-gradient-start: var(--dfci-bg-gradient-start);
+    --bg-gradient-middle: var(--dfci-bg-gradient-middle);
+    --bg-gradient-end: var(--dfci-bg-gradient-end);
+
+    --button-gradient-start: var(--dfci-button-gradient-start);
+    --button-gradient-end: var(--dfci-button-gradient-end);
+  }
+
+  .dfc-theme {
+    --color-primary: var(--dfc-color-primary);
+    --color-secondary: var(--dfc-color-secondary);
+    --color-tertiary: var(--dfc-color-tertiary);
+
+    --hover-glow: var(--dfc-hover-glow);
+    
+    --bg-gradient-start: var(--dfc-bg-gradient-start);
+    --bg-gradient-middle: var(--dfc-bg-gradient-middle);
+    --bg-gradient-end: var(--dfc-bg-gradient-end);
+
+    --button-gradient-start: var(--dfc-button-gradient-start);
+    --button-gradient-end: var(--dfc-button-gradient-end);
+  }
+
+  main {
+    background-image: radial-gradient(ellipse 100% 720px at 50% 125px, var(--bg-gradient-start), var(--bg-gradient-middle) 40%, var(--bg-gradient-end));
+  }
+
+  @media (min-width: 1280px) {
+    main {
+      background-image: radial-gradient(ellipse 100% 720px at 50% 250px, var(--bg-gradient-start), var(--bg-gradient-middle) 40%, var(--bg-gradient-end));
+    }
+  }
+
   .dfc-button {
-    clip-path: var(--dfc-button-shape) !important;
+    clip-path: var(--button-shape) !important;
   }
 
   .player-sel-flash-p1 {
-    clip-path: var(--dfc-player-sel-shape-p1);
+    clip-path: var(--player-sel-shape-p1);
   }
 
   .player-sel-flash-p2 {
-    clip-path: var(--dfc-player-sel-shape-p2);
+    clip-path: var(--player-sel-shape-p2);
   }
 
   .asst-sel-flash-p1 {
-    clip-path: var(--dfc-asst-sel-shape-p1);
+    clip-path: var(--asst-sel-shape-p1);
   }
 
   .asst-sel-flash-p2 {
-    clip-path: var(--dfc-asst-sel-shape-p2)
+    clip-path: var(--asst-sel-shape-p2)
   }
 
   .nav-text {
@@ -113,7 +182,7 @@
 
     &:hover {
       text-shadow: var(--text-shadow-glow);
-      --tw-shadow-color: var(--dfc-hover-glow);
+      --tw-shadow-color: var(--hover-glow);
     }
 
      :is(.\*\:overflow-visible > *) {
@@ -122,7 +191,7 @@
   }
 
   .select-overlay {
-    background-color: var(--dfc-color-secondary) !important;
+    background-color: var(--color-secondary) !important;
     background-image: url('./assets/horizontal_bars.png') !important;
     border-radius: calc(var(--spacing) * 1);
     border-top-left-radius: 0;

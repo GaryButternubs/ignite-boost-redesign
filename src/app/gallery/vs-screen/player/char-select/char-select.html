@@ -23,7 +23,7 @@
             class="relative"
         />
 
-        <div [ngClass]="`absolute bottom-3/17 flex flex-col w-full text-white italic font-semibold text-shadow-glow text-shadow-(color:--dfc-portrait-glow) ${isP1() ? 'text-right' : 'text-left'}`">
+        <div [ngClass]="`absolute bottom-3/17 flex flex-col w-full text-white italic font-semibold text-shadow-glow text-shadow-(color:--portrait-glow) ${isP1() ? 'text-right' : 'text-left'}`">
             <span class="mx-10 text-5xl">{{((this.selectedChar().name) ? this.selectedChar().short ?? this.selectedChar().name : 'Any/All') | uppercase}}</span>
             <!--TO-DO: Change second line to be assist's name-->
             <span [ngClass]="`mx-8 ${(this.asstName() && this.asstName().length > 10) ? 'text-lg' : 'text-2xl'}`">
@@ -42,7 +42,7 @@
                 [href]="this.selectedChar().wiki"
                 target="_blank"
             >
-                <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-portrait-glow) hover:text-shadow-(color:--dfc-char-sel-glow)" inline="true">info</mat-icon>
+                <mat-icon class="text-shadow-glow text-shadow-(color:--portrait-glow) hover:text-shadow-(color:--char-sel-glow)" inline="true">info</mat-icon>
             </a>
         }
     }
@@ -82,7 +82,7 @@
             animate.enter="select-overlay-enter"
             animate.leave="select-overlay-leave"
         >
-            <div (click)="updateSelectedChar(playableCharacters[10])" [ngClass]="`select-option ${selectedChar().name ? '' : 'bg-(--dfc-color-primary)/50'} hover:bg-white/25 *:text-white`">
+            <div (click)="updateSelectedChar(playableCharacters[10])" [ngClass]="`select-option ${selectedChar().name ? '' : 'bg-(--color-primary)/50'} hover:bg-white/25 *:text-white`">
                 <div class="flex flex-row gap-2 items-center">
                     <img 
                         ngSrc="../../../../../assets/char-menu/sm/all.png"
@@ -96,7 +96,7 @@
             @for (char of this.sortedChars; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
-                    <div (click)="updateSelectedChar(char)" [ngClass]="`select-option *:text-white ${(selectedChar() === char) ? 'bg-(--dfc-color-primary)/50' : ''} hover:bg-white/25`">
+                    <div (click)="updateSelectedChar(char)" [ngClass]="`select-option *:text-white ${(selectedChar() === char) ? 'bg-(--color-primary)/50' : ''} hover:bg-white/25`">
                         <div class="flex flex-row gap-2 items-center">
                             <img 
                                 [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
@@ -115,7 +115,7 @@
                             [href]="char.wiki"
                             target="_blank"
                         >
-                            <mat-icon class="text-shadow-glow text-shadow-(color:--dfc-char-sel-glow) hover:text-shadow-(color:--dfc-portrait-glow)" inline="true">info</mat-icon>
+                            <mat-icon class="text-shadow-glow text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)" inline="true">info</mat-icon>
                         </a>
                     </div>
                 }

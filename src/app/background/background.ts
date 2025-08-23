@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Code } from './code/code';
 
 @Component({
   selector: 'app-background',
-  imports: [RouterOutlet, Code],
+  imports: [RouterOutlet, NgClass, Code],
   templateUrl: './background.html',
   styleUrl: './background.scss'
 })
