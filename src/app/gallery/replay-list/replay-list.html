@@ -1,1 +1,18 @@
-<p>replay-list works!</p>
+<div class="relative text-white w-full py-4 m-2 flex justify-center text-center">
+    <div class="max-w-[1280px]">
+        <mat-paginator
+            [length]="replays()?.length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[10, 25, 50]"
+            showFirstLastButtons
+            (page)="updateDisplay($event)"
+            aria-label="Select page of replays"
+        />
+
+        @for (replay of displayedReplays(); track replay._id) {
+            <div>
+                <span>{{replay.player1}} as {{replay.char1}}/{{replay.assist1}} vs. {{replay.player2}} as {{replay.char2}}/{{replay.assist2}}</span>
+            </div>
+        }
+    </div>
+</div>

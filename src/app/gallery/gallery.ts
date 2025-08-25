@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, inject, resource, signal } from '@angular/core';
 import { VsScreen } from "./vs-screen/vs-screen";
 import { ReplayList } from "./replay-list/replay-list";
-import { VideoSearch } from '../api/Videos';
+import { Video, VideoSearch } from '../api/Videos';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ApiRequests } from '../api/api-requests';
 
 @Component({
   selector: 'app-gallery',
@@ -11,6 +12,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './gallery.scss'
 })
 export class Gallery {
+  apiRequestService = inject(ApiRequests);
+
   // What we need inside Gallery
   // - Query signal that adjusts based on output from vs-screen
   //  - Feed said query into replay-list for searching
@@ -25,12 +28,31 @@ export class Gallery {
     sort: '',
   });
 
+  isEmpty = computed<boolean>(() => {
+    let empty = true;
+
+    Object.keys(this.query()).forEach(key => {
+      const newKey: keyof VideoSearch = key as keyof VideoSearch;
+      if (key !== 'version' && this.query()[newKey]) empty = false;
+    });
+
+    return empty;
+  });
+
+  videosResource = resource({
+    params: () => this.query(),
+    loader: ({params}) => {
+      if (this.isEmpty()) return this.apiRequestService.getAllVideos();
+
+      return this.apiRequestService.searchVideos(params);
+    }
+  });
+
   // Using any is sloppy, and I should find a nicer way of doing it if I can
   updateQueryParam({key, value}: {key: keyof VideoSearch, value: any}) {
-    this.query.update((params) => {
-      params[key] = value;
-      return params;
-    });
-    console.log(this.query());
+    // .update() isn't notifying dependancies, so need to make deep copy of query
+    const newQuery: VideoSearch = {...this.query()};
+    newQuery[key] = value;
+    this.query.set(newQuery);
   }
 }
