@@ -2,7 +2,6 @@
 
 * {
   font-family: "Orbitron", sans-serif;
-  transition: color 0.5s ease, background-color 0.5s ease, background-image 0.5s ease, border-color 0.5s ease !important;
 }
 
 @theme inline {
@@ -149,6 +148,7 @@
 
   main {
     background-image: radial-gradient(ellipse 100% 720px at 50% 125px, var(--bg-gradient-start), var(--bg-gradient-middle) 40%, var(--bg-gradient-end));
+    transition: background-image var(--default-transition-duration) var(--default-transition-timing-function) !important;
   }
 
   @media (min-width: 1280px) {
@@ -159,6 +159,7 @@
 
   .dfc-button {
     clip-path: var(--button-shape) !important;
+    transition: background-image var(--default-transition-duration) var(--default-transition-timing-function) !important;
   }
 
   .player-sel-flash-p1 {
@@ -238,4 +239,8 @@
 /* Need to apply this globally unfortunately. */
 .mat-expansion-panel-body {
   padding: 0 !important;
+}
+
+.mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: white !important;
 }
