@@ -6,10 +6,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-assist-select',
-  imports: [NgOptimizedImage, NgClass, AssistMenu, MatSelectModule, OverlayModule, MatExpansionModule, MatIconModule],
+  imports: [
+    NgOptimizedImage, 
+    NgClass, 
+    AssistMenu, 
+    MatSelectModule, 
+    OverlayModule, 
+    MatExpansionModule, 
+    MatIconModule, 
+    MatProgressSpinnerModule
+  ],
   templateUrl: './assist-select.html',
   styleUrl: './assist-select.scss'
 })

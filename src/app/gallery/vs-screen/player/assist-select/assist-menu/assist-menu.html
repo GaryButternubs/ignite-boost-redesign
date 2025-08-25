@@ -3,31 +3,20 @@
         <span class="block w-full text-center text-white italic text-2xl font-semibold text-shadow-glow text-shadow-(color:--asst-sel-glow)">Support Character Select</span>
         <div class="grid grid-cols-8 gap-2 py-2">
             @for (char of this.assistCharacters; track char.abbr) {
-                <!--Don't display DFCI exclusive assists if only DFC-->
-                <!-- @defer (on viewport) {
-                    @if (!char.ignition || isIgnition()) {
+                @if (!char.ignition || isIgnition()) {
+                    @defer {
                         <img 
                             [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
-                            [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'}`"
+                            [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
                             width="60"
                             height="60"
                             (mouseenter)="hoveredAsst.set(char)"
                             (click)="updateSelectedAsst.emit(char)"
+                            animate.enter="select-overlay-enter"
                         />
+                    } @placeholder {
+                        <mat-spinner diameter="60"/>
                     }
-                } @placeholder (minimum 50000ms) {
-                    <mat-spinner class="max-w-[60px]! max-h-[60px]!" />
-                } -->
-
-                @if (!char.ignition || isIgnition()) {
-                    <img 
-                        [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
-                        [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
-                        width="60"
-                        height="60"
-                        (mouseenter)="hoveredAsst.set(char)"
-                        (click)="updateSelectedAsst.emit(char)"
-                    />
                 }
             }
         </div>

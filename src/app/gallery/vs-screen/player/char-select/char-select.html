@@ -11,6 +11,7 @@
             [ngSrc]="`../../../../../assets/char-menu/sm/${this.selectedChar().abbr}.png`"
             width="90"
             height="90"
+            priority
         />
     } @else {
         <!--VS Screen Replica-->
@@ -21,6 +22,7 @@
             width="596"
             height="395"
             class="relative"
+            priority
         />
 
         <div [ngClass]="`absolute bottom-3/17 flex flex-col w-full text-white italic font-semibold text-shadow-glow text-shadow-(color:--portrait-glow) ${isP1() ? 'text-right' : 'text-left'}`">
@@ -84,39 +86,51 @@
         >
             <div (click)="updateSelectedChar(playableCharacters[10])" [ngClass]="`select-option ${selectedChar().name ? '' : 'bg-(--color-primary)/50'} hover:bg-white/25 *:text-white`">
                 <div class="flex flex-row gap-2 items-center">
-                    <img 
-                        ngSrc="../../../../../assets/char-menu/sm/all.png"
-                        width="90"
-                        height="90"
-                        class="w-auto h-12"
-                    />
-                    <span class="text-md">Any/All</span>
+                    @defer {
+                        <div animate.enter="select-overlay-enter" class="w-full flex flex-row gap-2 items-center cursor-pointer">
+                            <img 
+                                ngSrc="../../../../../assets/char-menu/sm/all.png"
+                                width="90"
+                                height="90"
+                                class="w-auto h-12"
+                            />
+                            <span class="text-md">Any/All</span>
+                        </div>
+                    } @placeholder {
+                        <mat-spinner diameter="48" />
+                    }
                 </div>
             </div>
             @for (char of this.sortedChars; track char.abbr) {
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
                     <div (click)="updateSelectedChar(char)" [ngClass]="`select-option *:text-white ${(selectedChar() === char) ? 'bg-(--color-primary)/50' : ''} hover:bg-white/25`">
-                        <div class="flex flex-row gap-2 items-center">
-                            <img 
-                                [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
-                                width="90"
-                                height="90"
-                                class="w-auto h-12"
-                            />
-                            <span class="text-md">{{char.name}}</span>
-                        </div>
+                        @defer {
+                            <div animate.enter="select-overlay-enter" class="w-full flex flex-row gap-2 items-center justify-between cursor-pointer">
+                                <div class="flex flex-row gap-2 items-center">
+                                    <img 
+                                        [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
+                                        width="90"
+                                        height="90"
+                                        class="w-auto h-12"
+                                    />
+                                    <span class="text-md">{{char.name}}</span>
+                                </div>
 
-                        <!--Mizuumi link-->
-                        <a 
-                            matIconButton 
-                            [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
-                            class="flex justify-end text-4xl *:overflow-visible"
-                            [href]="char.wiki"
-                            target="_blank"
-                        >
-                            <mat-icon class="text-shadow-glow text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)" inline="true">info</mat-icon>
-                        </a>
+                                <!--Mizuumi link-->
+                                <a 
+                                    matIconButton 
+                                    [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
+                                    class="flex justify-end text-4xl *:overflow-visible"
+                                    [href]="char.wiki"
+                                    target="_blank"
+                                >
+                                    <mat-icon class="text-shadow-glow text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)" inline="true">info</mat-icon>
+                                </a>
+                            </div>
+                        } @placeholder {
+                            <mat-spinner diameter="48" />
+                        }
                     </div>
                 }
             }

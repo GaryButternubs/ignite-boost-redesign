@@ -1,5 +1,11 @@
-<app-vs-screen 
-    [isIgnition]="(query().version === 2)"
-    (updateQuery)="updateQueryParam($event)"
-/>
-<app-replay-list />
+@defer {
+    <app-vs-screen 
+        [isIgnition]="(query().version === 2)"
+        (updateQuery)="updateQueryParam($event)"
+    />
+    <app-replay-list />
+} @placeholder {
+    <div class="relative w-full flex justify-center items-center py-4">
+        <mat-spinner />
+    </div>
+}

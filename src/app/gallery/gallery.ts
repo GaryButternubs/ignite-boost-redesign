@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { VsScreen } from "./vs-screen/vs-screen";
 import { ReplayList } from "./replay-list/replay-list";
 import { VideoSearch } from '../api/Videos';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-gallery',
-  imports: [VsScreen, ReplayList],
+  imports: [VsScreen, ReplayList, MatProgressSpinnerModule],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss'
 })

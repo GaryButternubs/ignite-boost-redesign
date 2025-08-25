@@ -5,10 +5,20 @@ import { CharMenu } from './char-menu/char-menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-char-select',
-  imports: [NgOptimizedImage, NgClass, UpperCasePipe, CharMenu, MatIconModule, MatSelectModule, OverlayModule],
+  imports: [
+    NgOptimizedImage, 
+    NgClass, 
+    UpperCasePipe, 
+    CharMenu, 
+    MatIconModule, 
+    MatSelectModule, 
+    OverlayModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './char-select.html',
   styleUrl: './char-select.scss'
 })
