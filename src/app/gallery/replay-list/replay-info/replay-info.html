@@ -1,1 +1,56 @@
-<p>replay-info works!</p>
+<div 
+    class="bg-black/75 w-full"
+    animate.enter="select-overlay-enter"
+>
+    @if (!this.isFull()) {
+
+    } @else {
+        <div class="m-2 p-2 flex flex-row gap-4 justify-between items-center text-white">
+            <span>{{this.replay()?.matchDate}}</span>
+            
+            <div class="flex items-center gap-4 flex-grow justify-center">
+                <!--Player 1-->
+                <div class="flex flex-row gap-2 items-center">
+                    <span>{{this.replay()?.player1}}</span>
+                    <img 
+                        [ngSrc]="`../../../../assets/asst-menu/sm/${this.assist1().abbr}.png`"
+                        width="90"
+                        height="48"
+                    />
+                    <img 
+                        [ngSrc]="`../../../../assets/char-menu/sm/${this.char1().abbr}.png`"
+                        width="90"
+                        height="90"
+                    />
+                </div>
+
+                <img 
+                    ngSrc="../../../../assets/vs_text.png"
+                    width="192"
+                    height="64"
+                    class="h-10 w-fit"
+                />
+
+                <!--Player 2-->
+                <div class="flex flex-row gap-2 items-center">
+                    <img 
+                        [ngSrc]="`../../../../assets/char-menu/sm/${this.char2().abbr}.png`"
+                        width="90"
+                        height="90"
+                    />
+                    <img 
+                        [ngSrc]="`../../../../assets/asst-menu/sm/${this.assist2().abbr}.png`"
+                        width="90"
+                        height="48"
+                    />
+                    <span>{{this.replay()?.player2}}</span>
+                </div>
+            </div>
+
+            <span>{{((this.replay()?.version ?? 2) === 2) ? 'DFCI' : 'DFC'}}</span>
+            <span>
+                <a [href]="this.replay()?.link" target="_blank">Here</a>
+            </span>
+        </div>
+    }
+</div>

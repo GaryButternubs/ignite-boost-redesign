@@ -19,8 +19,6 @@ export class ApiRequests {
   async searchVideos(query: VideoSearch): Promise<Video[]> {
     await this.simulateDelay();
 
-    console.log(query);
-
     return this.videos.filter(video => {
       if (query.player1) {
         if (query.player1 !== video.player1 && query.player1 !== video.player2) {
