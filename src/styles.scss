@@ -261,8 +261,10 @@
       border-image-slice: 1;
       border-width: 2px;
       border-image-source: linear-gradient(to right, var(--player-gradient-ends), var(--player-gradient-center), var(--player-gradient-ends));
-      width: calc(100% - 4px) !important;
-      height: calc(100% - 4px) !important;
+      // width: calc(100% - 4px) !important;
+      // height: calc(100% - 4px) !important;
+      width: 80px !important;
+      height: 37.5px !important;
       top: 2px !important;
       left: 2px !important;
     }

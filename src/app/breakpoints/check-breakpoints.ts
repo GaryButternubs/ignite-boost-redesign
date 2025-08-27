@@ -13,7 +13,7 @@ export class CheckBreakpoints {
     // For mobile viewports
     const handsetObserver = this.breakpointObserver.observe([
       Breakpoints.Handset,
-      '(max-width: 729.98px) and (orientation: portrait)'
+      '(max-width: 949.98px) and (orientation: portrait)',
     ]).subscribe(result => {
       this.isHandset.set(result.matches);
     });
