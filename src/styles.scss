@@ -252,6 +252,17 @@
       container-text-color: white,
     ));
   }
+
+  .cdk-overlay-container {
+    div.mat-mdc-select-panel {
+      background-image: url('./assets/horizontal_bars.png') !important;
+      background-color: var(--color-secondary) !important;
+    }
+
+    .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+      background-color: color-mix(in oklab, var(--color-primary) 50%, transparent) !important;
+    }
+  }
 }
 
 .cdk-overlay-container {

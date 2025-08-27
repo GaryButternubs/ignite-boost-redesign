@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgOptimizedImage, 
     NgClass, 
     UpperCasePipe, 
-    CharMenu, 
+    CharMenu,
     MatIconModule, 
     MatSelectModule, 
     OverlayModule,

@@ -1,12 +1,14 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { CheckBreakpoints } from '../../../breakpoints/check-breakpoints';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Character, PlayableCharacters, AssistCharacters } from '../../../api/Characters';
 import { Video } from '../../../api/Videos';
 
 @Component({
   selector: 'app-replay-info',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, MatButtonModule, MatIconModule],
   templateUrl: './replay-info.html',
   styleUrl: './replay-info.scss'
 })
