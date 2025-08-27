@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AddVideos {
   
+  // Need to do this since this is a single-page application via <router-outlet />
+  resetTheme() {
+    document.body.classList.remove('dfc-theme');
+    document.body.classList.add('dfci-theme');
+  }
 }
