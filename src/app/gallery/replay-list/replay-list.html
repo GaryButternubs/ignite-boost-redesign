@@ -10,10 +10,14 @@
         />
 
         <div class="flex flex-col gap-2 w-full">
-            @for (replay of displayedReplays(); track replay._id) {
-                <app-replay-info 
-                    [replay]="replay"
-                />
+            @if ((replays()?.length ?? 0) > 0) {
+                @for (replay of displayedReplays(); track replay._id) {
+                    <app-replay-info 
+                        [replay]="replay"
+                    />
+                }
+            } @else {
+                <span>No results found. Try searching for something else.</span>
             }
         </div>
     </div>

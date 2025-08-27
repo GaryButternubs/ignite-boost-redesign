@@ -3,8 +3,8 @@ import { NgClass } from '@angular/common';
 import { CharSelect } from './char-select/char-select';
 import { AssistSelect } from "./assist-select/assist-select";
 import { PlayerSearch } from "./player-search/player-search";
-import { AssistCharacters, Character } from '../../../api/Characters';
-import { VideoSearch } from '../../../api/Videos';
+import { AssistCharacters, Character } from '../../../api/video-service/Characters';
+import { VideoSearch } from '../../../api/video-service/Videos';
 
 
 @Component({

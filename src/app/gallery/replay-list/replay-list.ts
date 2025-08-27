@@ -1,6 +1,6 @@
 import { Component, computed, input, output, signal } from '@angular/core';
 import { ReplayInfo } from './replay-info/replay-info';
-import { Video, VideoSearch } from '../../api/Videos';
+import { Video, VideoSearch } from '../../api/video-service/Videos';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({

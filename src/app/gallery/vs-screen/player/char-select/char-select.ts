@@ -1,6 +1,6 @@
 import { Component, input, output, signal, computed } from '@angular/core';
 import { NgOptimizedImage, NgClass, UpperCasePipe } from '@angular/common';
-import { Character, PlayableCharacters } from '../../../../api/Characters';
+import { Character, PlayableCharacters } from '../../../../api/video-service/Characters';
 import { CharMenu } from './char-menu/char-menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';

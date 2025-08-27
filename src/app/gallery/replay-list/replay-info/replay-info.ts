@@ -3,8 +3,8 @@ import { NgOptimizedImage, NgClass } from '@angular/common';
 import { CheckBreakpoints } from '../../../breakpoints/check-breakpoints';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Character, PlayableCharacters, AssistCharacters } from '../../../api/Characters';
-import { Video } from '../../../api/Videos';
+import { Character, PlayableCharacters, AssistCharacters } from '../../../api/video-service/Characters';
+import { Video } from '../../../api/video-service/Videos';
 
 @Component({
   selector: 'app-replay-info',

@@ -1,7 +1,7 @@
 import { Component, output, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
-import { VideoSearch } from '../../../api/Videos';
+import { VideoSearch } from '../../../api/video-service/Videos';
 @Component({
   selector: 'app-version-select',
   imports: [MatButtonToggleModule, NgClass],

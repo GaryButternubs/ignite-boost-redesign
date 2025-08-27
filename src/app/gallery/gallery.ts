@@ -1,9 +1,9 @@
 import { Component, computed, inject, resource, signal } from '@angular/core';
 import { VsScreen } from "./vs-screen/vs-screen";
 import { ReplayList } from "./replay-list/replay-list";
-import { Video, VideoSearch } from '../api/Videos';
+import { VideoSearch } from '../api/video-service/Videos';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ApiRequests } from '../api/api-requests';
+import { VideoRequests } from '../api/video-service/video-requests';
 
 @Component({
   selector: 'app-gallery',
@@ -12,7 +12,7 @@ import { ApiRequests } from '../api/api-requests';
   styleUrl: './gallery.scss'
 })
 export class Gallery {
-  apiRequestService = inject(ApiRequests);
+  videoRequestService = inject(VideoRequests);
 
   // What we need inside Gallery
   // - Query signal that adjusts based on output from vs-screen
@@ -34,6 +34,7 @@ export class Gallery {
     Object.keys(this.query()).forEach(key => {
       const newKey: keyof VideoSearch = key as keyof VideoSearch;
       if (key !== 'version' && this.query()[newKey]) empty = false;
+      else if (key === 'version' && this.query()[newKey] !== 2) empty = false;
     });
 
     return empty;
@@ -42,9 +43,9 @@ export class Gallery {
   videosResource = resource({
     params: () => this.query(),
     loader: ({params}) => {
-      if (this.isEmpty()) return this.apiRequestService.getAllVideos();
+      if (this.isEmpty()) return this.videoRequestService.getAllVideos();
 
-      return this.apiRequestService.searchVideos(params);
+      return this.videoRequestService.searchVideos(params);
     }
   });
 

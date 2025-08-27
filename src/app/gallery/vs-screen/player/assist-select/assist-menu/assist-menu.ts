@@ -1,6 +1,6 @@
 import { Component, input, output, signal } from '@angular/core';
 import { NgOptimizedImage, NgClass } from '@angular/common';
-import { Character, AssistCharacters } from '../../../../../api/Characters';
+import { Character, AssistCharacters } from '../../../../../api/video-service/Characters';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({

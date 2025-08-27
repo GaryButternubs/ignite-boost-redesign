@@ -2,7 +2,7 @@ import { Component, computed, inject, input, output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { CheckBreakpoints } from '../../breakpoints/check-breakpoints';
 import { Player } from "./player/player";
-import { VideoSearch } from '../../api/Videos';
+import { VideoSearch } from '../../api/video-service/Videos';
 import { VersionSelect } from "./version-select/version-select";
 
 @Component({
