@@ -251,9 +251,49 @@
       container-background-color: none,
       container-text-color: white,
     ));
+
+    .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--outlined.mdc-text-field--no-label {
+      background-color: black;
+      border-radius: 0 !important;
+    }
+
+    .mdc-notched-outline.mdc-notched-outline--no-label {
+      border-image-slice: 1;
+      border-width: 2px;
+      border-image-source: linear-gradient(to right, var(--player-gradient-ends), var(--player-gradient-center), var(--player-gradient-ends));
+      width: calc(100% - 4px) !important;
+      height: calc(100% - 4px) !important;
+      top: 2px !important;
+      left: 2px !important;
+    }
+
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline.mdc-notched-outline--no-label {
+      filter: brightness(125%) !important;
+    }
+
+    .mat-mdc-notch-piece.mdc-notched-outline__leading, 
+    .mat-mdc-notch-piece.mdc-notched-outline__trailing {
+      background-color: black !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+    }
+
+    .mat-mdc-form-field-infix {
+      z-index: 1 !important;
+    }
   }
 
   .cdk-overlay-container {
+    @include mat.theme((
+      color: (
+        theme-type: dark,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Orbitron,
+      density: 0,
+    ));
+
     div.mat-mdc-select-panel {
       background-image: url('./assets/horizontal_bars.png') !important;
       background-color: var(--color-secondary) !important;
@@ -263,18 +303,6 @@
       background-color: color-mix(in oklab, var(--color-primary) 50%, transparent) !important;
     }
   }
-}
-
-.cdk-overlay-container {
-  @include mat.theme((
-      color: (
-        theme-type: dark,
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: Orbitron,
-      density: 0,
-    ));
 }
 
 /* Annoying Angular Material style overrides. */

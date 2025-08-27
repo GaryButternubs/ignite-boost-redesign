@@ -1,5 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, NgClass } from '@angular/common';
 import { CheckBreakpoints } from '../../../breakpoints/check-breakpoints';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,7 @@ import { Video } from '../../../api/Videos';
 
 @Component({
   selector: 'app-replay-info',
-  imports: [NgOptimizedImage, MatButtonModule, MatIconModule],
+  imports: [NgOptimizedImage, NgClass, MatButtonModule, MatIconModule],
   templateUrl: './replay-info.html',
   styleUrl: './replay-info.scss'
 })
@@ -16,6 +16,7 @@ export class ReplayInfo {
   checkBreakpoints = inject(CheckBreakpoints);
   replay = input<Video>();
   isFull = computed<boolean>(() => this.checkBreakpoints.getIsFull());
+  isIgnition = computed<boolean>(() => (this.replay()?.version ?? 2) === 2);
 
   // Computeds to get relevant Character/Assist data
   char1 = computed<Character>(() => PlayableCharacters.find((char) => {
