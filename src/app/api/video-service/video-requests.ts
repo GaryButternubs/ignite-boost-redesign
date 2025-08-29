@@ -21,44 +21,46 @@ export class VideoRequests {
     await this.simulateDelay();
     const videos: Video[] = (await import('./TestData.json')).videos;
 
-    console.log(query);
+    const { char1, char2, assist1, assist2, version } = query;
+    const player1 = (query.player1) ? query.player1.toLowerCase() : '';
+    const player2 = (query.player2) ? query.player2.toLowerCase() : '';
 
     // TO-DO: Fix search functionality so that mirror matches work as intended
     return videos.filter(video => {
-      if (query.player1) {
-        if (query.player1 !== video.player1 && query.player1 !== video.player2) {
+      if (player1) {
+        if (video.player1.toLowerCase().indexOf(player1) === -1 && video.player2.toLowerCase().indexOf(player1) === -1) {
           return false;
         } else {
           if (query.char1 && 
-            ((query.player1 !== video.player1 || query.char1 !== video.char1) && 
-            (query.player1 !== video.player2 || query.char1 !== video.char2))
+            ((video.player1.toLowerCase().indexOf(player1) === -1 || query.char1 !== video.char1) && 
+            (video.player2.toLowerCase().indexOf(player1) === -1 || query.char1 !== video.char2))
           ) {
             return false;
           }
 
           if (query.assist1 && 
-            ((query.player1 !== video.player1 || query.assist1 !== video.assist1) && 
-            (query.player1 !== video.player2 || query.assist1 !== video.assist2))
+            ((video.player1.toLowerCase().indexOf(player1) === -1 || query.assist1 !== video.assist1) && 
+            (video.player2.toLowerCase().indexOf(player1) === -1 || query.assist1 !== video.assist2))
           ) {
             return false;
           }
         }
       }
 
-      if (query.player2) {
-        if (query.player2 !== video.player1 && query.player2 !== video.player2) {
+      if (player2) {
+        if (video.player1.toLowerCase().indexOf(player2) === -1 && video.player2.toLowerCase().indexOf(player2) === -1) {
           return false;
         } else {
           if (query.char1 && 
-            ((query.player2 !== video.player1 || query.char1 !== video.char1) && 
-            (query.player2 !== video.player2 || query.char1 !== video.char2))
+            ((video.player1.toLowerCase().indexOf(player2) === -1 || query.char1 !== video.char1) && 
+            (video.player2.toLowerCase().indexOf(player2) === -1 || query.char1 !== video.char2))
           ) {
             return false;
           }
 
           if (query.assist1 && 
-            ((query.player2 !== video.player1 || query.assist1 !== video.assist1) && 
-            (query.player2 !== video.player2 || query.assist1 !== video.assist2))
+            ((video.player1.toLowerCase().indexOf(player2) === -1 || query.assist1 !== video.assist1) && 
+            (video.player2.toLowerCase().indexOf(player2) === -1 || query.assist1 !== video.assist2))
           ) {
             return false;
           }
