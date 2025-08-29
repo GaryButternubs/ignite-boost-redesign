@@ -19,7 +19,7 @@ export class VideoRequests {
   // Doesn't sort for now, since this is just for testing
   async searchVideos(query: VideoSearch): Promise<Video[]> {
     await this.simulateDelay();
-    const videos = (await import('./TestData.json')).videos;
+    const videos: Video[] = (await import('./TestData.json')).videos;
 
     console.log(query);
 

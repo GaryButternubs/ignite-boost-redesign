@@ -9,6 +9,8 @@ export interface Video {
     assist2: string;
     link: string;
     version: number; // DFC vs. DFCI
+    createdData?: string;
+    updatedAt?: string;
 };
 
 export interface VideoSearch {
