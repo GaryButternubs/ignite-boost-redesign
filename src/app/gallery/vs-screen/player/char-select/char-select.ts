@@ -3,7 +3,6 @@ import { NgOptimizedImage, NgClass, UpperCasePipe } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../api/video-service/Characters';
 import { CharMenu } from './char-menu/char-menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -15,7 +14,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     UpperCasePipe, 
     CharMenu,
     MatIconModule, 
-    MatSelectModule, 
     OverlayModule,
     MatProgressSpinnerModule,
   ],

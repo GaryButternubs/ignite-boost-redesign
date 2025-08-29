@@ -1,9 +1,5 @@
 <div class="w-full flex flex-col justify-center bg-black/75 p-2">
-    <app-video-embed 
-        [videoID]="this.urlID()" 
-        [videoSrc]="this.videoSrc()" 
-        class="flex justify-center w-full"
-    />
+    <app-video-embed [videoID]="this.urlID()" [videoSrc]="this.videoSrc()" class="flex justify-center w-full" />
     <div class="video-preview">
         <form class="mt-2 mx-2 flex flex-wrap gap-4 text-white">
             <div class="p-[2px] shadow-xl bg-black">
@@ -25,16 +21,81 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="p-[2px] shadow-xl bg-black">
-                <div
-                    class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
-                    <mat-form-field class="bg-black p-1">
-                        <mat-label>Version</mat-label>
-                        <mat-select [(value)]="this.version">
+            <div class="p-[2px] shadow-xl bg-black cursor-pointer" cdkOverlayOrigin #versionSelect>
+                <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                    <mat-form-field class="bg-black p-1 cursor-pointer">
+                        <label matformfieldfloatinglabel=""
+                            class="mdc-floating-label mat-mdc-floating-label mdc-floating-label--float-above">
+                            <mat-label class="mdc-floating-label--float-above">Version</mat-label>
+                        </label>
+                        <!-- <mat-select [(value)]="this.version">
                             <mat-option value="2">DFCI</mat-option>
                             <mat-option value="1">DFC</mat-option>
-                        </mat-select>
+                        </mat-select> -->
+                        <input matInput class="opacity-0"/>
+                        <button 
+                            class="absolute w-full inline-flex left-0 justify-between cursor-pointer"
+                            (click)="versionSelOpen.set(!versionSelOpen())" 
+                            type="button"
+                        >
+                            <span class="w-full text-left">{{(this.version() === 2) ? 'DFCI' : 'DFC'}}</span>
+                            <div class="w-[10px] h-[5px] relative">
+                                <mat-icon class="absolute top-1/2 left-1/2 -translate-1/2">arrow_drop_down</mat-icon>
+                            </div>
+                        </button>
                     </mat-form-field>
+                    <ng-template 
+                        cdkConnectedOverlay 
+                        [cdkConnectedOverlayOrigin]="versionSelect"
+                        [cdkConnectedOverlayOpen]="versionSelOpen()"
+                        [cdkConnectedOverlayPositions]="[
+                            {
+                                originX: 'start',
+                                originY: 'bottom',
+                                overlayX: 'start',
+                                overlayY: 'top',
+                            },
+                            {
+                                originX: 'end',
+                                originY: 'bottom',
+                                overlayX: 'end',
+                                overlayY: 'top',
+                            }
+                        ]" 
+                        (detach)="versionSelOpen.set(false)"
+                        (overlayOutsideClick)="versionSelOpen.set(false)"
+                    >
+                        <div 
+                            class="select-overlay text-white" 
+                            animate.enter="select-overlay-enter"
+                            animate.leave="select-overlay-leave"
+                        >
+                            <button 
+                                (click)="updateVersionSelect(1)"
+                                [ngClass]="`px-4 py-2 flex gap-4 justify-between items-center w-full cursor-pointer ${version() === 1 ? 'bg-(--color-primary)/50': ''} hover:bg-white/25`"
+                            >
+                                <span class="text-md">DFC</span>
+                                <img 
+                                    [ngSrc]="'../../../assets/bolt_dfc.png'" 
+                                    width="90" 
+                                    height="90"
+                                    class="h-8 w-fit" 
+                                />
+                            </button>
+                            <button 
+                                (click)="updateVersionSelect(2)"
+                                [ngClass]="`px-4 py-2 flex gap-4 justify-between items-center w-full cursor-pointer ${version() === 2 ? 'bg-(--color-primary)/50': ''} hover:bg-white/25`"
+                            >
+                                <span class="text-md">DFCI</span>
+                                <img 
+                                    [ngSrc]="'../../../assets/bolt_dfci.png'" 
+                                    width="90" 
+                                    height="90"
+                                    class="h-8 w-fit" 
+                                />
+                            </button>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </form>
