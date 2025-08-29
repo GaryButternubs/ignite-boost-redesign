@@ -7,6 +7,13 @@ export interface Character {
     wiki: string;
 }
 
+export const DefaultChar: Character = {
+    name: '',
+    abbr: 'all',
+    ignition: false,
+    wiki: ''
+}
+
 export const PlayableCharacters: Character[] = [
     {
         name: 'Akira Yuki',

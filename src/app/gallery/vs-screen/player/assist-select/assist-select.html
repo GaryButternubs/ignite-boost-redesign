@@ -1,19 +1,20 @@
-<button
-    class="cursor-pointer animate-open-h"
-    (click)="isOpen.set(!isOpen())"
-    type="button"
-    cdkOverlayOrigin
-    #trigger
->
-    @if (!isFull()) {
-        <!--Replay Theater-->
-        <img 
-            [ngSrc]="`../../../../../assets/asst-menu/sm/${this.selectedAsst().abbr}.png`"
-            width="90"
-            height="48"
-            priority
-        />
-    } @else {
+@if (!isFull()) {
+    <app-char-dropdown 
+        [isIgnition]="isIgnition()"
+        imageDir="asst-menu/sm"
+        [characters]="assistCharacters"
+        [imgWidth]="90"
+        [imgHeight]="48"
+        (updateCharQuery)="updateSelectedAssist($event)"
+    />
+} @else {
+    <button
+        class="cursor-pointer animate-open-h"
+        (click)="isOpen.set(!isOpen())"
+        type="button"
+        cdkOverlayOrigin
+        #trigger
+    >
         <!--VS Screen Replica-->
         <img 
             [ngSrc]="`../../../../../assets/asst-portraits/${this.selectedAsst().abbr}_${this.isP1() ? 'p1' : 'p2'}.png`"
@@ -36,26 +37,13 @@
                 <mat-icon class="text-shadow-glow text-shadow-(color:--portrait-glow) hover:text-shadow-(color:--char-sel-glow)" inline="true">info</mat-icon>
             </a>
         }
-    }
-</button>
-<ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="isOpen()"
-    [cdkConnectedOverlayPositions]="!isFull() ? [
-            {
-                originX: 'start',
-                originY: 'bottom',
-                overlayX: 'start',
-                overlayY: 'top',
-            },
-            {
-                originX: 'end',
-                originY: 'bottom',
-                overlayX: 'end',
-                overlayY: 'top',
-            }
-        ] : [
+    </button>
+
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="isOpen()"
+        [cdkConnectedOverlayPositions]="[
             {
                 originX: (isP1()) ? 'start' : 'end',
                 originY: 'center',
@@ -63,67 +51,9 @@
                 overlayY: 'center'
             }
         ]"
-    (detach)="isOpen.set(false)"
-    (overlayOutsideClick)="isOpen.set(false)"
->
-    @if (!isFull()) {
-        <!--Standard Select-->
-        <div 
-            class="select-overlay"
-            animate.enter="select-overlay-enter"
-            animate.leave="select-overlay-leave"
-        >
-            <div (click)="updateSelectedAssist(assistCharacters[0])" [ngClass]="`select-option ${selectedAsst().name ? '' : 'bg-(--color-primary)/50'} hover:bg-white/25 *:text-white`">
-                <div class="flex flex-row gap-2 items-center">
-                    @defer {
-                        <div animate.enter="select-overlay-enter" class="w-full flex flex-row gap-2 items-center cursor-pointer">
-                            <img 
-                                ngSrc="../../../../../assets/asst-menu/sm/all.png"
-                                width="90"
-                                height="48"
-                                class="w-12 h-auto"
-                            />
-                            <span class="text-white text-lg">Any/All</span>
-                        </div>
-                    } @placeholder {
-                        <mat-spinner diameter="28" />
-                    }
-                </div>
-            </div>
-            @for (char of this.sortedAssists; track char.abbr) {
-                @if (char.abbr !== 'all' && (!char.ignition || isIgnition())) {
-                    <div (click)="updateSelectedAssist(char)" [ngClass]="`select-option *:text-white ${(selectedAsst() === char) ? 'bg-(--color-primary)/50' : ''} hover:bg-white/25`">
-                        @defer {
-                            <div animate.enter="select-overlay-enter" class="w-full flex flex-row gap-2 items-center justify-between cursor-pointer">
-                                <div class="flex flex-row gap-2 items-center">
-                                    <img 
-                                        [ngSrc]="`../../../../../assets/asst-menu/sm/${char.abbr}.png`"
-                                        width="90"
-                                        height="48"
-                                        class="w-12 h-auto"
-                                    />
-                                    <span class="text-md">{{char.name}}</span>
-                                </div>
-
-                                <!--Mizuumi link-->
-                                <a 
-                                    matIconButton 
-                                    [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
-                                    class="flex justify-end text-4xl *:overflow-visible"
-                                    [href]="char.wiki"
-                                    target="_blank"
-                                >
-                                    <mat-icon class="text-shadow-glow text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)" inline="true">info</mat-icon>
-                                </a>
-                            </div>
-                        } @placeholder {
-                            <mat-spinner diameter="28" />
-                        }
-                    </div>
-                }
-            }
-        </div>
-    } @else {
+        (detach)="isOpen.set(false)"
+        (overlayOutsideClick)="isOpen.set(false)"
+    >
         <app-assist-menu 
             [isIgnition]="isIgnition()"
             [isP1]="isP1()"
@@ -132,5 +62,5 @@
             animate.enter="animate-overlay-open-h"
             animate.leave="select-overlay-leave" 
         />
-    }
-</ng-template>
+    </ng-template>
+}

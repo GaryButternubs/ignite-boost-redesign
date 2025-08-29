@@ -1,19 +1,20 @@
-<button
-    class="cursor-pointer animate-open-h relative"
-    (click)="isOpen.set(!isOpen())"
-    type="button"
-    cdkOverlayOrigin
-    #trigger
->
-    @if (!isFull()) {
-        <!--Replay Theater-->
-        <img 
-            [ngSrc]="`../../../../../assets/char-menu/sm/${this.selectedChar().abbr}.png`"
-            width="90"
-            height="90"
-            priority
-        />
-    } @else {
+@if (!isFull()) {
+    <app-char-dropdown 
+        [isIgnition]="isIgnition()"
+        imageDir="char-menu/sm"
+        [characters]="playableCharacters"
+        [imgWidth]="90"
+        [imgHeight]="90"
+        (updateCharQuery)="updateSelectedChar($event)"
+    />
+} @else {
+    <button
+        class="cursor-pointer animate-open-h relative"
+        (click)="isOpen.set(!isOpen())"
+        type="button"
+        cdkOverlayOrigin
+        #trigger
+    >
         <!--VS Screen Replica-->
         <div [ngClass]="`${isP1() ? 'player-sel-flash-p1' : 'player-sel-flash-p2'} absolute -bottom-1/30 w-full h-full bg-black/50`"></div>
 
@@ -47,26 +48,13 @@
                 <mat-icon class="text-shadow-glow text-shadow-(color:--portrait-glow) hover:text-shadow-(color:--char-sel-glow)" inline="true">info</mat-icon>
             </a>
         }
-    }
-</button>
-<ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="isOpen()"
-    [cdkConnectedOverlayPositions]="!isFull() ? [
-            {
-                originX: 'start',
-                originY: 'bottom',
-                overlayX: 'start',
-                overlayY: 'top',
-            },
-            {
-                originX: 'end',
-                originY: 'bottom',
-                overlayX: 'end',
-                overlayY: 'top',
-            }
-        ] : [
+    </button>
+
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="isOpen()"
+        [cdkConnectedOverlayPositions]="[
             {
                 originX: (isP1()) ? 'start' : 'end',
                 originY: 'center',
@@ -74,68 +62,9 @@
                 overlayY: 'center'
             }
         ]"
-    (detach)="isOpen.set(false)"
-    (overlayOutsideClick)="isOpen.set(false)"
->
-    @if (!isFull()) {
-        <!--Standard Select-->
-        <div 
-            class="select-overlay"
-            animate.enter="select-overlay-enter"
-            animate.leave="select-overlay-leave"
-        >
-            <div (click)="updateSelectedChar(playableCharacters[10])" [ngClass]="`select-option ${selectedChar().name ? '' : 'bg-(--color-primary)/50'} hover:bg-white/25 *:text-white`">
-                <div class="flex flex-row gap-2 items-center">
-                    @defer {
-                        <div animate.enter="select-overlay-enter" class="w-full flex flex-row gap-2 items-center cursor-pointer">
-                            <img 
-                                ngSrc="../../../../../assets/char-menu/sm/all.png"
-                                width="90"
-                                height="90"
-                                class="w-auto h-12"
-                            />
-                            <span class="text-md">Any/All</span>
-                        </div>
-                    } @placeholder {
-                        <mat-spinner diameter="90" />
-                    }
-                </div>
-            </div>
-            @for (char of this.sortedChars; track char.abbr) {
-                <!--Don't display DFCI exclusive characters if only DFC-->
-                @if (char.abbr !== 'all' && (isIgnition() || !char.ignition)) {
-                    <div (click)="updateSelectedChar(char)" [ngClass]="`select-option *:text-white ${(selectedChar() === char) ? 'bg-(--color-primary)/50' : ''} hover:bg-white/25`">
-                        @defer {
-                            <div animate.enter="select-overlay-enter" class="w-full flex flex-row gap-2 items-center justify-between cursor-pointer">
-                                <div class="flex flex-row gap-2 items-center">
-                                    <img 
-                                        [ngSrc]="`../../../../../assets/char-menu/sm/${char.abbr}.png`"
-                                        width="90"
-                                        height="90"
-                                        class="w-auto h-12"
-                                    />
-                                    <span class="text-md">{{char.name}}</span>
-                                </div>
-
-                                <!--Mizuumi link-->
-                                <a 
-                                    matIconButton 
-                                    [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
-                                    class="flex justify-end text-4xl *:overflow-visible"
-                                    [href]="char.wiki"
-                                    target="_blank"
-                                >
-                                    <mat-icon class="text-shadow-glow text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)" inline="true">info</mat-icon>
-                                </a>
-                            </div>
-                        } @placeholder {
-                            <mat-spinner diameter="90" />
-                        }
-                    </div>
-                }
-            }
-        </div>
-    } @else {
+        (detach)="isOpen.set(false)"
+        (overlayOutsideClick)="isOpen.set(false)"
+    >
         <app-char-menu 
             [isIgnition]="isIgnition()"
             [isP1]="isP1()"
@@ -143,5 +72,5 @@
             animate.enter="animate-overlay-open-h"
             animate.leave="select-overlay-leave"    
         />
-    }
-</ng-template>
+    </ng-template>
+}

@@ -2,9 +2,9 @@ import { Component, input, output, signal, computed } from '@angular/core';
 import { NgOptimizedImage, NgClass, UpperCasePipe } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../api/video-service/Characters';
 import { CharMenu } from './char-menu/char-menu';
+import { CharDropdown } from '../../../../components/char-dropdown/char-dropdown';
 import { MatIconModule } from '@angular/material/icon';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-char-select',
@@ -13,17 +13,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgClass, 
     UpperCasePipe, 
     CharMenu,
+    CharDropdown,
     MatIconModule, 
     OverlayModule,
-    MatProgressSpinnerModule,
   ],
   templateUrl: './char-select.html',
   styleUrl: './char-select.scss'
 })
 export class CharSelect {
-  isIgnition = input<boolean>(true);
-  isP1 = input<boolean>(true); // For char-menu text-alignment
-  isFull = input<boolean>(true);
+  isIgnition = input.required<boolean>();
+  isP1 = input.required<boolean>(); // For char-menu text-alignment
+  isFull = input.required<boolean>();
   selectedAsst = input<Character>();
   updateCharQuery = output<string>();
 

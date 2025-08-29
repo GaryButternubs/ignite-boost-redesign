@@ -2,23 +2,19 @@ import { Component, input, output, signal } from '@angular/core';
 import { NgOptimizedImage, NgClass } from '@angular/common';
 import { Character, AssistCharacters } from '../../../../api/video-service/Characters';
 import { AssistMenu } from './assist-menu/assist-menu';
-import { MatSelectModule } from '@angular/material/select';
+import { CharDropdown } from '../../../../components/char-dropdown/char-dropdown';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-assist-select',
   imports: [
     NgOptimizedImage, 
     NgClass, 
-    AssistMenu, 
-    MatSelectModule, 
+    AssistMenu,
+    CharDropdown, 
     OverlayModule, 
-    MatExpansionModule, 
     MatIconModule, 
-    MatProgressSpinnerModule
   ],
   templateUrl: './assist-select.html',
   styleUrl: './assist-select.scss'
