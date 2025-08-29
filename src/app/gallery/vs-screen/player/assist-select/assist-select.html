@@ -44,15 +44,15 @@
     [cdkConnectedOverlayOpen]="isOpen()"
     [cdkConnectedOverlayPositions]="!isFull() ? [
             {
-                originX: isP1() ? 'start' : 'end',
+                originX: 'start',
                 originY: 'bottom',
-                overlayX: isP1() ? 'start' : 'end',
+                overlayX: 'start',
                 overlayY: 'top',
             },
             {
-                originX: isP1() ? 'end' : 'start',
+                originX: 'end',
                 originY: 'bottom',
-                overlayX: isP1() ? 'end' : 'start',
+                overlayX: 'end',
                 overlayY: 'top',
             }
         ] : [

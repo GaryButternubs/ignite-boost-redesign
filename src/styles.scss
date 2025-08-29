@@ -227,12 +227,17 @@
     // cursor: pointer;
   }
 
-  .player-search .mat-mdc-form-field-bottom-align::before {
+  .player-search .mat-mdc-form-field-bottom-align::before,
+  .video-preview .mat-mdc-form-field-bottom-align::before {
     display: none !important;
   }
 
   .player-search .mat-mdc-form-field-infix {
     max-width: 180px !important;
+    width: 100% !important;
+  }
+
+  .video-preview-link .mat-mdc-form-field-infix {
     width: 100% !important;
   }
 

@@ -1,4 +1,4 @@
-import { Component, computed, inject, resource, signal } from '@angular/core';
+import { Component, OnDestroy, computed, inject, resource, signal } from '@angular/core';
 import { VsScreen } from "./vs-screen/vs-screen";
 import { ReplayList } from "./replay-list/replay-list";
 import { VideoSearch } from '../api/video-service/Videos';
@@ -11,7 +11,7 @@ import { VideoRequests } from '../api/video-service/video-requests';
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss'
 })
-export class Gallery {
+export class Gallery implements OnDestroy {
   videoRequestService = inject(VideoRequests);
 
   // What we need inside Gallery
@@ -55,5 +55,11 @@ export class Gallery {
     const newQuery: VideoSearch = {...this.query()};
     newQuery[key] = value;
     this.query.set(newQuery);
+  }
+
+  // Reset back to DFCI theme on page change
+  ngOnDestroy(): void {
+    document.body.classList.remove('dfc-theme');
+    document.body.classList.add('dfci-theme');
   }
 }

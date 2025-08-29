@@ -1,1 +1,42 @@
-<p>video-preview works!</p>
+<div class="w-full flex flex-col justify-center bg-black/75 p-2">
+    <app-video-embed 
+        [videoID]="this.urlID()" 
+        [videoSrc]="this.videoSrc()" 
+        class="flex justify-center w-full"
+    />
+    <div class="video-preview">
+        <form class="mt-2 mx-2 flex flex-wrap gap-4 text-white">
+            <div class="p-[2px] shadow-xl bg-black">
+                <div
+                    class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                    <mat-form-field class="bg-black p-1">
+                        <mat-label>Date</mat-label>
+                        <input matInput type="date" (change)="this.date.set($event.target.value)" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="p-[2px] shadow-xl bg-black video-preview-link grow-1">
+                <div
+                    class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                    <mat-form-field class="bg-black p-1 w-full">
+                        <mat-label>Video Link</mat-label>
+                        <input matInput type="url" placeholder="Ex. https://www.youtube.com/watch?v=***********"
+                            (change)="this.url.set($event.target.value)" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="p-[2px] shadow-xl bg-black">
+                <div
+                    class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                    <mat-form-field class="bg-black p-1">
+                        <mat-label>Version</mat-label>
+                        <mat-select [(value)]="this.version">
+                            <mat-option value="2">DFCI</mat-option>
+                            <mat-option value="1">DFC</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
