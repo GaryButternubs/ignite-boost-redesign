@@ -1,4 +1,4 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { VideoEmbed } from './video-embed/video-embed';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatExpansionModule } from "@angular/material/expansion";
+import { DefaultVideoData, VideoData } from '../VideoData';
 
 @Component({
   selector: 'app-video-preview',
@@ -25,12 +26,21 @@ import { MatExpansionModule } from "@angular/material/expansion";
   styleUrl: './video-preview.scss'
 })
 export class VideoPreview {
-  url = signal<string>('');
-  date = signal<string>('');
-  version = signal<number>(2);
+  urlData = signal<VideoData>(DefaultVideoData);
   versionSelOpen = signal<boolean>(false);
 
-  urlID = computed<string>(() => {
+  updateVideoData = output<VideoData>();
+
+  updateDate(date: string) {
+    this.urlData.update(data => {
+      data['date'] = date;
+      return data;
+    });
+
+    this.updateVideoData.emit(this.urlData());
+  }
+
+  parseURL(url: string) {
     // Regexes to check for valid YouTube, NicoNico, and BiliBili videos respectively
     const regexes: RegExp[] = [];
     regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|live\/))((\w|-){11})(?:\S+)?$/);
@@ -39,34 +49,33 @@ export class VideoPreview {
 
     let videoSrc = -1;
     regexes.forEach((regex, index) => {
-      if (this.url().match(regex)) videoSrc = index;
+      if (url.match(regex)) videoSrc = index;
     });
-    
-    return (videoSrc === -1) ? '' : this.url().match(regexes[videoSrc])![1];
-  });
 
-  // -1: N/A, 0: YouTube, 1: NicoNico, 2: BiliBili
-  videoSrc = computed<number>(() => {
-    // Regexes to check for valid YouTube, NicoNico, and BiliBili videos respectively
-    const regexes: RegExp[] = [];
-    regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|live\/))((\w|-){11})(?:\S+)?$/);
-    regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.|embed\.|live\.)?(?:nicovideo\.jp\/(?:watch\/))(sm(\w|-){8}|lv(\w|-){9})(?:\S+)?$/);
-    regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:bilibili\.com\/(?:video\/))((\w|-){12})(?:\S+)?$/);
+    if (videoSrc !== -1) {
+      this.urlData.update(data => {
+        data['url'] = url;
+        data['id'] = url.match(regexes[videoSrc])![1];
+        data['src'] = videoSrc;
+        return data;
+      });
 
-    let videoSrc = -1;
-    regexes.forEach((regex, index) => {
-      if (this.url().match(regex)) videoSrc = index;
-    });
-    
-    return videoSrc;
-  });
+      this.updateVideoData.emit(this.urlData());
+    }
+  }
 
   updateVersionSelect(newVersion: number) {
     // Update theme based on selection made
     document.body.classList.remove((newVersion === 2) ? 'dfc-theme' : 'dfci-theme');
     document.body.classList.add((newVersion === 2) ? 'dfci-theme' : 'dfc-theme');
 
-    this.version.set(newVersion);
+    //this.version.set(newVersion);
     this.versionSelOpen.set(false);
+    this.urlData.update(data => {
+      data['version'] = newVersion;
+      return data;
+    });
+
+    this.updateVideoData.emit(this.urlData());
   }
 }

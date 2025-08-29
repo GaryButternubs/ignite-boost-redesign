@@ -1,6 +1,7 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Video } from '../api/video-service/Videos';
 import { VideoPreview } from "./video-preview/video-preview";
+import { Video } from '../api/video-service/Videos';
+import { VideoData, DefaultVideoData } from './VideoData';
 
 @Component({
   selector: 'app-add-videos',
@@ -9,9 +10,12 @@ import { VideoPreview } from "./video-preview/video-preview";
   styleUrl: './add-videos.scss'
 })
 export class AddVideos implements OnDestroy {
-  videoDate = signal<string>('');
-  videoLink = signal<string>('');
   matchList = signal<Video[]>([]);
+  videoData = signal<VideoData>(DefaultVideoData);
+
+  updateVideoData(newData: VideoData) {
+    this.videoData.set(newData);
+  }
 
   // Reset back to DFCI theme on page change
   ngOnDestroy(): void {

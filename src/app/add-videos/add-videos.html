@@ -1,9 +1,12 @@
 <div 
-    class="relative w-full flex justify-center"
+    class="relative w-full flex justify-center *:text-white"
     animate.enter="select-overlay-enter"
 >
-    <div class="mt-4 w-full max-w-[1280px] flex justify-center">
-        <app-video-preview class="w-full "/>
+    <div class="mt-4 w-full max-w-[1280px] flex flex-col gap-4 bg-black/75 p-4 justify-center">
+        <app-video-preview 
+            class="w-full"
+            (updateVideoData)="updateVideoData($event)"
+        />
         <hr />
     </div>
 </div>
