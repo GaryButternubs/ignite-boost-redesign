@@ -38,7 +38,7 @@
                     <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
                         <mat-form-field class="bg-black p-1 w-full">
                             <mat-label>Player 1</mat-label>
-                            <input matInput type="text" (change)="player1.set($event.target.value)" />
+                            <input matInput type="text" (change)="player1.set($event.target.value.trim())" [(ngModel)]="player1" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
                         <mat-form-field class="bg-black p-1 w-full">
                             <mat-label>Player 2</mat-label>
-                            <input matInput type="text" (change)="player2.set($event.target.value)" />
+                            <input matInput type="text" (change)="player2.set($event.target.value)" [(ngModel)]="player2" />
                         </mat-form-field>
                     </div>
                 </div>

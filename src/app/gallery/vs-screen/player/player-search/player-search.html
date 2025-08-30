@@ -4,7 +4,7 @@
         <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
             <mat-form-field [ngClass]="`skew-x-0 bg-black p-1 player-search flex ${isP1() ? 'justify-start' : 'justify-end'}`">
                 <mat-label>{{`Player ${isP1() ? '1' : '2'}`}}</mat-label>
-                <input matInput (change)="updatePlayerInput($event.target.value)" />
+                <input matInput (change)="updatePlayerInput($event.target.value.trim())" [(ngModel)]="playerInput" />
             </mat-form-field>
         </div>
     </div>
