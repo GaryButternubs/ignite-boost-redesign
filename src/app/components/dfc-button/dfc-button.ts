@@ -1,4 +1,4 @@
-import { Component, contentChildren, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
@@ -13,4 +13,5 @@ export class DfcButton {
   // Or routerLink run when pressed. Creates <a> element
   callback = input<Function>();
   routerURL = input<string>();
+  disabled = input<boolean>(false);
 }

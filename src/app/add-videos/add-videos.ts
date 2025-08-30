@@ -1,4 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { VideoPreview } from "./video-preview/video-preview";
 import { MatchInfo } from './match-info/match-info';
 import { Video, ReplayInfo } from '../api/video-service/Videos';
@@ -6,7 +7,7 @@ import { VideoData, DefaultVideoData, MatchItem } from './VideoData';
 
 @Component({
   selector: 'app-add-videos',
-  imports: [VideoPreview, MatchInfo],
+  imports: [NgClass, VideoPreview, MatchInfo],
   templateUrl: './add-videos.html',
   styleUrl: './add-videos.scss'
 })
@@ -26,6 +27,8 @@ export class AddVideos implements OnDestroy {
   }]);
   videoData = signal<VideoData>(DefaultVideoData);
   matchesValid = signal<boolean>(false);
+
+  buttonOptions = ['Add Match', 'Submit Match', 'Submit Matches'];
 
   updateVideoData(newData: VideoData) {
     this.videoData.set(newData);
@@ -61,6 +64,30 @@ export class AddVideos implements OnDestroy {
     }
 
     return true;
+  }
+
+  addMatch() {
+    const temp = this.matchList();
+    temp.push({
+      data: {
+        player1: '',
+        char1: '',
+        assist1: '',
+        player2: '',
+        char2: '',
+        assist2: '',
+        timestamp: '',
+      },
+      index: 0,
+      valid: false,
+    });
+
+    this.matchList.set(temp);
+  }
+
+  // Parse match data as a whole and make a request to API to add videos
+  submitMatches() {
+
   }
 
   // Reset back to DFCI theme on page change

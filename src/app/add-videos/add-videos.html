@@ -8,7 +8,7 @@
             (updateVideoData)="updateVideoData($event)"
         />
 
-        @for (match of matchList(); track $index) {
+        @for (match of matchList(); track match.index) {
             <app-match-info 
                 [index]="$index"
                 [videoData]="videoData()"
@@ -16,5 +16,34 @@
                 (deleteMatchEntry)="deleteMatchEntry($event)"
             />
         }
+
+        <div class="flex gap-4 justify-center">
+            <button 
+                matButton 
+                (click)="addMatch()" 
+                class="dfc-button h-fit w-fit bg-black p-1 text-white hover:text-shadow-glow hover:text-shadow-(color:--hover-glow) *:overflow-visible cursor-pointer"
+            >
+                <div class="dfc-button bg-linear-to-r from-(--button-gradient-start) via-(--button-gradient-end) to-(--button-gradient-start) p-1">
+                    <div class="dfc-button bg-black px-2 py-1">
+                        Add Match
+                    </div>
+                </div>
+            </button>
+            @if (matchList().length > 0) {
+                <button 
+                    matButton 
+                    (click)="submitMatches()"
+                    [disabled]="matchesValid()" 
+                    class="dfc-button h-fit w-fit bg-black p-1 text-white"
+                    [ngClass]="`${matchesValid() ? 'hover:text-shadow-glow hover:text-shadow-(color:--hover-glow) *:overflow-visible cursor-pointer' : 'opacity-75'}`"
+                >
+                    <div class="dfc-button bg-linear-to-r from-(--button-gradient-start) via-(--button-gradient-end) to-(--button-gradient-start) p-1">
+                        <div class="dfc-button bg-black px-2 py-1">
+                            {{ `Submit Match${(matchList().length > 1) ? 'es' : ''}` }}
+                        </div>
+                    </div>
+                </button>
+            }
+        </div>
     </div>
 </div>

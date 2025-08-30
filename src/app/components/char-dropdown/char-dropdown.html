@@ -17,20 +17,6 @@
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOpen()"
-    [cdkConnectedOverlayPositions]="[
-        {
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'top',
-        },
-        {
-           originX: 'end',
-            originY: 'bottom',
-            overlayX: 'end',
-            overlayY: 'top',
-        }
-    ]"
     (detach)="isOpen.set(false)"
     (overlayOutsideClick)="isOpen.set(false)"
 >
