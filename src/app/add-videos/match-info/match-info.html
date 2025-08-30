@@ -1,1 +1,102 @@
-<p>match-info works!</p>
+<!-- <div [ngClass]="`flex items-center ${!isFull() ? 'flex-col gap-2' : 'gap-4'}`">
+</div> -->
+
+@if (!isFull()) {
+
+} @else {
+    <div 
+        class="p-2 flex gap-4 items-center *:text-white"
+        animate.enter="select-overlay-enter"
+        animate.leave="select-overlay-leave"
+    >
+        <button 
+            matIconButton
+            class="text-4xl flex justify-center items-center *:overflow-visible text-shadow-glow hover:text-shadow-(color:--hover-glow)" 
+            aria-label="Remove match" 
+            (click)="deleteMatchEntry.emit(index())"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <!--Timestamp input-->
+        <div class="p-[2px] shadow-xl bg-black">
+            <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                <mat-form-field class="bg-black p-1 w-full">
+                    <mat-label>Timestmap</mat-label>
+                    <input matInput type="text" placeholder="00:00:00" (change)="parseTimeInput($event.target.value)" [(ngModel)]="time" />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="w-[1px] bg-white h-[90px]"></div>
+        
+        <!--Player/Char/Assist input-->
+        <div class="flex gap-4 items-center justify-center grow">
+            <!--Player 1-->
+            <div class="flex gap-2 items-center">
+                <div class="p-[2px] shadow-xl bg-black">
+                    <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                        <mat-form-field class="bg-black p-1 w-full">
+                            <mat-label>Player 1</mat-label>
+                            <input matInput type="text" (change)="player1.set($event.target.value)" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <app-char-dropdown 
+                    [enableDefault]="false"
+                    [isIgnition]="videoData().version === 2"
+                    [enableInfo]="false"
+                    imageDir="asst-menu/sm"
+                    [characters]="assistCharacters"
+                    [imgWidth]="90"
+                    [imgHeight]="48"
+                    (updateCharQuery)="assist1.set($event)"
+                />
+                <app-char-dropdown 
+                    [enableDefault]="false"
+                    [isIgnition]="videoData().version === 2"
+                    [enableInfo]="false"
+                    imageDir="char-menu/sm"
+                    [characters]="playableCharacters"
+                    [imgWidth]="90"
+                    [imgHeight]="90"
+                    (updateCharQuery)="char1.set($event)"
+                />
+            </div>
+
+            <span class="text-lg grow">VS</span>
+
+            <!--Player 2-->
+            <div class="flex flex-row gap-2 items-center">
+                <app-char-dropdown 
+                    [enableDefault]="false"
+                    [isIgnition]="videoData().version === 2"
+                    [enableInfo]="false"
+                    imageDir="char-menu/sm"
+                    [characters]="playableCharacters"
+                    [imgWidth]="90"
+                    [imgHeight]="90"
+                    (updateCharQuery)="char2.set($event)"
+                />
+                <app-char-dropdown 
+                    [enableDefault]="false"
+                    [isIgnition]="videoData().version === 2"
+                    [enableInfo]="false"
+                    imageDir="asst-menu/sm"
+                    [characters]="assistCharacters"
+                    [imgWidth]="90"
+                    [imgHeight]="48"
+                    (updateCharQuery)="assist2.set($event)"
+                />
+                <div class="p-[2px] shadow-xl bg-black">
+                    <div class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
+                        <mat-form-field class="bg-black p-1 w-full">
+                            <mat-label>Player 2</mat-label>
+                            <input matInput type="text" (change)="player2.set($event.target.value)" />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

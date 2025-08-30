@@ -1,5 +1,5 @@
 export interface Video {
-    _id: string;
+    _id?: string;
     matchDate: string;
     player1: string;
     char1: string;
@@ -22,4 +22,16 @@ export interface VideoSearch {
     assist2?: string;
     version?: number;
     sort?: string;
+}
+
+export const DefaultVideo = {
+    matchDate: '',
+    player1: '',
+    char1: '',
+    assist1: '',
+    player2: '',
+    char2: '',
+    assist2: '',
+    link: '',
+    version: 2
 }

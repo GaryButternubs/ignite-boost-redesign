@@ -7,6 +7,16 @@
             class="w-full"
             (updateVideoData)="updateVideoData($event)"
         />
+
         <hr />
+
+        @for (match of matchList(); track $index) {
+            <app-match-info 
+                [index]="$index"
+                [videoData]="videoData()"
+                (updateMatchArray)="updateMatchList($event)"
+                (deleteMatchEntry)="this.matchList.set(this.matchList().splice($event, 1));"
+            />
+        }
     </div>
 </div>
