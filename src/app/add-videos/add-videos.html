@@ -2,20 +2,18 @@
     class="relative w-full flex justify-center *:text-white"
     animate.enter="select-overlay-enter"
 >
-    <div class="mt-4 w-full max-w-[1280px] flex flex-col gap-4 bg-black/75 p-4 justify-center">
+    <div class="my-4 w-full max-w-[1280px] flex flex-col gap-4 justify-center">
         <app-video-preview 
             class="w-full"
             (updateVideoData)="updateVideoData($event)"
         />
-
-        <hr />
 
         @for (match of matchList(); track $index) {
             <app-match-info 
                 [index]="$index"
                 [videoData]="videoData()"
                 (updateMatchArray)="updateMatchList($event)"
-                (deleteMatchEntry)="this.matchList.set(this.matchList().splice($event, 1));"
+                (deleteMatchEntry)="deleteMatchEntry($event)"
             />
         }
     </div>

@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { CheckBreakpoints } from '../../breakpoints/check-breakpoints';
 import { CharDropdown } from '../../components/char-dropdown/char-dropdown';
 import { Character, PlayableCharacters, AssistCharacters } from '../../api/video-service/Characters';
-import { Video } from '../../api/video-service/Videos';
-import { DefaultVideoData, VideoData, MatchData } from '../VideoData';
+import { ReplayInfo } from '../../api/video-service/Videos';
+import { DefaultVideoData, VideoData, MatchItem } from '../VideoData';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,51 +33,77 @@ export class MatchInfo {
 
   time = signal<string>(''); // Assemble URL with timestamp on form submission
   player1 = signal<string>('');
-  char1 = signal<Character>(PlayableCharacters[10]);
-  assist1 = signal<Character>(AssistCharacters[0]);
+  // char1 = signal<Character>(PlayableCharacters[10]);
+  // assist1 = signal<Character>(AssistCharacters[0]);
   player2 = signal<string>('');
-  char2 = signal<Character>(PlayableCharacters[10]);
-  assist2 = signal<Character>(AssistCharacters[0]);
-
-  validTime = signal<boolean>(false);
+  // char2 = signal<Character>(PlayableCharacters[10]);
+  // assist2 = signal<Character>(AssistCharacters[0]);
 
   isFull = computed<boolean>(() => this.checkBreakpoints.getIsFull());
 
-  matchInfo = computed<Video>(() => {
-    const videoData: Video = {
-      matchDate: this.videoData().date,
-      player1: this.player1(),
-      char1: this.char1().internal ?? this.char1().short ?? this.char1().name,
-      assist1: this.assist1().internal ?? this.assist1().short ?? this.assist1().name,
-      player2: this.player2(),
-      char2: this.char2().internal ?? this.char2().short ?? this.char2().name,
-      assist2: this.assist2().internal ?? this.assist2().short ?? this.assist2().name,
-      link: this.videoData().url,
-      version: this.videoData().version
-    }
-
-    return videoData;
+  matchInfo = signal<ReplayInfo>({
+    player1: '',
+    char1: '',
+    assist1: '',
+    player2: '',
+    char2: '',
+    assist2: '',
+    timestamp: this.time(),
   });
 
   // Disable submission unless every field is filled out
-  validSubmission = computed<boolean>(() => {
-    if (!this.validTime()) return false;
-
+  validMatch = computed<boolean>(() => {
     const keys = Object.keys(this.matchInfo());
 
     for (let i = 0; i < keys.length; i++) {
-      if (!this.matchInfo()[keys[i] as keyof Video]) return false;
+      const newKey = keys[i] as keyof ReplayInfo;
+      if (!this.matchInfo()[newKey]) return false;
     }
 
-    this.updateMatchArray.emit({videoData: this.matchInfo(), index: this.index()});
     return true;
   });
 
-  updateMatchArray = output<MatchData>();
+  updateMatchArray = output<MatchItem>();
   deleteMatchEntry = output<number>();
 
   playableCharacters = PlayableCharacters;
   assistCharacters = AssistCharacters;
+
+  updateMatchInfo({key, value}: {key: keyof ReplayInfo, value: string}) {
+    let parsedValue = value;
+
+    if (key === 'timestamp') {
+      this.parseTimeInput(value);
+      parsedValue = this.time();
+    } else if (key === 'player1') {
+      this.player1.set(value);
+    } else if (key === 'player2') {
+      this.player2.set(value);
+    }
+
+    const temp = {...this.matchInfo()};
+    temp[key] = parsedValue;
+    this.matchInfo.set(temp);
+
+    // if (key === 'timestamp') {
+    //   this.parseTimeInput(value);
+    //   this.matchInfo.update(match => {
+    //     match['timestamp'] = this.time();
+    //     return match;
+    //   });
+    // } else {
+    //   // These inputs have two-way data-binding to remove extra whitespace
+    //   if (key === 'player1') this.player1.set(value);
+    //   else if (key === 'player2') this.player2.set(value);
+
+    //   this.matchInfo.update(match => {
+    //     match[key] = value;
+    //     return match;
+    //   });
+    // }
+
+    this.updateMatchArray.emit({data: this.matchInfo(), index: this.index(), valid: this.validMatch()});
+  }
 
   parseTimeInput(newTime: string) {
     // Remove any invalid characters from time
@@ -88,7 +114,7 @@ export class MatchInfo {
       let splitTime = replacedTime.split(':');
       
       if (splitTime.length > 3) splitTime = splitTime.slice(0, 2);
-      while (splitTime.length < 3) splitTime.push('00');
+      while (splitTime.length < 3) splitTime.unshift('00');
 
       for (let i = 0; i < splitTime.length; i++) {
         while (splitTime[i].length < 2) {

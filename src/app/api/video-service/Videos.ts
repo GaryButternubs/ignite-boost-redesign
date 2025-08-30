@@ -13,6 +13,16 @@ export interface Video {
     updatedAt?: string;
 };
 
+export interface ReplayInfo {
+    player1: string;
+    char1: string;
+    assist1: string;
+    player2: string;
+    char2: string;
+    assist2: string;
+    timestamp: string;
+};
+
 export interface VideoSearch {
     player1?: string;
     player2?: string;
@@ -22,16 +32,4 @@ export interface VideoSearch {
     assist2?: string;
     version?: number;
     sort?: string;
-}
-
-export const DefaultVideo = {
-    matchDate: '',
-    player1: '',
-    char1: '',
-    assist1: '',
-    player2: '',
-    char2: '',
-    assist2: '',
-    link: '',
-    version: 2
-}
+};

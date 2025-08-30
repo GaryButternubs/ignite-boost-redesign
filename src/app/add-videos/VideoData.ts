@@ -1,4 +1,4 @@
-import { Video } from "../api/video-service/Videos";
+import { ReplayInfo } from "../api/video-service/Videos";
 
 export interface VideoData {
     url: string;
@@ -8,9 +8,10 @@ export interface VideoData {
     version: number; // 1: DFC, 2: DFCI
 }
 
-export interface MatchData {
-    videoData: Video;
+export interface MatchItem {
+    data: ReplayInfo;
     index: number;
+    valid: boolean;
 }
 
 export const DefaultVideoData: VideoData = {
