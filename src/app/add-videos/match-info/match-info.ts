@@ -116,9 +116,14 @@ export class MatchInfo {
       if (splitTime.length > 3) splitTime = splitTime.slice(0, 2);
       while (splitTime.length < 3) splitTime.unshift('00');
 
+      // Ensure each measure of time is exactly 2 digits in length
       for (let i = 0; i < splitTime.length; i++) {
         while (splitTime[i].length < 2) {
           splitTime[i] = `0${splitTime[i]}`;
+        }
+
+        if (splitTime[i].length > 2) {
+          splitTime[i] = splitTime[i].substring(0, 2);
         }
       }
 

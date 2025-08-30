@@ -32,10 +32,9 @@ export class VideoPreview {
   updateVideoData = output<VideoData>();
 
   updateDate(date: string) {
-    this.urlData.update(data => {
-      data['date'] = date;
-      return data;
-    });
+    const temp = {...this.urlData()};
+    temp['date'] = date;
+    this.urlData.set(temp);
 
     this.updateVideoData.emit(this.urlData());
   }
@@ -44,7 +43,7 @@ export class VideoPreview {
     // Regexes to check for valid YouTube, NicoNico, and BiliBili videos respectively
     const regexes: RegExp[] = [];
     regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|live\/))((\w|-){11})(?:\S+)?$/);
-    regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.|embed\.|live\.)?(?:nicovideo\.jp\/(?:watch\/))(sm(\w|-){8}|lv(\w|-){9})(?:\S+)?$/);
+    regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.|embed\.|live\.)?(?:nicovideo\.jp\/(?:watch\/))(sm(\w|-){8}|so(\w|-){8}|lv(\w|-){9})(?:\S+)?$/);
     regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:bilibili\.com\/(?:video\/))((\w|-){12})(?:\S+)?$/);
 
     let videoSrc = -1;
@@ -52,16 +51,13 @@ export class VideoPreview {
       if (url.match(regex)) videoSrc = index;
     });
 
-    if (videoSrc !== -1) {
-      this.urlData.update(data => {
-        data['url'] = url;
-        data['id'] = url.match(regexes[videoSrc])![1];
-        data['src'] = videoSrc;
-        return data;
-      });
+    const temp = {...this.urlData()};
+    temp['url'] = url;
+    temp['id'] = (videoSrc !== -1) ? url.match(regexes[videoSrc])![1] : '';
+    temp['src'] = videoSrc;
+    this.urlData.set(temp);
 
-      this.updateVideoData.emit(this.urlData());
-    }
+    this.updateVideoData.emit(this.urlData());
   }
 
   updateVersionSelect(newVersion: number) {
@@ -69,7 +65,6 @@ export class VideoPreview {
     document.body.classList.remove((newVersion === 2) ? 'dfc-theme' : 'dfci-theme');
     document.body.classList.add((newVersion === 2) ? 'dfci-theme' : 'dfc-theme');
 
-    //this.version.set(newVersion);
     this.versionSelOpen.set(false);
     this.urlData.update(data => {
       data['version'] = newVersion;

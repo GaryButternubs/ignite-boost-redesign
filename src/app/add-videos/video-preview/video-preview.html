@@ -1,5 +1,9 @@
 <div class="w-full flex flex-col justify-center p-4 bg-black/75">
-    <app-video-embed [videoID]="this.urlData()['id']" [videoSrc]="this.urlData()['src']" class="flex justify-center w-full" />
+    <app-video-embed 
+        [videoID]="this.urlData()['id']" 
+        [videoSrc]="this.urlData()['src']" 
+        class="flex justify-center w-full" 
+    />
     <div class="video-preview">
         <form class="mt-2 mx-2 flex flex-wrap gap-4 text-white">
             <div class="p-[2px] shadow-xl bg-black">
@@ -15,7 +19,7 @@
                 <div
                     class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
                     <mat-form-field class="bg-black p-1 w-full">
-                        <mat-label>Video Link</mat-label>
+                        <mat-label>Video Link (YouTube, Niconico, Bilibili)</mat-label>
                         <input matInput type="url" placeholder="Ex. https://www.youtube.com/watch?v=***********"
                             (change)="parseURL($event.target.value.trim())" [value]="this.urlData().url" />
                     </mat-form-field>

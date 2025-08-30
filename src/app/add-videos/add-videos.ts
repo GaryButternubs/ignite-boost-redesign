@@ -1,17 +1,21 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { VideoPreview } from "./video-preview/video-preview";
 import { MatchInfo } from './match-info/match-info';
-import { Video, ReplayInfo } from '../api/video-service/Videos';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { VideoRequests } from '../api/video-service/video-requests';
 import { VideoData, DefaultVideoData, MatchItem } from './VideoData';
+import { ReplayInfo } from '../api/video-service/Videos';
 
 @Component({
   selector: 'app-add-videos',
-  imports: [NgClass, VideoPreview, MatchInfo],
+  imports: [NgClass, VideoPreview, MatchInfo, MatProgressSpinnerModule],
   templateUrl: './add-videos.html',
   styleUrl: './add-videos.scss'
 })
 export class AddVideos implements OnDestroy {
+  videoRequestService = inject(VideoRequests);
+
   matchList = signal<MatchItem[]>([{
     data: {
       player1: '',
@@ -26,12 +30,17 @@ export class AddVideos implements OnDestroy {
     valid: false,
   }]);
   videoData = signal<VideoData>(DefaultVideoData);
+  videoDataValid = signal<boolean>(false);
   matchesValid = signal<boolean>(false);
 
-  buttonOptions = ['Add Match', 'Submit Match', 'Submit Matches'];
+  savingMatches = signal<boolean>(false);
+
+  enableSubmit = computed<boolean>(() => this.matchesValid() && this.videoDataValid());
 
   updateVideoData(newData: VideoData) {
     this.videoData.set(newData);
+
+    this.videoDataValid.set(this.isVideoDataValid());
   }
 
   updateMatchList(item: MatchItem) {
@@ -55,17 +64,6 @@ export class AddVideos implements OnDestroy {
     this.matchesValid.set(this.areMatchesValid());
   }
 
-  // Check if all match data is currently valid for submission
-  areMatchesValid(): boolean {
-    for (let i = 0; i < this.matchList().length; i++) {
-      if (!this.matchList()[i].valid) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
   addMatch() {
     const temp = this.matchList();
     temp.push({
@@ -83,11 +81,54 @@ export class AddVideos implements OnDestroy {
     });
 
     this.matchList.set(temp);
+    this.matchesValid.set(this.areMatchesValid());
   }
 
   // Parse match data as a whole and make a request to API to add videos
-  submitMatches() {
+  async submitMatches() {
+    this.savingMatches.set(true);
+    const replays: ReplayInfo[] = this.matchList().map(match => match.data);
+    const response = await this.videoRequestService.addVideos(this.videoData(), replays);
+    console.log(response);
 
+    // Clear matchList signal
+    this.matchList.set([{
+      data: {
+        player1: '',
+        char1: '',
+        assist1: '',
+        player2: '',
+        char2: '',
+        assist2: '',
+        timestamp: '',
+      },
+      index: 0,
+      valid: false,
+    }]);
+
+    this.savingMatches.set(false);
+  }
+
+  // Check videoData to ensure it's properly filled out
+  isVideoDataValid(): boolean {
+    if (Number.isNaN(new Date(this.videoData().date).getTime())
+      || this.videoData().src === -1
+      || this.videoData().id === '') {
+      return false;
+    }
+
+    return true;
+  }
+
+  // Check if all match data is currently valid for submission
+  areMatchesValid(): boolean {
+    for (let i = 0; i < this.matchList().length; i++) {
+      if (!this.matchList()[i].valid) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   // Reset back to DFCI theme on page change

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Video, VideoSearch } from './Videos';
+import { Video, VideoSearch, ReplayInfo } from './Videos';
+import { VideoData } from '../../add-videos/VideoData';
 //import * as jsonData from './TestData.json';
 
 @Injectable({
@@ -7,26 +8,29 @@ import { Video, VideoSearch } from './Videos';
 })
 export class VideoRequests {
   private delay = 1000; // Simulated network delay
-  //private videos: Video[] = jsonData.videos;
+  private videos: Video[] = [];
 
   // Adjust methods to make HTTP requests once connected with backend
   async getAllVideos(): Promise<Video[]> {
     await this.simulateDelay();
-    const videos = (await import('./TestData.json')).videos;
-    return videos;
+    
+    if (this.videos.length === 0) {
+      this.videos = (await import('./TestData.json')).videos;
+    }
+
+    return this.videos;
   }
 
   // Doesn't sort for now, since this is just for testing
   async searchVideos(query: VideoSearch): Promise<Video[]> {
     await this.simulateDelay();
-    const videos: Video[] = (await import('./TestData.json')).videos;
 
     const { char1, char2, assist1, assist2, version } = query;
     const player1 = (query.player1) ? query.player1.toLowerCase() : '';
     const player2 = (query.player2) ? query.player2.toLowerCase() : '';
 
     // TO-DO: Fix search functionality so that mirror matches work as intended
-    return videos.filter(video => {
+    return this.videos.filter(video => {
       if (player1) {
         if (video.player1.toLowerCase().indexOf(player1) === -1 && video.player2.toLowerCase().indexOf(player1) === -1) {
           return false;
@@ -127,14 +131,69 @@ export class VideoRequests {
     });
   }
 
-  async addVideos(videos: Video[]): Promise<Object> {
-    // TO-DO: Check input data, adding to videos JSON and return errors as needed
-    //  - Missing parameters (400)
-    //  - Failed to add video (500)
+  async addVideos(videoData: VideoData, replays: ReplayInfo[]): Promise<Object> {
+    await this.simulateDelay();
     
-    // Videos added successfully
-    return {
-      status: 200
+    console.log('Adding videos');
+    let incompleteURL = '';
+
+    // Set up URL, barring timestamp
+    switch (videoData.src) {
+      // YouTube
+      case 0:
+        incompleteURL += `https://youtu.be/${videoData.id}?t=`
+        break;
+      
+      // Niconico
+      case 1:
+        incompleteURL += `https://www.nicovideo.jp/watch/${videoData.id}?from=`
+        break;
+
+      // Bilibili
+      case 2:
+        incompleteURL += `https://www.bilibili.com/video/${videoData.id}/?t=`;
+        break;
+    }
+    
+    // Format URL based on video source. Identical for YouTube and BiliBili, unique for NicoNico
+    const newVideos = replays.map(replay => {
+      // Start by generating date object to calculate elapsed seconds
+      let seconds = 0;
+      seconds += parseInt(replay.timestamp.substring(0, 2)) * 60 * 60;  // Hours
+      seconds += parseInt(replay.timestamp.substring(3, 5)) * 60;       // Minutes
+      seconds += parseInt(replay.timestamp.substring(6));               // Seconds
+
+      let completeURL = `${incompleteURL}${seconds}`;
+
+      const newVideo: Video = {
+        matchDate: videoData.date,
+        player1: replay.player1,
+        char1: replay.char1,
+        assist1: replay.assist1,
+        player2: replay.player2,
+        char2: replay.char2,
+        assist2: replay.assist2,
+        link: completeURL,
+        version: videoData.version,
+      };
+
+      return newVideo;
+    });
+
+    try {
+      newVideos.forEach(newVideo => {
+        this.videos = [newVideo, ...this.videos];
+      });
+
+      return {
+        status: 200,
+        message: 'Videos have successfully been added!'
+      };
+    } catch (err) {
+      return {
+        status: 500,
+        message: 'Something went wrong while adding videos!'
+      };
     }
   }
 

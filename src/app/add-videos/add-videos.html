@@ -7,14 +7,17 @@
             class="w-full"
             (updateVideoData)="updateVideoData($event)"
         />
-
-        @for (match of matchList(); track match.index) {
-            <app-match-info 
-                [index]="$index"
-                [videoData]="videoData()"
-                (updateMatchArray)="updateMatchList($event)"
-                (deleteMatchEntry)="deleteMatchEntry($event)"
-            />
+        @if (savingMatches()) {
+            <mat-spinner />
+        } @else {
+            @for (match of matchList(); track match.index) {
+                <app-match-info 
+                    [index]="$index"
+                    [videoData]="videoData()"
+                    (updateMatchArray)="updateMatchList($event)"
+                    (deleteMatchEntry)="deleteMatchEntry($event)"
+                />
+            }
         }
 
         <div class="flex gap-4 justify-center">
@@ -33,9 +36,9 @@
                 <button 
                     matButton 
                     (click)="submitMatches()"
-                    [disabled]="matchesValid()" 
+                    [disabled]="!enableSubmit()" 
                     class="dfc-button h-fit w-fit bg-black p-1 text-white"
-                    [ngClass]="`${matchesValid() ? 'hover:text-shadow-glow hover:text-shadow-(color:--hover-glow) *:overflow-visible cursor-pointer' : 'opacity-75'}`"
+                    [ngClass]="`${enableSubmit() ? 'hover:text-shadow-glow hover:text-shadow-(color:--hover-glow) *:overflow-visible cursor-pointer' : 'opacity-75'}`"
                 >
                     <div class="dfc-button bg-linear-to-r from-(--button-gradient-start) via-(--button-gradient-end) to-(--button-gradient-start) p-1">
                         <div class="dfc-button bg-black px-2 py-1">
