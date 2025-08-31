@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject, input, resource } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NavbarOption } from '../navbar-option';
@@ -7,7 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { UserRequests } from '../../api/user-service/user-requests';
 
 @Component({
   selector: 'app-navlist',
@@ -25,17 +26,25 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
   styleUrl: './navlist.scss'
 })
 export class Navlist {
-  // TO-DO: Inject a service that manages login state
+  userResource = inject(UserRequests);
+
   isMobile = input<boolean>(false);
 
-  // Navbar options
-  options: NavbarOption[] = [
-    {
+  authResource = resource({
+    loader: this.userResource.getAuth
+  });
+
+  // Navbar options, adjusts based on login state
+  options = computed<NavbarOption[]>(() => {
+    const list = [];
+
+    list.push({
       text: 'Replays',
       id: 1,
       url: { path: '/' },
-    },
-    {
+    });
+    
+    list.push({
       text: 'Resources',
       id: 2,
       children: [
@@ -56,22 +65,90 @@ export class Navlist {
         }
       ],
       elementType: 'dropdown',
-    },
-    {
-      text: 'Add a Replay',
-      id: 3,
-      url: { path: '/add' },
-    },
-    {
-      text: 'Login',
-      id: 4,
-      url: { path: '/login' },
-    },
-    {
-      text: 'Signup',
-      id: 5,
-      url: { path: '/signup' },
-      elementType: 'dfc-button',
+    });
+
+    // Check if logged in
+    if (this.authResource.hasValue() && this.authResource.value()) {
+      list.push({
+        text: 'Add Replays',
+        id: 3,
+        url: { path: '/add' }
+      });
+
+      list.push({
+        text: 'Change Password',
+        id: 4,
+        url: { path: '/change'}
+      });
+
+      list.push({
+        text: 'Logout',
+        id: 5,
+        url: { path: '/logout' },
+        elementType: 'dfc-button'
+      });
+    } else {
+      list.push({
+        text: 'Login to Add Replays',
+        id: 3,
+        url: { path: '/login'}
+      });
+
+      list.push({
+        text: 'Signup',
+        id: 4,
+        url: { path: '/signup' },
+        elementType: 'dfc-button'
+      });
     }
-  ];
+
+    return list;
+  });
+
+  // Navbar options
+  // options: NavbarOption[] = [
+  //   {
+  //     text: 'Replays',
+  //     id: 1,
+  //     url: { path: '/' },
+  //   },
+  //   {
+  //     text: 'Resources',
+  //     id: 2,
+  //     children: [
+  //       {
+  //         text: 'DFC Resource Site',
+  //         id: 1,
+  //         url: { path: 'https://sites.google.com/view/dfci-guide/', external: true},
+  //       },
+  //       {
+  //         text: 'DFCI Mizuumi Wiki',
+  //         id: 2,
+  //         url: { path: 'https://wiki.gbl.gg/w/Dengeki_Bunko:_Fighting_Climax/DFCI', external: true },
+  //       },
+  //       {
+  //         text: 'Report an issue',
+  //         id: 3,
+  //         url: { path: 'mailto:ignite-boost.net@gmail.com', external: true},
+  //       }
+  //     ],
+  //     elementType: 'dropdown',
+  //   },
+  //   {
+  //     text: 'Add a Replay',
+  //     id: 3,
+  //     url: { path: '/add' },
+  //   },
+  //   {
+  //     text: 'Login',
+  //     id: 4,
+  //     url: { path: '/login' },
+  //   },
+  //   {
+  //     text: 'Signup',
+  //     id: 5,
+  //     url: { path: '/signup' },
+  //     elementType: 'dfc-button',
+  //   }
+  // ];
 }
