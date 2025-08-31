@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Login } from './login/login';
+import { Signup } from './signup/signup';
 
 @Component({
   selector: 'app-login-signup',
-  imports: [],
+  imports: [Login, Signup],
   templateUrl: './login-signup.html',
   styleUrl: './login-signup.scss'
 })
 export class LoginSignup {
-
+  private route = inject(ActivatedRoute);
+  state = signal<string>(this.route.snapshot.data['state']);
 }

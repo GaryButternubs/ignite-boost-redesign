@@ -1,1 +1,15 @@
-<p>login-signup works!</p>
+<div 
+    class="w-full relative flex justify-center"
+    animate.enter="select-overlay-enter"
+    animate.leave="select-overlay-exit"
+>
+    <div class="max-w-[1280px] w-full my-4 p-4 bg-black/75 text-white">
+        @if (state() === 'login') {
+            <app-login />
+        } @else {
+            <app-signup 
+                [changePass]="state() === 'change'"
+            />
+        }
+    </div>
+</div>
