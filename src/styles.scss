@@ -304,13 +304,36 @@
       density: 0,
     ));
 
-    div.mat-mdc-select-panel {
+    div.mat-mdc-select-panel,
+    .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
       background-image: url('./assets/horizontal_bars.png') !important;
       background-color: var(--color-secondary) !important;
     }
 
     .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
       background-color: color-mix(in oklab, var(--color-primary) 50%, transparent) !important;
+    }
+
+    .mat-mdc-snack-bar-container .mdc-snackbar__label {
+      color: var(--color-white) !important;
+    } 
+
+    .mat-mdc-snack-bar-container .mdc-button__label {
+      color: var(--color-white) !important;
+      --glow-color: color-mix(in oklab, var(--hover-glow) var(--tw-text-shadow-alpha), transparent) !important;
+      text-shadow: 0px 0px 2px var(--glow-color, rgba(0, 0, 0, 0.1)), 
+        0px 0px 2px var(--glow-color, 
+        varrgba(0, 0, 0, 0.1)), 0px 0px 8px 
+        var(--glow-color, rgba(0, 0, 0, 0.1)) 
+        !important;
+    } 
+
+    .mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed {
+      color: var(--color-primary) !important;
+    }
+
+    .mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before {
+      opacity:50%;
     }
   }
 }

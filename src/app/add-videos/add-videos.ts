@@ -3,9 +3,11 @@ import { NgClass } from '@angular/common';
 import { VideoPreview } from "./video-preview/video-preview";
 import { MatchInfo } from './match-info/match-info';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { VideoRequests } from '../api/video-service/video-requests';
 import { VideoData, DefaultVideoData, MatchItem } from './VideoData';
 import { ReplayInfo } from '../api/video-service/Videos';
+import { Response } from '../api/Response';
 
 @Component({
   selector: 'app-add-videos',
@@ -15,6 +17,7 @@ import { ReplayInfo } from '../api/video-service/Videos';
 })
 export class AddVideos implements OnDestroy {
   videoRequestService = inject(VideoRequests);
+  snackBar = inject(MatSnackBar);
 
   matchList = signal<MatchItem[]>([{
     data: {
@@ -88,8 +91,7 @@ export class AddVideos implements OnDestroy {
   async submitMatches() {
     this.savingMatches.set(true);
     const replays: ReplayInfo[] = this.matchList().map(match => match.data);
-    const response = await this.videoRequestService.addVideos(this.videoData(), replays);
-    console.log(response);
+    const response: Response = await this.videoRequestService.addVideos(this.videoData(), replays);
 
     // Clear matchList signal
     this.matchList.set([{
@@ -107,6 +109,9 @@ export class AddVideos implements OnDestroy {
     }]);
 
     this.savingMatches.set(false);
+
+    // Display results in SnackBar
+    this.snackBar.open(response.error ?? response.message ?? '', 'Dismiss');
   }
 
   // Check videoData to ensure it's properly filled out

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Video, VideoSearch, ReplayInfo } from './Videos';
 import { VideoData } from '../../add-videos/VideoData';
+import { Response } from '../Response';
 //import * as jsonData from './TestData.json';
 
 @Injectable({
@@ -131,7 +132,7 @@ export class VideoRequests {
     });
   }
 
-  async addVideos(videoData: VideoData, replays: ReplayInfo[]): Promise<Object> {
+  async addVideos(videoData: VideoData, replays: ReplayInfo[]): Promise<Response> {
     await this.simulateDelay();
     
     console.log('Adding videos');
