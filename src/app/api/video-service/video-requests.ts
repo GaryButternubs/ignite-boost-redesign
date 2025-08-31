@@ -193,7 +193,7 @@ export class VideoRequests {
     } catch (err) {
       return {
         status: 500,
-        message: 'Something went wrong while adding videos!'
+        message: 'Something went wrong while adding videos. Please try again later.'
       };
     }
   }
