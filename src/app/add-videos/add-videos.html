@@ -8,7 +8,9 @@
             (updateVideoData)="updateVideoData($event)"
         />
         @if (savingMatches()) {
-            <mat-spinner />
+            <div class="flex w-full justify-center items-center">
+                <mat-spinner />
+            </div>
         } @else {
             @for (match of matchList(); track match.index) {
                 <app-match-info 

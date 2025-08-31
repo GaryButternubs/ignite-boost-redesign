@@ -1,13 +1,13 @@
 import { Component, computed, inject, input, output } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { CheckBreakpoints } from '../../breakpoints/check-breakpoints';
+import { ImageLoader } from '../../components/image-loader/image-loader';
 import { Player } from "./player/player";
 import { VideoSearch } from '../../api/video-service/Videos';
 import { VersionSelect } from "./version-select/version-select";
 
 @Component({
   selector: 'app-vs-screen',
-  imports: [NgOptimizedImage, Player, VersionSelect],
+  imports: [ImageLoader, Player, VersionSelect],
   templateUrl: './vs-screen.html',
   styleUrl: './vs-screen.scss'
 })

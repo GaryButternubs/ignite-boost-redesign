@@ -11,10 +11,16 @@
 
         @if (!isHandset() && !isFull()) {
             <div class="shrink">
-                <img 
+                <!-- <img 
                     ngSrc="../../../assets/vs_text.png"
                     width="192"
                     height="64"
+                /> -->
+                <app-image-loader 
+                    src="../../../assets/vs_text.png"
+                    [width]="192"
+                    [height]="64"
+                    [priority]="true"
                 />
             </div>
         }
@@ -30,11 +36,18 @@
 
         <!--VS Text-->
         @if (!isHandset() && isFull()) {
-            <img 
+            <!-- <img 
                 ngSrc="../../../assets/vs_text.png"
                 width="192"
                 height="64"
                 class="h-fit absolute top-10/25 animate-open-h"
+            /> -->
+            <app-image-loader 
+                src="../../../assets/vs_text.png"
+                [width]="192"
+                [height]="64"
+                class="h-fit absolute top-10/25 animate-open-h"
+                [priority]="true"
             />
         }
     </div>

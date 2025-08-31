@@ -4,19 +4,24 @@
         <div class="grid grid-cols-8 gap-2 py-2">
             @for (char of this.assistCharacters; track char.abbr) {
                 @if (!char.ignition || isIgnition()) {
-                    @defer {
-                        <img 
-                            [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
-                            [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
-                            width="60"
-                            height="60"
-                            (mouseenter)="hoveredAsst.set(char)"
-                            (click)="updateSelectedAsst.emit(char)"
-                            animate.enter="select-overlay-enter"
-                        />
-                    } @placeholder {
-                        <mat-spinner diameter="60"/>
-                    }
+                    <!-- <img 
+                        [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
+                        [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
+                        width="60"
+                        height="60"
+                        (mouseenter)="hoveredAsst.set(char)"
+                        (click)="updateSelectedAsst.emit(char)"
+                        animate.enter="select-overlay-enter"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
+                        [addClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
+                        [width]="60"
+                        [height]="60"
+                        (mouseenter)="hoveredAsst.set(char)"
+                        (click)="updateSelectedAsst.emit(char)"
+                        animate.enter="select-overlay-enter"
+                    />
                 }
             }
         </div>

@@ -1,20 +1,21 @@
 import { Component, computed, input, output, signal } from '@angular/core';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatIconModule } from '@angular/material/icon';
 import { Character, DefaultChar } from '../../api/video-service/Characters';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatButtonModule } from "@angular/material/button";
+import { ImageLoader } from '../image-loader/image-loader';
 
 @Component({
   selector: 'app-char-dropdown',
   imports: [
     NgClass,
-    NgOptimizedImage,
     OverlayModule,
     MatIconModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    ImageLoader
 ],
   templateUrl: './char-dropdown.html',
   styleUrl: './char-dropdown.scss'

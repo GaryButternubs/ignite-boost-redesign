@@ -75,11 +75,18 @@
                                 [ngClass]="`px-4 py-2 flex gap-4 justify-between items-center w-full cursor-pointer ${this.urlData()['version'] === 1 ? 'bg-(--color-primary)/50': ''} hover:bg-white/25`"
                             >
                                 <span class="text-md">DFC</span>
-                                <img 
+                                <!-- <img 
                                     [ngSrc]="'../../../assets/bolt_dfc.png'" 
                                     width="90" 
                                     height="90"
                                     class="h-8 w-fit" 
+                                /> -->
+                                <app-image-loader 
+                                    [src]="'../../../assets/bolt_dfc.png'" 
+                                    [width]="90" 
+                                    [height]="90"
+                                    addClass="h-8 w-fit" 
+                                    spinnerClass="h-8 w-fit"
                                 />
                             </button>
                             <button 
@@ -87,11 +94,18 @@
                                 [ngClass]="`px-4 py-2 flex gap-4 justify-between items-center w-full cursor-pointer ${this.urlData()['version'] === 2 ? 'bg-(--color-primary)/50': ''} hover:bg-white/25`"
                             >
                                 <span class="text-md">DFCI</span>
-                                <img 
+                                <!-- <img 
                                     [ngSrc]="'../../../assets/bolt_dfci.png'" 
                                     width="90" 
                                     height="90"
                                     class="h-8 w-fit" 
+                                /> -->
+                                <app-image-loader 
+                                    [src]="'../../../assets/bolt_dfci.png'" 
+                                    [width]="90" 
+                                    [height]="90"
+                                    addClass="h-8 w-fit" 
+                                    spinnerClass="h-8 w-fit"
                                 />
                             </button>
                         </div>

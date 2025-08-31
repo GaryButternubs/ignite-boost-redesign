@@ -1,5 +1,6 @@
 import { Component, output, signal } from '@angular/core';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
+import { ImageLoader } from '../../components/image-loader/image-loader';
 import { VideoEmbed } from './video-embed/video-embed';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +15,7 @@ import { DefaultVideoData, VideoData } from '../VideoData';
   imports: [
     VideoEmbed,
     NgClass,
-    NgOptimizedImage,
+    ImageLoader,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

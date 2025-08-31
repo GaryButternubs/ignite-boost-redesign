@@ -8,11 +8,18 @@
             <div class="flex flex-row justify-between items-center">
                 <span class="text-sm">{{this.replay()?.matchDate}}</span>
                 <div class="flex gap-4 items-center">
-                    <img 
+                    <!-- <img 
                         [ngSrc]="`../../../../assets/bolt_${((this.replay()?.version ?? 2) === 2) ? 'dfci' : 'dfc'}.png`"
                         width="90"
                         height="90"
                         class="h-8 w-fit"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../../assets/bolt_${((this.replay()?.version ?? 2) === 2) ? 'dfci' : 'dfc'}.png`"
+                        [width]="90"
+                        [height]="90"
+                        addClass="h-8 w-fit"
+                        spinnerClass="h-8 w-fit"
                     />
                     <a 
                         matIconButton 
@@ -29,33 +36,61 @@
             <hr />
             <!--Player 1-->
             <div class="flex gap-2 items-center">
-                <img 
+                <!-- <img 
                     [ngSrc]="`../../../../assets/char-menu/sm/${this.char1().abbr}.png`"
                     width="90"
                     height="90"
                     class="h-fit w-16"
+                /> -->
+                <app-image-loader 
+                    [src]="`../../../../assets/char-menu/sm/${this.char1().abbr}.png`"
+                    [width]="90"
+                    [height]="90"
+                    addClass="h-fit w-16"
+                    spinnerClass="h-fit w-16"
                 />
-                <img 
+                <!-- <img 
                     [ngSrc]="`../../../../assets/asst-menu/sm/${this.assist1().abbr}.png`"
                     width="90"
                     height="48"
                     class="h-fit w-16"
+                /> -->
+                <app-image-loader 
+                    [src]="`../../../../assets/asst-menu/sm/${this.assist1().abbr}.png`"
+                    [width]="90"
+                    [height]="48"
+                    addClass="h-fit w-16"
+                    spinnerClass="h-fit w-16"
                 />
                 <span>{{this.replay()?.player1}}</span>
             </div>
             <!--Player 2-->
             <div class="flex gap-2 items-center">
-                <img 
+                <!-- <img 
                     [ngSrc]="`../../../../assets/char-menu/sm/${this.char2().abbr}.png`"
                     width="90"
                     height="90"
                     class="h-fit w-16"
+                /> -->
+                <app-image-loader 
+                    [src]="`../../../../assets/char-menu/sm/${this.char2().abbr}.png`"
+                    [width]="90"
+                    [height]="90"
+                    addClass="h-fit w-16"
+                    spinnerClass="h-fit w-16"
                 />
-                <img 
+                <!-- <img 
                     [ngSrc]="`../../../../assets/asst-menu/sm/${this.assist2().abbr}.png`"
                     width="90"
                     height="48"
                     class="h-fit w-16"
+                /> -->
+                <app-image-loader 
+                    [src]="`../../../../assets/asst-menu/sm/${this.assist2().abbr}.png`"
+                    [width]="90"
+                    [height]="48"
+                    addClass="h-fit w-16"
+                    spinnerClass="h-fit w-16"
                 />
                 <span>{{this.replay()?.player2}}</span>
             </div>
@@ -72,36 +107,63 @@
                 
                 <!--Player 1 images-->
                 <div class="flex flex-row gap-2 items-center">
-                    <img 
+                    <!-- <img 
                         [ngSrc]="`../../../../assets/asst-menu/sm/${this.assist1().abbr}.png`"
                         width="90"
                         height="48"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../../assets/asst-menu/sm/${this.assist1().abbr}.png`"
+                        [width]="90"
+                        [height]="48"
                     />
-                    <img 
+                    <!-- <img 
                         [ngSrc]="`../../../../assets/char-menu/sm/${this.char1().abbr}.png`"
                         width="90"
                         height="90"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../../assets/char-menu/sm/${this.char1().abbr}.png`"
+                        [width]="90"
+                        [height]="90"
                     />
                 </div>
 
-                <img 
+                <!-- <img 
                     ngSrc="../../../../assets/vs_text.png"
                     width="192"
                     height="64"
                     class="h-10 w-fit"
+                /> -->
+                <app-image-loader 
+                    src="../../../../assets/vs_text.png"
+                    [width]="192"
+                    [height]="64"
+                    addClass="h-10 w-fit"
+                    spinnerClass="h-10 w-fit"
                 />
 
                 <!--Player 2 images-->
                 <div class="flex flex-row gap-2 items-center">
-                    <img 
+                    <!-- <img 
                         [ngSrc]="`../../../../assets/char-menu/sm/${this.char2().abbr}.png`"
                         width="90"
                         height="90"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../../assets/char-menu/sm/${this.char2().abbr}.png`"
+                        [width]="90"
+                        [height]="90"
                     />
-                    <img 
+                    <!-- <img 
                         [ngSrc]="`../../../../assets/asst-menu/sm/${this.assist2().abbr}.png`"
                         width="90"
                         height="48"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../../assets/asst-menu/sm/${this.assist2().abbr}.png`"
+                        [width]="90"
+                        [height]="48"
                     />
                 </div>
 
@@ -110,11 +172,18 @@
                 </div>
             </div>
 
-            <img 
+            <!-- <img 
                 [ngSrc]="`../../../../assets/bolt_${((this.replay()?.version ?? 2) === 2) ? 'dfci' : 'dfc'}.png`"
                 width="90"
                 height="90"
                 class="h-14 w-fit"
+            /> -->
+            <app-image-loader 
+                [src]="`../../../../assets/bolt_${((this.replay()?.version ?? 2) === 2) ? 'dfci' : 'dfc'}.png`"
+                [width]="90"
+                [height]="90"
+                addClass="h-14 w-fit"
+                spinnerClass="h-14 w-fit"
             />
             <a 
                 matIconButton 

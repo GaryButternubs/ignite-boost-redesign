@@ -1,11 +1,11 @@
 import { Component, input, output, signal } from '@angular/core';
-import { NgOptimizedImage, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Character, PlayableCharacters } from '../../../../../api/video-service/Characters';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ImageLoader } from '../../../../../components/image-loader/image-loader';
 
 @Component({
   selector: 'app-char-menu',
-  imports: [NgOptimizedImage, NgClass, MatProgressSpinnerModule],
+  imports: [NgClass, ImageLoader],
   templateUrl: './char-menu.html',
   styleUrl: './char-menu.scss'
 })

@@ -5,11 +5,17 @@
     cdkOverlayOrigin
     #trigger
 >
-    <img 
+    <!-- <img 
         [ngSrc]="`../../../assets/${imageDir()}/${selectedChar().abbr}.png`"
         [width]="imgWidth()"
         [height]="imgHeight()"
         priority
+    /> -->
+    <app-image-loader 
+        [src]="`../../../assets/${imageDir()}/${selectedChar().abbr}.png`"
+        [width]="imgWidth()"
+        [height]="imgHeight()"
+        [priority]="true"
     />
 </button>
 
@@ -35,11 +41,18 @@
                     class="w-full flex flex-row gap-2 items-center cursor-pointer"
                     animate.enter="select-overlay-enter"
                 >
-                    <img 
+                    <!-- <img 
                         [ngSrc]="`../../../assets/${imageDir()}/${defaultChar.abbr}.png`"
                         [width]="imgWidth()"
                         [height]="imgHeight()"
                         class="w-12 h-auto"
+                    /> -->
+                    <app-image-loader 
+                        [src]="`../../../assets/${imageDir()}/${defaultChar.abbr}.png`"
+                        [width]="imgWidth()"
+                        [height]="imgHeight()"
+                        addClass="w-12 h-auto"
+                        spinnerClass="w-12 h-auto"
                     />
                     <span class="text-md">Any/All</span>
                 </div>
@@ -58,11 +71,18 @@
                         animate.enter="select-overlay-enter"
                     >
                         <div class="flex flex-row gap-2 items-center">
-                            <img 
+                            <!-- <img 
                                 [ngSrc]="`../../../assets/${imageDir()}/${char.abbr}.png`"
                                 [width]="imgWidth()"
                                 [height]="imgHeight()"
                                 class="w-12 h-auto"
+                            /> -->
+                            <app-image-loader 
+                                [src]="`../../../assets/${imageDir()}/${char.abbr}.png`"
+                                [width]="imgWidth()"
+                                [height]="imgHeight()"
+                                addClass="w-12 h-auto"
+                                spinnerClass="w-12 h-auto"
                             />
                             <span class="text-md">{{char.name}}</span>
                         </div>
@@ -70,20 +90,20 @@
                         <!--Mizuumi link-->
                         @if (enableInfo()) {
                             <a 
-                                    matIconButton 
-                                    [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
-                                    class="flex justify-center items-center text-4xl *:overflow-visible"
-                                    [href]="char.wiki"
-                                    target="_blank"
+                                matIconButton 
+                                [ariaLabel]="`${char.short ?? char.name}'s wiki page`" 
+                                class="flex justify-center items-center text-4xl *:overflow-visible"
+                                [href]="char.wiki"
+                                target="_blank"
+                            >
+                                <mat-icon
+                                    class="text-shadow-glow" 
+                                    [ngClass]="`${isIgnition() ? 'text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)' : 'text-shadow-(color:--portrait-glow) hover:text-shadow-(color:--char-sel-glow)'}`" 
+                                    inline="true"
                                 >
-                                    <mat-icon
-                                        class="text-shadow-glow" 
-                                        [ngClass]="`${isIgnition() ? 'text-shadow-(color:--char-sel-glow) hover:text-shadow-(color:--portrait-glow)' : 'text-shadow-(color:--portrait-glow) hover:text-shadow-(color:--char-sel-glow)'}`" 
-                                        inline="true"
-                                    >
-                                        info
-                                    </mat-icon>
-                                </a>
+                                    info
+                                </mat-icon>
+                            </a>
                         }
                     </div>
                 </div>
