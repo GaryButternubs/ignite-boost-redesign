@@ -112,7 +112,6 @@ export class Navlist {
     this.router.events.pipe(takeUntilDestroyed()).subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         // Navigation completed
-        console.log('Navigation completed:', event.url);
         this.authResource.reload();
       }
     });

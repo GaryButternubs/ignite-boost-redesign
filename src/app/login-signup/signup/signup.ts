@@ -13,7 +13,13 @@ import { Response } from '../../api/Response';
 
 @Component({
   selector: 'app-signup',
-  imports: [NgClass, ReactiveFormsModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [
+    NgClass, 
+    ReactiveFormsModule, 
+    MatInputModule, 
+    MatButtonModule, 
+    MatProgressSpinnerModule
+  ],
   templateUrl: './signup.html',
   styleUrl: './signup.scss'
 })
@@ -36,9 +42,9 @@ export class Signup {
     this.reqPending.set(true);
 
     const data: User = {
-      username: this.form.controls.username.value ?? '',
-      password: this.form.controls.password.value ?? '',
-      retype: this.form.controls.retype.value ?? ''
+      username: this.form.controls.username.value?.trim() ?? '',
+      password: this.form.controls.password.value?.trim() ?? '',
+      retype: this.form.controls.retype.value?.trim() ?? ''
     };
     const res: Response = await ((this.changePass()) ? this.userService.changePassword(data) : this.userService.signup(data));
     this.reqPending.set(false);
@@ -46,7 +52,7 @@ export class Signup {
     if (res.error) {
       this.snackBar.open(res.error, 'Dismiss');
     } else if (res.redirect) {
-      this.router.navigateByUrl((res.redirect === '/') ? '' : res.redirect);
+      this.router.navigateByUrl(res.redirect);
     }
   }
 }

@@ -29,7 +29,10 @@ export class UserRequests {
     }
 
     try {
-      this.user.set(newUser);
+      this.user.set({
+        username: newUser.username,
+        password: newUser.password
+      });
       this.loggedIn.set(true);
       return {
         status: 200,
@@ -47,6 +50,9 @@ export class UserRequests {
   async login(credentials: User): Promise<Response> {
     await this.simulateDelay();
 
+    console.log(`Credentials: ${credentials.username}, ${credentials.password}`);
+    console.log(`User: ${this.user().username}, ${this.user().password}`);
+
     // Check that login data is correct
     if (credentials.username !== this.user().username || credentials.password !== this.user().password) {
       return {
@@ -60,7 +66,7 @@ export class UserRequests {
       return {
         status: 200,
         message: 'Logged in successfully.',
-        redirect: '',
+        redirect: '/',
       }
     } catch(error) {
       return {
@@ -78,7 +84,7 @@ export class UserRequests {
       return {
         status: 200,
         message: 'Successfully logged out.',
-        redirect: '',
+        redirect: '/',
       }
     } catch(error) {
       return {
