@@ -141,29 +141,36 @@ export class VideoRequests {
     switch (videoData.src) {
       // YouTube
       case 0:
-        incompleteURL += `https://youtu.be/${videoData.id}?t=`
+        incompleteURL += `https://youtu.be/${videoData.id}?t=`;
         break;
       
       // Niconico
       case 1:
-        incompleteURL += `https://www.nicovideo.jp/watch/${videoData.id}?from=`
+        incompleteURL += `https://www.nicovideo.jp/watch/${videoData.id}?from=`;
         break;
 
       // Bilibili
       case 2:
         incompleteURL += `https://www.bilibili.com/video/${videoData.id}/?t=`;
         break;
+
+      // Twitch
+      case 3:
+        incompleteURL += `https://www.twitch.tv/videos/${videoData.id}/?t=`;
     }
     
-    // Format URL based on video source. Identical for YouTube and BiliBili, unique for NicoNico
+    // Format URL based on video source
     const newVideos = replays.map(replay => {
       // Start by generating date object to calculate elapsed seconds
-      let seconds = 0;
-      seconds += parseInt(replay.timestamp.substring(0, 2)) * 60 * 60;  // Hours
-      seconds += parseInt(replay.timestamp.substring(3, 5)) * 60;       // Minutes
-      seconds += parseInt(replay.timestamp.substring(6));               // Seconds
+      const hours = parseInt(replay.timestamp.substring(0, 2));  // Hours
+      const minutes = parseInt(replay.timestamp.substring(3, 5));       // Minutes
+      const seconds = parseInt(replay.timestamp.substring(6));               // Seconds
 
-      let completeURL = `${incompleteURL}${seconds}`;
+      let completeURL;
+
+      // Twitch does it differently from everyone else
+      if (videoData.src !== 3) completeURL = `${incompleteURL}${(hours * 3600) + (minutes * 60) + seconds}`;
+      else completeURL = `${incompleteURL}${hours}h${minutes}m${seconds}s`;
 
       const newVideo: Video = {
         matchDate: videoData.date,

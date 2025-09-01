@@ -19,7 +19,7 @@
                 <div
                     class="p-[2px] bg-gradient-to-r from-(--player-gradient-ends) via-(--player-gradient-center) to-(--player-gradient-ends)">
                     <mat-form-field class="bg-black p-1 w-full">
-                        <mat-label>Video Link (YouTube, Niconico, Bilibili)</mat-label>
+                        <mat-label>Video Link (YouTube, Twitch, Niconico, Bilibili)</mat-label>
                         <input matInput type="url" placeholder="Ex. https://www.youtube.com/watch?v=***********"
                             (change)="parseURL($event.target.value.trim())" [value]="this.urlData().url" />
                     </mat-form-field>

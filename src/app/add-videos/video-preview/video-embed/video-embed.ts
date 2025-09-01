@@ -28,6 +28,10 @@ export class VideoEmbed {
       case 2:
         url = `https://player.bilibili.com/player.html?isOutside=true&bvid=${this.videoID()}`;
         break;
+
+      case 3:
+        url = `https://player.twitch.tv/?video=${this.videoID()}&parent=localhost`;
+        break;
     }
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

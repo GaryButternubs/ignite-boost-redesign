@@ -41,11 +41,12 @@ export class VideoPreview {
   }
 
   parseURL(url: string) {
-    // Regexes to check for valid YouTube, NicoNico, and BiliBili videos respectively
+    // Regexes to check for valid YouTube, NicoNico, BiliBili, and Twitch videos respectively
     const regexes: RegExp[] = [];
     regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|live\/))((\w|-){11})(?:\S+)?$/);
     regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.|embed\.|live\.)?(?:nicovideo\.jp\/(?:watch\/))(sm(\w|-){8}|so(\w|-){8}|lv(\w|-){9})(?:\S+)?$/);
     regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:bilibili\.com\/(?:video\/))((\w|-){12})(?:\S+)?$/);
+    regexes.push(/^(?:https?:\/\/)?(?:m\.|www\.|player\.)?(?:twitch\.tv\/(?:videos\/))((\d|-){8,12})(?:\S+)?$/);
 
     let videoSrc = -1;
     regexes.forEach((regex, index) => {
