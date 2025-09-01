@@ -11,6 +11,8 @@
   --color-secondary: #088c8c;
   --color-tertiary: #05a696;
 
+  --color-footer: #1E2229;
+
   --hover-glow: #00ffff;
   
   --bg-gradient-start: #01b6af;
@@ -32,6 +34,8 @@
   --dfci-color-secondary: #088c8c;
   --dfci-color-tertiary: #05a696;
 
+  --dfci-color-footer: #1E2229;
+
   --dfci-hover-glow: #00ffff;
   
   --dfci-bg-gradient-start: #01b6af;
@@ -45,6 +49,8 @@
   --dfc-color-primary: #2a6587;
   --dfc-color-secondary: #3486a8;
   --dfc-color-tertiary: #34a1bb;
+
+  --dfc-color-footer: #132326;
 
   --dfc-hover-glow: #0054ff;
   
@@ -122,6 +128,8 @@
     --color-secondary: var(--dfci-color-secondary);
     --color-tertiary: var(--dfci-color-tertiary);
 
+    --color-footer: var(--dfci-color-footer);
+
     --hover-glow: var(--dfci-hover-glow);
     
     --bg-gradient-start: var(--dfci-bg-gradient-start);
@@ -136,6 +144,8 @@
     --color-primary: var(--dfc-color-primary);
     --color-secondary: var(--dfc-color-secondary);
     --color-tertiary: var(--dfc-color-tertiary);
+
+    --color-footer: var(--dfc-color-footer);
 
     --hover-glow: var(--dfc-hover-glow);
     
