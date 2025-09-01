@@ -6,7 +6,7 @@ import { Response } from '../Response';
   providedIn: 'root'
 })
 export class UserRequests {
-  private delay = 1000;
+  private delay = 200;
   private loggedIn = signal<boolean>(false);
   private user = signal<User>({
     username: '',
@@ -21,12 +21,20 @@ export class UserRequests {
   async signup(newUser: User): Promise<Response> {
     await this.simulateDelay();
 
+    if (newUser.password !== newUser.retype) {
+      return {
+        status: 400,
+        error: 'Passwords do not match. Please try again.'
+      };
+    }
+
     try {
       this.user.set(newUser);
+      this.loggedIn.set(true);
       return {
         status: 200,
         message: 'Account created successfully.',
-        redirect: '',
+        redirect: '/',
       };
     } catch(error) {
       return {
@@ -89,7 +97,7 @@ export class UserRequests {
         status: 400,
         error: 'Username is incorrect. Please try again.'
       }
-    } else if (newCredentials.retypePassword !== newCredentials.password) {
+    } else if (newCredentials.retype !== newCredentials.password) {
       return {
         status: 400,
         error: 'Passwords do not match. Please try again.'

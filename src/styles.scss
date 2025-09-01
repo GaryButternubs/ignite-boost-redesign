@@ -235,6 +235,18 @@
     display: none !important;
   }
 
+  .mat-mdc-form-field-hint-wrapper,
+  .mat-mdc-form-field-error-wrapper {
+    position: relative !important;
+  }
+
+  mat-error {	
+    margin-top: calc(var(--spacing) * 1);
+    font-size: var(--text-sm) !important; /* 0.875rem (14px) */ 
+    line-height: var(--text-base--line-height) !important; /* calc(1.25 / 0.875) */
+    color: var(--color-red-700) !important;
+  }
+
   .player-search .mat-mdc-form-field-infix {
     max-width: 180px !important;
     width: 100% !important;

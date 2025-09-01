@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-login-signup',
-  imports: [Login, Signup],
+  imports: [Login, Signup, TitleCasePipe],
   templateUrl: './login-signup.html',
   styleUrl: './login-signup.scss'
 })

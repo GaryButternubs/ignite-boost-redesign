@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, resource } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Event, Router, RouterLink, NavigationStart, NavigationEnd } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavbarOption } from '../navbar-option';
 import { DfcButton } from '../../components/dfc-button/dfc-button';
 import { MatListModule } from '@angular/material/list';
@@ -26,12 +27,13 @@ import { UserRequests } from '../../api/user-service/user-requests';
   styleUrl: './navlist.scss'
 })
 export class Navlist {
-  userResource = inject(UserRequests);
+  private userResource = inject(UserRequests);
+  private readonly router = inject(Router);
 
   isMobile = input<boolean>(false);
 
   authResource = resource({
-    loader: this.userResource.getAuth
+    loader: (params) => this.userResource.getAuth()
   });
 
   // Navbar options, adjusts based on login state
@@ -105,50 +107,14 @@ export class Navlist {
     return list;
   });
 
-  // Navbar options
-  // options: NavbarOption[] = [
-  //   {
-  //     text: 'Replays',
-  //     id: 1,
-  //     url: { path: '/' },
-  //   },
-  //   {
-  //     text: 'Resources',
-  //     id: 2,
-  //     children: [
-  //       {
-  //         text: 'DFC Resource Site',
-  //         id: 1,
-  //         url: { path: 'https://sites.google.com/view/dfci-guide/', external: true},
-  //       },
-  //       {
-  //         text: 'DFCI Mizuumi Wiki',
-  //         id: 2,
-  //         url: { path: 'https://wiki.gbl.gg/w/Dengeki_Bunko:_Fighting_Climax/DFCI', external: true },
-  //       },
-  //       {
-  //         text: 'Report an issue',
-  //         id: 3,
-  //         url: { path: 'mailto:ignite-boost.net@gmail.com', external: true},
-  //       }
-  //     ],
-  //     elementType: 'dropdown',
-  //   },
-  //   {
-  //     text: 'Add a Replay',
-  //     id: 3,
-  //     url: { path: '/add' },
-  //   },
-  //   {
-  //     text: 'Login',
-  //     id: 4,
-  //     url: { path: '/login' },
-  //   },
-  //   {
-  //     text: 'Signup',
-  //     id: 5,
-  //     url: { path: '/signup' },
-  //     elementType: 'dfc-button',
-  //   }
-  // ];
+  constructor() {
+    // Subscribe to router events and react to events
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        // Navigation completed
+        console.log('Navigation completed:', event.url);
+        this.authResource.reload();
+      }
+    });
+  }
 }

@@ -8,7 +8,7 @@ import { Response } from '../Response';
   providedIn: 'root'
 })
 export class VideoRequests {
-  private delay = 1000; // Simulated network delay
+  private delay = 200; // Simulated network delay
   private videos: Video[] = [];
 
   // Adjust methods to make HTTP requests once connected with backend
@@ -135,7 +135,6 @@ export class VideoRequests {
   async addVideos(videoData: VideoData, replays: ReplayInfo[]): Promise<Response> {
     await this.simulateDelay();
     
-    console.log('Adding videos');
     let incompleteURL = '';
 
     // Set up URL, barring timestamp
