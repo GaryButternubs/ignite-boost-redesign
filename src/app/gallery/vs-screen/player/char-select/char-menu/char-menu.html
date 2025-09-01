@@ -6,7 +6,7 @@
                 <!--Don't display DFCI exclusive characters if only DFC-->
                 @if (!char.ignition || isIgnition()) {
                     <!-- <img
-                        [ngSrc]="`../../../../../../assets/char-menu/lg/${char.abbr}.png`"
+                        [ngSrc]="`../../../../../../assets/char-menu/lg/${char.abbr}.webp`"
                         [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
                         width="56"
                         height="144"
@@ -15,7 +15,7 @@
                         animate.enter="select-overlay-enter"  
                     /> -->
                     <app-image-loader 
-                        [src]="`../../../../../../assets/char-menu/lg/${char.abbr}.png`"
+                        [src]="`../../../../../../assets/char-menu/lg/${char.abbr}.webp`"
                         [width]="56"
                         [height]="144"
                         [addClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"

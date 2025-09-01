@@ -30,7 +30,7 @@
                             </a>
                             <mat-icon>arrow_drop_down</mat-icon>
                         </div>
-                        <mat-menu #navbarDropdown="matMenu" class="bg-[var(--color-secondary)] bg-[url(/assets/horizontal_bars.png)]">
+                        <mat-menu #navbarDropdown="matMenu" class="bg-[var(--color-secondary)] bg-[url(/assets/horizontal_bars.webp)]">
                             @for (child of option.children; track child.id) {
                                 @if (child.url?.external) {
                                     <a mat-menu-item [href]="child.url?.path" target="_blank" class="text-white hover:text-shadow-glow hover:text-shadow-(color:--hover-glow) *:overflow-visible">{{ child.text }}</a>

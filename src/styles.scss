@@ -194,7 +194,7 @@
 
   .select-overlay {
     background-color: var(--color-secondary) !important;
-    background-image: url('./assets/horizontal_bars.png') !important;
+    background-image: url('./assets/horizontal_bars.webp') !important;
     border-radius: calc(var(--spacing) * 1);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -318,7 +318,7 @@
 
     div.mat-mdc-select-panel,
     .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
-      background-image: url('./assets/horizontal_bars.png') !important;
+      background-image: url('./assets/horizontal_bars.webp') !important;
       background-color: var(--color-secondary) !important;
     }
 

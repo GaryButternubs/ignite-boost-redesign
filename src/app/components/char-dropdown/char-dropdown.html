@@ -6,13 +6,13 @@
     #trigger
 >
     <!-- <img 
-        [ngSrc]="`../../../assets/${imageDir()}/${selectedChar().abbr}.png`"
+        [ngSrc]="`../../../assets/${imageDir()}/${selectedChar().abbr}.webp`"
         [width]="imgWidth()"
         [height]="imgHeight()"
         priority
     /> -->
     <app-image-loader 
-        [src]="`../../../assets/${imageDir()}/${selectedChar().abbr}.png`"
+        [src]="`../../../assets/${imageDir()}/${selectedChar().abbr}.webp`"
         [width]="imgWidth()"
         [height]="imgHeight()"
         [priority]="true"
@@ -42,13 +42,13 @@
                     animate.enter="select-overlay-enter"
                 >
                     <!-- <img 
-                        [ngSrc]="`../../../assets/${imageDir()}/${defaultChar.abbr}.png`"
+                        [ngSrc]="`../../../assets/${imageDir()}/${defaultChar.abbr}.webp`"
                         [width]="imgWidth()"
                         [height]="imgHeight()"
                         class="w-12 h-auto"
                     /> -->
                     <app-image-loader 
-                        [src]="`../../../assets/${imageDir()}/${defaultChar.abbr}.png`"
+                        [src]="`../../../assets/${imageDir()}/${defaultChar.abbr}.webp`"
                         [width]="imgWidth()"
                         [height]="imgHeight()"
                         addClass="w-12 h-auto"
@@ -72,13 +72,13 @@
                     >
                         <div class="flex flex-row gap-2 items-center">
                             <!-- <img 
-                                [ngSrc]="`../../../assets/${imageDir()}/${char.abbr}.png`"
+                                [ngSrc]="`../../../assets/${imageDir()}/${char.abbr}.webp`"
                                 [width]="imgWidth()"
                                 [height]="imgHeight()"
                                 class="w-12 h-auto"
                             /> -->
                             <app-image-loader 
-                                [src]="`../../../assets/${imageDir()}/${char.abbr}.png`"
+                                [src]="`../../../assets/${imageDir()}/${char.abbr}.webp`"
                                 [width]="imgWidth()"
                                 [height]="imgHeight()"
                                 addClass="w-12 h-auto"

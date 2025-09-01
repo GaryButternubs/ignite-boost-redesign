@@ -5,7 +5,7 @@
             @for (char of this.assistCharacters; track char.abbr) {
                 @if (!char.ignition || isIgnition()) {
                     <!-- <img 
-                        [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
+                        [ngSrc]="`../../../../../../assets/asst-menu/lg/${char.abbr}.webp`"
                         [ngClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
                         width="60"
                         height="60"
@@ -14,7 +14,7 @@
                         animate.enter="select-overlay-enter"
                     /> -->
                     <app-image-loader 
-                        [src]="`../../../../../../assets/asst-menu/lg/${char.abbr}.png`"
+                        [src]="`../../../../../../assets/asst-menu/lg/${char.abbr}.webp`"
                         [addClass]="`${isP1() ? 'hover:animate-p1-select' : 'hover:animate-p2-select'} cursor-pointer`"
                         [width]="60"
                         [height]="60"
